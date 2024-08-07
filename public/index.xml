@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>Recent content on Chao Liu</description>
+    <generator>Hugo -- 0.131.0</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About me</title>
+      <link>//localhost:1313/about/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/about/</guid>
+      <description>I grew up in a southern coastal city of China and made my way to the United States in 2010, driven by a deep desire to pursue graduate degrees in psychology and make a positive impact on the lives of children in need. In 2013, I earned my master&amp;rsquo;s degree in developmental psychology from the University of Maine.
+During my time at the university, I came to realize the profound influence that families have on child development.</description>
+    </item>
+    <item>
+      <title>Current Projects</title>
+      <link>//localhost:1313/projects/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/projects/</guid>
+      <description>If you are interested in any of the following projects or if you have your own ideas and would like to collaborate, please reach out!
+EmoMine: Unraveling Emotional Dynamics in Parent-Child Interactions through Text Mining Analysis
+This research project aims to leverage advanced text mining techniques to delve into the intricate emotional dynamics within parent-child interactions. Emotions play a crucial role in shaping familial relationships, and understanding their nuanced expression in textual communication is paramount.</description>
+    </item>
+    <item>
+      <title>Location</title>
+      <link>//localhost:1313/location/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/location/</guid>
+      <description>Dr. Chao Liu&amp;#39;s mailing and office addresses at Cedarville University.</description>
+    </item>
+    <item>
+      <title>Publications</title>
+      <link>//localhost:1313/publications/</link>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/publications/</guid>
+      <description>Liu, C. &amp;amp; Waltz, K (2024). Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis. International Journal of Behavioral Development. [Link]Liu, C. &amp;amp; Chen, C. (2024). Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother‐child interactions. Social Development. [Link]Liu, C., Younkin, F., Hardman, M., Buchanan, B., Nugent, N., Pettus, M., &amp;amp; Lawrence B. (2021). The Longitudinal Relations between Disciplinary Practices and Emotion Regulation in Early Years.</description>
+    </item>
+    <item>
+      <title>Office Hours</title>
+      <link>//localhost:1313/officehours/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/officehours/</guid>
+      <description>Schedule and location for Professor Dr von Igelfeld&amp;#39;s office hours.</description>
+    </item>
+    <item>
+      <title>List of Irregular Verbs Across Romance Languages</title>
+      <link>//localhost:1313/data/data1/</link>
+      <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/data/data1/</guid>
+      <description>This dataset contains all irregular verbs in known Romance languages.</description>
+    </item>
+    <item>
+      <title>Unusual Uses For Olive Oil</title>
+      <link>//localhost:1313/papers/paper1/</link>
+      <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/papers/paper1/</guid>
+      <description>This paper reviews unusual uses for olive oil throughout the Mediterranean world. Published in the Journal of Oleic Science, 2013.</description>
+    </item>
+    <item>
+      <title>The Finer Points of Sausage Dogs</title>
+      <link>//localhost:1313/papers/paper2/</link>
+      <pubDate>Tue, 28 Dec 2004 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/papers/paper2/</guid>
+      <description>This paper studies the pulmonary efficiency of sausage dogs. Published in the Journal of Canine Science, 2004.</description>
+    </item>
+    <item>
+      <title>Lectures at the Villa of Reduced Circumstances</title>
+      <link>//localhost:1313/courses/course1/</link>
+      <pubDate>Mon, 10 Mar 2003 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/courses/course1/</guid>
+      <description>This graduate course presents classical results in Romance philology.</description>
+    </item>
+    <item>
+      <title>Portugese Irregular Verbs</title>
+      <link>//localhost:1313/books/book1/</link>
+      <pubDate>Wed, 01 Jan 1997 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/books/book1/</guid>
+      <description>This book discusses Portugese irregular verbs in great details.</description>
+    </item>
+    <item>
+      <title>Profanity in Early Irish</title>
+      <link>//localhost:1313/courses/course2/</link>
+      <pubDate>Sat, 16 Jun 1990 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/courses/course2/</guid>
+      <description>This undergraduate course discusses profanity in Early Irish.</description>
+    </item>
+  </channel>
+</rss>

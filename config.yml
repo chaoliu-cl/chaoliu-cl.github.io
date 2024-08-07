@@ -1,0 +1,140 @@
+baseURL: "" 
+title: Chao Liu
+paginate: 20
+theme: PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+
+taxonomies:
+    tag: tags
+
+menu:
+    main:
+        - name: About
+          url: about/
+          weight: 2
+        #- name: Books
+        #  url: books/
+        #  weight: 5 
+        - name: Publications
+          url: publications/
+          weight: 2
+        - name: Projects
+          url: projects/
+          weight: 2
+        #- name: Courses
+        #  url: courses/
+        #  weight: 3
+        #- name: Data
+        #  url: data/
+        #  weight: 4 
+        #- name: Blog
+        #  url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
+        #  weight: 6
+
+params:
+    description: "I am an Assistant Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a husband, a father of two, and a Christ follower."
+    author: Chao Liu
+    # googleAnalyticsID: "G-XXXXX"
+    DateFormat: "January 2006"
+    defaultTheme: light
+    hideFooter: true
+    disableThemeToggle: false
+    ShowShareButtons: false
+    ShowReadingTime: false
+    disableSpecial1stPost: true
+    disableAnchoredHeadings: true
+    ShowPostNavLinks: false
+    ShowBreadCrumbs: false
+    ShowCodeCopyButtons: true
+    ShowAllPagesInArchive: false
+    MainSections: ["books","courses","papers","data"]
+    ShowToc: false
+    disableScrollToTop: true
+    TocOpen: true
+    ShowWordCount: false
+    UseHugoToc: true
+    comments: false
+    math: true
+    profileMode:
+          enabled: true
+          title: Chao Liu
+          subtitle: >
+            Assistant Professor of Psychology@<a href="https://www.cedarville.edu/" style="color: blue;">Cedarville</a>
+            
+
+            Quantitative Researcher
+            
+
+            A husband, a father, and a Christ follower
+          imageUrl: "profile.jpg"
+          imageWidth: 160
+          imageHeight: 160
+          imageTitle: Chao Liu
+          buttons:
+            - name: About
+              url: about/
+              weight: 2
+            #- name: Books
+            #  url: books/
+            #  weight: 5 
+            - name: Publications
+              url: publications/
+              weight: 2
+            - name: Projects
+              url: projects/
+              weight: 2
+            #- name: Courses
+            #  url: courses/
+            #  weight: 3
+            #- name: Data
+            #  url: data/
+            #  weight: 4 
+            #- name: Blog
+            #  url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
+            #  weight: 6
+
+    socialIcons:
+        - name: CV
+          url: cv_5-5.pdf
+        - name: Email
+          url: mailto:chaoliu@cedarville.edu
+        #- name: Zoom
+        #  url: https://www.zoom.us/my/igelfeld
+        - name: Location
+          url: location/
+        #- name: Office Hours
+        #  url: officehours/
+        - name: Google Scholar
+          url: https://scholar.google.com/citations?user=7Mo7trwAAAAJ&hl=en
+        - name: GitHub
+          url: https://github.com/chaoliu-cl
+        #- name: Substack
+        #  url: https://pmichaillat.substack.com
+        #- name: YouTube
+        #  url: https://www.youtube.com/@alexandermccallsmithoffici9000
+        - name: X
+          url: https://x.com/ChaoLiu77600168
+
+    assets:
+        disableScrollBarStyle: true
+    cover:
+        hiddenInList: false
+        hiddenInSingle: true
+    label:
+      text: "Chao Liu"
+      icon: favicon.ico
+      iconHeight: 18
+
+markup:
+    goldmark:
+        renderer:
+            unsafe: true
+    highlight:
+        guessSyntax: true
+        style: autumn 
+    tableOfContents:
+        endLevel: 2
+        ordered: false
+        startLevel: 2
