@@ -16,12 +16,12 @@ menu:
           weight: 2
         #- name: Books
         #  url: books/
-        #  weight: 5 
-        - name: Publications
-          url: publications/
-          weight: 2
+        #  weight: 5
         - name: Projects
           url: projects/
+          weight: 2 
+        - name: Publications
+          url: publications/
           weight: 2
         #- name: Courses
         #  url: courses/
