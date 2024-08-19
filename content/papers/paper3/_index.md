@@ -31,7 +31,7 @@ This study observed 81 children playing with their mothers and fathers separatel
 
 ![](paper3.jpeg)
 
-##### Figure 1: Adjusted residuals for counts of different parental roles (Dir = Director, Fac = Facilitator, Co-P = Co-player) comparing fathers with mothers within three play contexts.
+##### Figure 2: Adjusted residuals for counts of different parental roles (Dir = Director, Fac = Facilitator, Co-P = Co-player) comparing fathers with mothers within three play contexts.
 
 ![](paper3_2.jpeg)
 
