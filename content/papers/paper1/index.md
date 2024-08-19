@@ -25,9 +25,10 @@ cover:
 ##### Abstract
 
 This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.
+
 ---
 
-##### Figure 6: The Clusters of Mother Polarity and Child Polarity over time 
+##### Figure 1: The Clusters of Mother Polarity and Child Polarity over time 
 
 ![](paper1.png)
 
