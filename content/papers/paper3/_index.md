@@ -15,7 +15,7 @@ cover:
 
 ---
 
-##### Download
+##### Relevant Links
 
 + [Paper](https://journals.sagepub.com/doi/full/10.1177/0192513X241263782)
 

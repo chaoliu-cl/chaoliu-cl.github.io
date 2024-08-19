@@ -15,7 +15,7 @@ cover:
 
 ---
 
-##### Download
+##### Relevant Links
 
 + [Paper](https://onlinelibrary.wiley.com/doi/full/10.1111/sode.12733)
 + [Code and data](https://osf.io/?view_only=c96818e4b23348ceaa6db76081288d7c)
