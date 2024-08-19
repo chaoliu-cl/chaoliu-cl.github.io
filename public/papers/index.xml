@@ -9,18 +9,18 @@
     <lastBuildDate>Fri, 12 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/papers/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Unusual Uses For Olive Oil</title>
-      <link>//localhost:1313/papers/paper1/</link>
-      <pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/papers/paper1/</guid>
-      <description>This paper reviews unusual uses for olive oil throughout the Mediterranean world. Published in the Journal of Oleic Science, 2013.</description>
+      <title>Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis</title>
+      <link>//localhost:1313/papers/paper2/</link>
+      <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/papers/paper2/</guid>
+      <description>This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time.</description>
     </item>
     <item>
-      <title>The Finer Points of Sausage Dogs</title>
-      <link>//localhost:1313/papers/paper2/</link>
-      <pubDate>Tue, 28 Dec 2004 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/papers/paper2/</guid>
-      <description>This paper studies the pulmonary efficiency of sausage dogs. Published in the Journal of Canine Science, 2004.</description>
+      <title>Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions</title>
+      <link>//localhost:1313/papers/paper1/</link>
+      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/papers/paper1/</guid>
+      <description>This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.</description>
     </item>
   </channel>
 </rss>

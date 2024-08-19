@@ -1,18 +1,15 @@
 ---
-title: "Unusual Uses For Olive Oil" 
-date: 2013-01-15
+title: "Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions" 
+date: 2024-02-02
 lastmod: 2024-07-12
-tags: ["philology","oleic science","history of oil","Mediterranean world"]
-author: ["Detlev Amadeus Unterholzer","Moritz-Maria von Igelfeld"]
-description: "This paper reviews unusual uses for olive oil throughout the Mediterranean world. Published in the Journal of Oleic Science, 2013." 
-summary: "This paper reviews unusual uses for olive oil throughout the Mediterranean world. It highlights in particular the challengs arising from excessive or unorthodox consumption of olive oil." 
+tags: ["child development","mother-child interaction","text mining","sentiment analysis"]
+author: ["Chao Liu","Charis Chen"]
+description: "This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions." 
+summary: "This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions."
 cover:
     image: "paper1.png"
-    alt: "Some Uses For Olive Oil"
+    alt: "The Clusters of Mother Polarity and Child Polarity over time"
     relative: false
-editPost:
-    URL: "https://github.com/pmichaillat/hugo-website"
-    Text: "Journal of Oleic Science"
 
 ---
 
@@ -20,19 +17,17 @@ editPost:
 
 ##### Download
 
-+ [Paper](paper1.pdf)
-+ [Online appendix](appendix1.pdf)
-+ [Code and data](https://github.com/pmichaillat/feru)
++ [Paper](https://onlinelibrary.wiley.com/doi/full/10.1111/sode.12733)
++ [Code and data](https://osf.io/?view_only=c96818e4b23348ceaa6db76081288d7c)
 
 ---
 
 ##### Abstract
 
-This paper reviews unusual uses for olive oil throughout the Mediterranean world. It highlights in particular the challengs arising from excessive or unorthodox consumption of olive oil. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.
 ---
 
-##### Figure 6: Some Uses For Olive Oil
+##### Figure 6: The Clusters of Mother Polarity and Child Polarity over time 
 
 ![](paper1.png)
 
@@ -40,23 +35,20 @@ This paper reviews unusual uses for olive oil throughout the Mediterranean world
 
 ##### Citation
 
-Unterholzer, Detlev A., and  Moritz-Maria von Igelfeld. 2013. "Unusual Uses For Olive Oil." *Journal of Oleic Science* 34 (1): 449–489. http://www.alexandermccallsmith.com/book/unusual-uses-for-olive-oil.
+Liu, C., & Chen, C. (2024). Text Mining and Sentiment Analysis: A New Lens to Explore the Emotion Dynamics of Mother-Child Interactions. *Social Development*, 33, e12733. https://doi.org/10.1111/sode.12733.
 
 ```BibTeX
-@article{UI13,
-author = {Detlev A. Unterholzer and Moritz-Maria von Igelfeld},
-year = {2013},
-title ={Unusual Uses For Olive Oil},
-journal = {Journal of Oleic Science},
-volume = {34},
-number = {1},
-pages = {449--489},
-url = {http://www.alexandermccallsmith.com/book/unusual-uses-for-olive-oil}}
+@article{https://doi.org/10.1111/sode.12733,
+author = {Liu, Chao and Chen, Charis},
+title = {Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions},
+journal = {Social Development},
+volume = {33},
+number = {3},
+pages = {e12733},
+keywords = {cluster analysis, emotion dynamics, generalized additive models, mother-child interactions, piecewise linear regression, sentiment analysis, text mining},
+doi = {https://doi.org/10.1111/sode.12733},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/sode.12733}}
 ```
 
 ---
 
-##### Related material
-
-+ [Presentation slides](presentation1.pdf)
-+ [Summary of the paper](https://www.penguinrandomhouse.com/books/110403/unusual-uses-for-olive-oil-by-alexander-mccall-smith/)

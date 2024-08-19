@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/about/</loc>
-    <lastmod>2024-08-07T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>//localhost:1313/</loc>
+    <lastmod>2024-08-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/posts/new-paper/</loc>
+    <lastmod>2024-08-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/posts/</loc>
+    <lastmod>2024-08-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/about/</loc>
     <lastmod>2024-08-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/projects/</loc>
@@ -17,8 +23,41 @@
     <loc>//localhost:1313/publications/</loc>
     <lastmod>2024-08-07T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>//localhost:1313/tags/child-development/</loc>
+    <lastmod>2024-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/papers/paper3/</loc>
+    <lastmod>2024-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/log-linear-analysis/</loc>
+    <lastmod>2024-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/papers/</loc>
+    <lastmod>2024-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/parent-child-play/</loc>
+    <lastmod>2024-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/</loc>
+    <lastmod>2024-07-24T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>//localhost:1313/officehours/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/mother-child-interaction/</loc>
+    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/sentiment-analysis/</loc>
+    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/text-mining/</loc>
+    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/papers/paper2/</loc>
+    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/papers/paper1/</loc>
+    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/data/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
@@ -54,42 +93,6 @@
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/spanish/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/history-of-oil/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/mediterranean-world/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/oleic-science/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/papers/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/papers/paper1/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/canine-pulmonary-efficiency/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/canine-science/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/experimental-zoology/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/sausage-dogs/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/papers/paper2/</loc>
-    <lastmod>2024-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/zoology/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/courses/</loc>

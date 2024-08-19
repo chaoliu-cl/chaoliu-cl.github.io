@@ -1,62 +1,58 @@
 ---
-title: "The Finer Points of Sausage Dogs" 
-date: 2004-12-28
+title: "Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis" 
+date: 2024-04-04
 lastmod: 2024-07-12
-tags: ["zoology","sausage dogs","canine pulmonary efficiency","canine science","experimental zoology"]
-author: ["Florianus Prinzel", "Moritz-Maria von Igelfeld"]
-description: "This paper studies the pulmonary efficiency of sausage dogs. Published in the Journal of Canine Science, 2004." 
-summary: "This paper studies the pulmonary efficiency of sausage dogs through several experiments." 
+tags: ["mother-child interaction","text mining","sentiment analysis"]
+author: ["Chao Liu", "Kira Waltz"]
+description: "This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time." 
+summary: "This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time." 
 cover:
-    image: "paper2.png"
-    alt: "Dimensions of a sausage dog"
+    image: "paper2_1.png"
+    alt: "mother-child interaction"
     relative: false
-editPost:
-    URL: "https://github.com/pmichaillat/hugo-website"
-    Text: "Journal of Canine Science"
 
 ---
 
----
 
 ##### Download
 
-+ [Paper](paper2.pdf)
-+ [Online appendix](appendix2.pdf)
-+ [Code and data](https://github.com/pmichaillat/wunk)
++ [Paper](https://journals.sagepub.com/doi/10.1177/01650254241242662)
++ [Code and data](https://osf.io/mjrt6/?view_only=d2d18e16274a4ab7bdf3587eae35be02)
 
 ---
 
 ##### Abstract
 
-This paper studies the pulmonary efficiency of sausage dogs. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur: $\sin(\theta) = x^2 - \exp(1+\chi)$. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor $\zeta$ incididunt ut labore et dolore magna aliqua: $p(x) = \int \cos(\zeta) d\zeta - \theta$. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time.
 
 ---
 
-##### Figure 2: Dimensions of a sausage dog
+##### Figure 1: The Smooth Effect of Mother Positive Emotion on Child Positive Emotion 
 
-![](paper2.png)
+![](paper2_1.png)
+
+##### Figure 2: The Smooth Effect of Mother Negative Emotion on Child Negative Emotion
+
+![](paper2_2.png)
 
 ---
 
 ##### Citation
 
-Prinzel, Florianus, and Moritz-Maria von Igelfeld. 2004. "The Finer Points of Sausage Dogs." *Journal of Canine Science* 43 (2): 89–109. http://www.alexandermccallsmith.com/book/the-finer-points-of-sausage-dogs.
+Liu, C., & Waltz, K. (2024). Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis. *International Journal of Behavioral Development*, 0(0). https://doi.org/10.1177/01650254241242662
 
 ```BibTeX
-@article{PI04,
-author = {Florianus Prinzel and Moritz-Maria von Igelfeld},
-year = {2004},
-title ={The Finer Points of Sausage Dogs},
-journal = {Journal of Canine Science},
-volume = {43},
-number = {2},
-pages = {89--109},
-url = {http://www.alexandermccallsmith.com/book/the-finer-points-of-sausage-dogs}}
+@article{doi:10.1177/01650254241242662,
+author = {Chao Liu and Kira Waltz},
+title ={Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis},
+journal = {International Journal of Behavioral Development},
+volume = {0},
+number = {0},
+pages = {01650254241242662},
+year = {0},
+doi = {10.1177/01650254241242662},
+URL = {https://doi.org/10.1177/01650254241242662}}
 ```
 
 ---
 
-##### Related material
-
-+ [Presentation slides](presentation2.pdf)
-+ [Wikipedia entry](https://en.wikipedia.org/wiki/The_Finer_Points_of_Sausage_Dogs)

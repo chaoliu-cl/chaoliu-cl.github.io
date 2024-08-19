@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Child Development on Chao Liu</title>
+    <link>//localhost:1313/tags/child-development/</link>
+    <description>Recent content in Child Development on Chao Liu</description>
+    <generator>Hugo -- 0.131.0</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 12 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/child-development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions</title>
+      <link>//localhost:1313/papers/paper1/</link>
+      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/papers/paper1/</guid>
+      <description>This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.</description>
+    </item>
+  </channel>
+</rss>

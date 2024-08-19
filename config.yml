@@ -14,9 +14,12 @@ menu:
         - name: About
           url: about/
           weight: 2
-        #- name: Books
-        #  url: books/
-        #  weight: 5
+        #- name: Posts
+        #  url: posts/
+        #  weight: 2
+        - name: Papers
+          url: papers/
+          weight: 2
         - name: Projects
           url: projects/
           weight: 2 
@@ -76,9 +79,12 @@ params:
             - name: About
               url: about/
               weight: 2
-            #- name: Books
-            #  url: books/
-            #  weight: 5
+            #- name: Posts
+            #  url: posts/
+            #  weight: 2
+            - name: Papers
+              url: papers/
+              weight: 2
             - name: Projects
               url: projects/
               weight: 2 
@@ -116,6 +122,9 @@ params:
         #  url: https://www.youtube.com/@alexandermccallsmithoffici9000
         - name: X
           url: https://x.com/ChaoLiu77600168
+        - name: linkedin
+          url: https://www.linkedin.com/in/chao-liu-1056663b/
+
 
     assets:
         disableScrollBarStyle: true
