@@ -14,9 +14,9 @@ menu:
         - name: About
           url: about/
           weight: 2
-        #- name: Posts
-        #  url: posts/
-        #  weight: 2
+        - name: Posts
+          url: posts/
+          weight: 2
         - name: Papers
           url: papers/
           weight: 2
@@ -58,7 +58,8 @@ params:
     TocOpen: true
     ShowWordCount: false
     UseHugoToc: true
-    comments: false
+    comments: true
+    disqusShortname: "liu-chao-site"
     math: true
     profileMode:
           enabled: true
@@ -79,9 +80,9 @@ params:
             - name: About
               url: about/
               weight: 2
-            #- name: Posts
-            #  url: posts/
-            #  weight: 2
+            - name: Posts
+              url: posts/
+              weight: 4
             - name: Papers
               url: papers/
               weight: 2

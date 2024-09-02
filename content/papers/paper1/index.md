@@ -2,6 +2,7 @@
 title: "Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions" 
 date: 2024-02-02
 lastmod: 2024-07-12
+comments: true
 tags: ["child development","mother-child interaction","text mining","sentiment analysis"]
 author: ["Chao Liu","Charis Chen"]
 description: "This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions." 

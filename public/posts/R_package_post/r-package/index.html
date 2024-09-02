@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>My First R package: Goodreader | Chao Liu</title>
+<meta name="keywords" content="">
+<meta name="description" content="Installing and loading the package Install the package:
+install.packages(&quot;Goodreader&quot;)And load the package:
+library(Goodreader)Searching for Books on Goodreads The search_goodreads() function allows you to search for books on Goodreads based on various criteria.
+The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings
+parent_df &lt;- search_goodreads(search_term = &quot;parenting&quot;, search_in = &quot;title&quot;, num_books = 10, sort_by = &quot;ratings&quot;)summary(parent_df)#&gt; title author book_id #&gt; Length:10 Length:10 Length:10 #&gt; Class :character Class :character Class :character #&gt; Mode :character Mode :character Mode :character #&gt; url ratings #&gt; Length:10 Min.">
+<meta name="author" content="Chao Liu">
+<link rel="canonical" href="//localhost:1313/posts/r_package_post/r-package/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6cf4a8fa527330d9574f36d8d000fdaf90ca838ff09ab72fc27d3cb7ca1ddc5.css" integrity="sha256-1s9Kj6UnMw2VdPNtjQAP2vkMqDj/Caty/CfTy3yh3cU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:1313/posts/r_package_post/r-package/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="My First R package: Goodreader" />
+<meta property="og:description" content="Installing and loading the package Install the package:
+install.packages(&quot;Goodreader&quot;)And load the package:
+library(Goodreader)Searching for Books on Goodreads The search_goodreads() function allows you to search for books on Goodreads based on various criteria.
+The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings
+parent_df &lt;- search_goodreads(search_term = &quot;parenting&quot;, search_in = &quot;title&quot;, num_books = 10, sort_by = &quot;ratings&quot;)summary(parent_df)#&gt; title author book_id #&gt; Length:10 Length:10 Length:10 #&gt; Class :character Class :character Class :character #&gt; Mode :character Mode :character Mode :character #&gt; url ratings #&gt; Length:10 Min." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//localhost:1313/posts/r_package_post/r-package/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-01T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="My First R package: Goodreader"/>
+<meta name="twitter:description" content="Installing and loading the package Install the package:
+install.packages(&quot;Goodreader&quot;)And load the package:
+library(Goodreader)Searching for Books on Goodreads The search_goodreads() function allows you to search for books on Goodreads based on various criteria.
+The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings
+parent_df &lt;- search_goodreads(search_term = &quot;parenting&quot;, search_in = &quot;title&quot;, num_books = 10, sort_by = &quot;ratings&quot;)summary(parent_df)#&gt; title author book_id #&gt; Length:10 Length:10 Length:10 #&gt; Class :character Class :character Class :character #&gt; Mode :character Mode :character Mode :character #&gt; url ratings #&gt; Length:10 Min."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "//localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "My First R package: Goodreader",
+      "item": "//localhost:1313/posts/r_package_post/r-package/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "My First R package: Goodreader",
+  "name": "My First R package: Goodreader",
+  "description": "Installing and loading the package Install the package:\ninstall.packages(\u0026quot;Goodreader\u0026quot;)\rAnd load the package:\nlibrary(Goodreader)\rSearching for Books on Goodreads The search_goodreads() function allows you to search for books on Goodreads based on various criteria.\nThe code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings\nparent_df \u0026lt;- search_goodreads(search_term = \u0026quot;parenting\u0026quot;, search_in = \u0026quot;title\u0026quot;, num_books = 10, sort_by = \u0026quot;ratings\u0026quot;)\rsummary(parent_df)\r#\u0026gt; title author book_id #\u0026gt; Length:10 Length:10 Length:10 #\u0026gt; Class :character Class :character Class :character #\u0026gt; Mode :character Mode :character Mode :character #\u0026gt; url ratings #\u0026gt; Length:10 Min.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Installing and loading the package Install the package:\ninstall.packages(\"Goodreader\")\rAnd load the package:\nlibrary(Goodreader)\rSearching for Books on Goodreads The search_goodreads() function allows you to search for books on Goodreads based on various criteria.\nThe code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings\nparent_df \u003c- search_goodreads(search_term = \"parenting\", search_in = \"title\", num_books = 10, sort_by = \"ratings\")\rsummary(parent_df)\r#\u003e title author book_id #\u003e Length:10 Length:10 Length:10 #\u003e Class :character Class :character Class :character #\u003e Mode :character Mode :character Mode :character #\u003e url ratings #\u003e Length:10 Min. : 8427 #\u003e Class :character 1st Qu.:11744 #\u003e Mode :character Median :13662 #\u003e Mean :19757 #\u003e 3rd Qu.:13784 #\u003e Max. :69591 You can also search author’s name:\nsearch_goodreads(search_term = \"J.K. Rowling\", search_in = \"author\", num_books = 5, sort_by = \"ratings\") The search_goodreads() function includes a sort_by that sorts the results either by ratings or published_year:\nsearch_goodreads(search_term = \"J.K. Rowling\", search_in = \"author\", num_books = 5, sort_by = \"published_year\") Scrape book metadata and reviews After the books are found, save their IDs to a text file. These IDs are used for extracting book metadata and reviews:\nget_book_ids(input_data = parent_df, file_name = \"parent_books.txt\") #the book IDs are now stored in a text file named “parent_books”\rBook metadata can then be scraped:\nparent_bookinfo \u003c- scrape_books(book_ids_path = \"parent_books.txt\", use_parallel = FALSE)\rTo speed up the scraping process, we can turn on the parallel process: use_parallel = TRUE, and specify the number of cores for the parallel process (e.g., num_cores = 8)\nparent_bookreviews \u003c- scrape_reviews(book_ids_path = \"parent_books.txt\", num_reviews = 10, use_parallel = FALSE) #users can also turn on parallel process to speed up the process\rConduct sentiment analysis The analyze_sentiment() function calculates the sentiment score of each review based on the lexicon chosen by the user. Available options for lexicon are afinn, bing, and nrc. Basic negation scope detection was implemented (e.g., not happy is labeled as negative emotion and is assigned with a negative score).\nsentiment_results \u003c- analyze_sentiment(parent_bookreviews, lexicon = \"afinn\")\rThe average_book_sentiment() function calculates the average sentiment score for each book.\nave_sentiment \u003c- average_book_sentiment(sentiment_results)\rsummary(ave_sentiment)\r#\u003e book_id avg_sentiment #\u003e Length:10 Min. : 4.40 #\u003e Class :character 1st Qu.: 7.25 #\u003e Mode :character Median :12.86 #\u003e Mean :12.95 #\u003e 3rd Qu.:14.65 #\u003e Max. :27.30\rThe sentiment scores can be plotted as a histogram:\nsentiment_histogram(sentiment_results)\rOr a trend of average sentiment score over time:\nsentiment_trend(sentiment_results, time_period = \"year\")\rPerform topic modeling Apply topic modeling to the reviews data:\nreviews_topic \u003c- model_topics(parent_bookreviews, num_topics = 3, num_terms = 10, english_only = TRUE)\r#\u003e Topic 1: #\u003e parent, children, need, one, way, good, get, work, dont, give #\u003e #\u003e Topic 2: #\u003e parent, child, book, emot, feel, help, also, can, children, use #\u003e #\u003e Topic 3: #\u003e book, just, kid, think, read, like, time, say, realli, much\rPlot the top terms by topic:\nplot_topic_terms(reviews_topic)\rCreate a word cloud for each topic:\ngen_topic_clouds(reviews_topic)\rTopic 1:\nTopic 2:\nTopic 3:\nOther utility functions The following table shows other utility functions to extract book-related information\nFunction Output Description get_book_ids() Text file Retrieve the book IDs from the input data and save to a text file get_book_summary() List Retrieve the summary for each book get_author_info() List Retrieve the author information for each book get_genres() List Extract the genres for each book get_published_time() List Retrieve the published time for each book get_num_pages() List Retrieve the number of pages for each book get_format_info() List Retrieve the format information for each book get_rating_distribution() List Retrieve the rating distribution for each book ",
+  "wordCount" : "585",
+  "inLanguage": "en",
+  "datePublished": "2024-09-01T00:00:00Z",
+  "dateModified": "2024-09-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Chao Liu"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "//localhost:1313/posts/r_package_post/r-package/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Chao Liu",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "//localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},
+            {left: "\\begin{gather}", right: "\\end{gather}", display: true},
+            {left: "\\begin{CD}", right: "\\end{CD}", display: true},
+          ],
+          throwOnError : false
+        });
+    });
+</script>
+ 
+
+
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="Chao Liu">
+                <img src="//localhost:1313/favicon.ico" alt="" aria-label="logo"
+                    height="18"
+                    width="18">Chao Liu</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/papers/" title="Papers">
+                    <span>Papers</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      My First R package: Goodreader
+    </h1>
+    <div class="post-meta"><span title='2024-09-01 00:00:00 +0000 UTC'>September 2024</span>&nbsp;&middot;&nbsp;Chao Liu
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="installing-and-loading-the-package">Installing and loading the package</h2>
+<p>Install the package:</p>
+<pre><code>install.packages(&quot;Goodreader&quot;)
+</code></pre>
+<p>And load the package:</p>
+<pre><code>library(Goodreader)
+</code></pre>
+<h2 id="searching-for-books-on-goodreads">Searching for Books on Goodreads</h2>
+<p>The <code>search_goodreads()</code> function allows you to search for books on Goodreads based on various criteria.</p>
+<p>The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings</p>
+<pre><code>parent_df &lt;- search_goodreads(search_term = &quot;parenting&quot;, search_in = &quot;title&quot;, num_books = 10, sort_by = &quot;ratings&quot;)
+summary(parent_df)
+#&gt;   title              author            book_id         
+#&gt; Length:10          Length:10          Length:10         
+#&gt; Class :character   Class :character   Class :character  
+#&gt; Mode  :character   Mode  :character   Mode  :character  
+
+#&gt;     url               ratings     
+#&gt; Length:10          Min.   : 8427  
+#&gt; Class :character   1st Qu.:11744  
+#&gt; Mode  :character   Median :13662  
+#&gt;                    Mean   :19757  
+#&gt;                    3rd Qu.:13784  
+#&gt;                    Max.   :69591  
+</code></pre>
+<p>You can also search author’s name:</p>
+<pre><code>search_goodreads(search_term = &quot;J.K. Rowling&quot;, search_in = &quot;author&quot;, num_books = 5, sort_by = &quot;ratings&quot;) 
+</code></pre>
+<p>The search_goodreads() function includes a sort_by that sorts the results either by ratings or published_year:</p>
+<pre><code>search_goodreads(search_term = &quot;J.K. Rowling&quot;, search_in = &quot;author&quot;, num_books = 5, sort_by = &quot;published_year&quot;) 
+</code></pre>
+<h2 id="scrape-book-metadata-and-reviews">Scrape book metadata and reviews</h2>
+<p>After the books are found, save their IDs to a text file. These IDs are used for extracting book metadata and reviews:</p>
+<pre><code>get_book_ids(input_data = parent_df, file_name = &quot;parent_books.txt&quot;) #the book IDs are now stored in a text file named “parent_books”
+</code></pre>
+<p>Book metadata can then be scraped:</p>
+<pre><code>parent_bookinfo &lt;- scrape_books(book_ids_path = &quot;parent_books.txt&quot;, use_parallel = FALSE)
+</code></pre>
+<p>To speed up the scraping process, we can turn on the parallel process: <code>use_parallel = TRUE</code>, and specify the number of cores for the parallel process (e.g., <code>num_cores = 8</code>)</p>
+<pre><code>parent_bookreviews &lt;- scrape_reviews(book_ids_path = &quot;parent_books.txt&quot;, num_reviews = 10, use_parallel = FALSE) #users can also turn on parallel process to speed up the process
+</code></pre>
+<h2 id="conduct-sentiment-analysis">Conduct sentiment analysis</h2>
+<p>The <code>analyze_sentiment()</code> function calculates the sentiment score of each review based on the lexicon chosen by the user. Available options for lexicon are afinn, bing, and nrc. Basic negation scope detection was implemented (e.g., not happy is labeled as negative emotion and is assigned with a negative score).</p>
+<pre><code>sentiment_results &lt;- analyze_sentiment(parent_bookreviews, lexicon = &quot;afinn&quot;)
+</code></pre>
+<p>The average_book_sentiment() function calculates the average sentiment score for each book.</p>
+<pre><code>ave_sentiment &lt;- average_book_sentiment(sentiment_results)
+summary(ave_sentiment)
+#&gt;    book_id          avg_sentiment  
+#&gt;  Length:10          Min.   : 4.40  
+#&gt;  Class :character   1st Qu.: 7.25  
+#&gt;  Mode  :character   Median :12.86  
+#&gt;                     Mean   :12.95  
+#&gt;                     3rd Qu.:14.65  
+#&gt;                     Max.   :27.30
+</code></pre>
+<p>The sentiment scores can be plotted as a histogram:</p>
+<pre><code>sentiment_histogram(sentiment_results)
+</code></pre>
+<p><img loading="lazy" src="sentiment_hist.png" alt=""  />
+</p>
+<p>Or a trend of average sentiment score over time:</p>
+<pre><code>sentiment_trend(sentiment_results, time_period = &quot;year&quot;)
+</code></pre>
+<p><img loading="lazy" src="sentiment_trend.png" alt=""  />
+</p>
+<h2 id="perform-topic-modeling">Perform topic modeling</h2>
+<p>Apply topic modeling to the reviews data:</p>
+<pre><code>reviews_topic &lt;- model_topics(parent_bookreviews, num_topics = 3, num_terms = 10, english_only = TRUE)
+#&gt; Topic 1:  
+#&gt; parent, children, need, one, way, good, get, work, dont, give 
+#&gt; 
+#&gt; Topic 2:  
+#&gt; parent, child, book, emot, feel, help, also, can, children, use 
+#&gt; 
+#&gt; Topic 3:  
+#&gt; book, just, kid, think, read, like, time, say, realli, much
+</code></pre>
+<p>Plot the top terms by topic:</p>
+<pre><code>plot_topic_terms(reviews_topic)
+</code></pre>
+<p><img loading="lazy" src="topic_terms.png" alt=""  />
+</p>
+<p>Create a word cloud for each topic:</p>
+<pre><code>gen_topic_clouds(reviews_topic)
+</code></pre>
+<p>Topic 1:</p>
+<p><img loading="lazy" src="topic1.png" alt=""  />
+</p>
+<p>Topic 2:</p>
+<p><img loading="lazy" src="topic2.png" alt=""  />
+</p>
+<p>Topic 3:</p>
+<p><img loading="lazy" src="topic3.png" alt=""  />
+</p>
+<p>Other utility functions
+The following table shows other utility functions to extract book-related information</p>
+<table>
+<thead>
+<tr>
+<th><strong>Function</strong></th>
+<th><strong>Output</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get_book_ids()</td>
+<td>Text file</td>
+<td>Retrieve the book IDs from the input data and save to a text file</td>
+</tr>
+<tr>
+<td>get_book_summary()</td>
+<td>List</td>
+<td>Retrieve the summary for each book</td>
+</tr>
+<tr>
+<td>get_author_info()</td>
+<td>List</td>
+<td>Retrieve the author information for each book</td>
+</tr>
+<tr>
+<td>get_genres()</td>
+<td>List</td>
+<td>Extract the genres for each book</td>
+</tr>
+<tr>
+<td>get_published_time()</td>
+<td>List</td>
+<td>Retrieve the published time for each book</td>
+</tr>
+<tr>
+<td>get_num_pages()</td>
+<td>List</td>
+<td>Retrieve the number of pages for each book</td>
+</tr>
+<tr>
+<td>get_format_info()</td>
+<td>List</td>
+<td>Retrieve the format information for each book</td>
+</tr>
+<tr>
+<td>get_rating_distribution()</td>
+<td>List</td>
+<td>Retrieve the rating distribution for each book</td>
+</tr>
+</tbody>
+</table>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+</html>

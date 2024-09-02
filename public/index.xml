@@ -6,14 +6,14 @@
     <description>Recent content on Chao Liu</description>
     <generator>Hugo -- 0.131.0</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 17 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Sep 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Blog Post</title>
-      <link>//localhost:1313/posts/new-paper/</link>
-      <pubDate>Sat, 17 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/posts/new-paper/</guid>
-      <description>This is the content of my first blog post.</description>
+      <title>My First R package: Goodreader</title>
+      <link>//localhost:1313/posts/post1/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/post1/</guid>
+      <description>This is a description of my first post.</description>
     </item>
     <item>
       <title>About me</title>
@@ -45,6 +45,13 @@ This research project aims to leverage advanced text mining techniques to delve 
       <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
       <guid>//localhost:1313/publications/</guid>
       <description>Liu, C. &amp;amp; Waltz, K (2024). Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis. International Journal of Behavioral Development. [Link]Liu, C. &amp;amp; Chen, C. (2024). Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother‐child interactions. Social Development. [Link]Liu, C., Younkin, F., Hardman, M., Buchanan, B., Nugent, N., Pettus, M., &amp;amp; Lawrence B. (2021). The Longitudinal Relations between Disciplinary Practices and Emotion Regulation in Early Years.</description>
+    </item>
+    <item>
+      <title>How Parents Play: Play Style as a Function of Gender of Parent, Gender of Child, and Play Context</title>
+      <link>//localhost:1313/papers/paper3/</link>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/papers/paper3/</guid>
+      <description>This study observed 81 children playing with their mothers and fathers separately to examine how parent and child gender, as well as play context, influenced parental play roles. The findings revealed complex interactions between gender and play context, with parents adopting different roles (director, facilitator, or co-player) based on the child&amp;#39;s gender and the type of game, highlighting the significant impact of these factors on parent-child play dynamics.</description>
     </item>
     <item>
       <title>Office Hours</title>
