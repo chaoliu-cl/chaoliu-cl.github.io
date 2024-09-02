@@ -15,7 +15,7 @@ cover:
 
 ---
 
-##### Download
+##### Relevant Links
 
 + [Paper](https://journals.sagepub.com/doi/full/10.1177/0192513X241263782)
 
@@ -24,13 +24,14 @@ cover:
 ##### Abstract
 
 This study observed 81 children playing with their mothers and fathers separately to examine how parent and child gender, as well as play context, influenced parental play roles. The findings revealed complex interactions between gender and play context, with parents adopting different roles (director, facilitator, or co-player) based on the child's gender and the type of game, highlighting the significant impact of these factors on parent-child play dynamics.
+
 ---
 
 ##### Figure 1: Adjusted residuals for counts of parental roles (Dir = Director, Fac = Facilitator, Co-P = Co-player) comparing boys with girls within three play contexts. 
 
 ![](paper3.jpeg)
 
-##### Figure 1: Adjusted residuals for counts of different parental roles (Dir = Director, Fac = Facilitator, Co-P = Co-player) comparing fathers with mothers within three play contexts.
+##### Figure 2: Adjusted residuals for counts of different parental roles (Dir = Director, Fac = Facilitator, Co-P = Co-player) comparing fathers with mothers within three play contexts.
 
 ![](paper3_2.jpeg)
 
@@ -54,4 +55,3 @@ URL = {https://doi.org/10.1177/0192513X241263782}}
 ```
 
 ---
-
