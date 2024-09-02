@@ -122,15 +122,15 @@ Create a word cloud for each topic:
     gen_topic_clouds(reviews_topic)
 Topic 1:
 
-![](topic1.png)
+![](Topic1.png)
 
 Topic 2:
 
-![](topic2.png)
+![](Topic2.png)
 
 Topic 3:
 
-![](topic3.png)
+![](Topic3.png)
 
 Other utility functions
 The following table shows other utility functions to extract book-related information

@@ -59,7 +59,7 @@ params:
     ShowWordCount: false
     UseHugoToc: true
     comments: true
-    disqusShortname: "liu-chao-site"
+    disqusShortname: "liu-chao.site"
     math: true
     profileMode:
           enabled: true
