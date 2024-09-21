@@ -54,7 +54,7 @@ The code below searches for books that include the term “parenting” in the t
 You can also search author’s name:
 
     search_goodreads(search_term = "J.K. Rowling", search_in = "author", num_books = 5, sort_by = "ratings") 
-The search_goodreads() function includes a sort_by that sorts the results either by ratings or published_year:
+The `search_goodreads()` function includes a `sort_by` that sorts the results either by ratings or published_year:
 
     search_goodreads(search_term = "J.K. Rowling", search_in = "author", num_books = 5, sort_by = "published_year") 
 
@@ -73,7 +73,7 @@ To speed up the scraping process, we can turn on the parallel process: `use_para
 The `analyze_sentiment()` function calculates the sentiment score of each review based on the lexicon chosen by the user. Available options for lexicon are afinn, bing, and nrc. Basic negation scope detection was implemented (e.g., not happy is labeled as negative emotion and is assigned with a negative score).
 
     sentiment_results <- analyze_sentiment(parent_bookreviews, lexicon = "afinn")
-The average_book_sentiment() function calculates the average sentiment score for each book.
+The `average_book_sentiment()` function calculates the average sentiment score for each book.
 
     ave_sentiment <- average_book_sentiment(sentiment_results)
     summary(ave_sentiment)
@@ -132,7 +132,7 @@ Topic 3:
 
 ![](Topic3.png)
 
-Other utility functions
+## Other utility functions
 The following table shows other utility functions to extract book-related information
 
 | **Function**              | **Output** | **Description**                                                   |
