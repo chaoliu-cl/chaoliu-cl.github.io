@@ -37,7 +37,7 @@ menu:
         #  weight: 6
 
 params:
-    description: "I am an Assistant Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a husband, a father of two, and a Christ follower."
+    description: "I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a husband, a father of two, and a Christ follower."
     author: Chao Liu
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
@@ -65,13 +65,13 @@ params:
           enabled: true
           title: Chao Liu
           subtitle: >
-            Assistant Professor of Psychology@<a href="https://www.cedarville.edu/" style="color: blue;">Cedarville</a>
+            Associate Professor of Psychology@<a href="https://www.cedarville.edu/" style="color: blue;">Cedarville</a>
             
 
-            Quantitative Researcher
+            Christ follower
             
 
-            Christ follower, husband, and father
+            Quantitative Researcher, husband, and father
           imageUrl: "profile.jpg"
           imageWidth: 160
           imageHeight: 160
