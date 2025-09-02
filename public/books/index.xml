@@ -1,19 +1,72 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Books on Chao Liu</title>
-    <link>//localhost:1313/books/</link>
-    <description>Recent content in Books on Chao Liu</description>
-    <generator>Hugo -- 0.131.0</generator>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 May 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/books/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/books/" rel="self" type="application/rss+xml"/>
+    
     <item>
       <title>Portugese Irregular Verbs</title>
       <link>//localhost:1313/books/book1/</link>
-      <pubDate>Wed, 01 Jan 1997 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jan 1997 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/books/book1/</guid>
-      <description>This book discusses Portugese irregular verbs in great details.</description>
+      <description>&lt;hr&gt;
+&lt;h4 id=&#34;description&#34;&gt;Description&lt;/h4&gt;
+&lt;p&gt;This book discusses Portugese irregular verbs in great details. It is the seminal work on Romance philology.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; The book is the result of years of research into the etymology and vagaries of Portuguese verbs.&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;praise&#34;&gt;Praise&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is nothing more to be said on this subject. Nothing – Anonymous reviewer&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;view&#34;&gt;View&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;chapter1.pdf&#34;&gt;Chapter 1: History of the Portuguese language&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;chapter2.pdf&#34;&gt;Chapter 2: Review of regular verbs&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;chapter3.pdf&#34;&gt;Chapter 3: Analysis of irregular verbs&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;excerpt-from-chapter-1-basic-mathematical-results-from-portuguese-philology&#34;&gt;Excerpt from Chapter 1: Basic mathematical results from Portuguese philology&lt;/h4&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit $x\in \mathbb{N}$. Proin ac libero nec eros accumsan sagittis: $x^\ast = \max f(x)$. Fusce gravida $4 \ln(x+y) =4 \int \ln(x^2)dx$, lectus nec aliquet malesuada, augue dui lacinia velit, eget ullamcorper lorem lorem id turpis. Nam interdum est id venenatis fermentum: . Nullam fermentum, arcu eu luctus fermentum, felis orci pretium mi, eu bibendum ligula neque in metus.&lt;/p&gt;
+&lt;p&gt;$$1+\lambda\exp{\frac{\beta}{\alpha^2}} = \max_{t\in\mathbb{R}}(x(t)-y(t)+z(t)^2).$$&lt;/p&gt;
+&lt;p&gt;Nulla facilisi. Phasellus pharetra ligula sit amet diam viverra, sed scelerisque ligula cursus. Curabitur sit amet libero eu velit fringilla vulputate, $2\ln(x)$. Suspendisse potenti. Quisque imperdiet arcu ac nibh gravida, id posuere ligula efficitur. Curabitur posuere, dui at finibus viverra, felis justo pulvinar urna, id finibus sem purus eget orci.&lt;/p&gt;
+&lt;p&gt;Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris vel neque at lorem fermentum tincidunt: $&amp;lt;x,y&amp;gt; = 2x^2 + \mathcal{A}$. Etiam volutpat, risus at aliquet varius, sapien quam vulputate lectus, id ultrices lorem arcu ut magna. Sed malesuada scelerisque dignissim. Aliquam erat volutpat. Proin efficitur tincidunt nulla, a convallis magna cursus sit amet. Donec eget convallis libero. Pellentesque tincidunt nunc et nisi lacinia, quis auctor lorem suscipit:&lt;/p&gt;
+&lt;p&gt;$$2\exp(\gamma) = 2\exp(\zeta/3) = 2\exp(\kappa).$$&lt;/p&gt;
+&lt;p&gt;Praesent at eros a sapien sagittis scelerisque at a nulla. Aliquam erat volutpat. In hac habitasse platea dictumst. Phasellus congue vestibulum nisl, vitae accumsan est. Suspendisse potenti. In ut nunc ac quam congue cursus. Duis fermentum hendrerit eros, ut auctor velit pharetra ut. Nulla facilisi. Cras at convallis purus, a convallis mauris. Donec id est vel ipsum hendrerit laoreet.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;citation&#34;&gt;Citation&lt;/h4&gt;
+&lt;p&gt;Moritz-Maria von Igelfeld. 1997. &lt;em&gt;Portugese Irregular Verbs&lt;/em&gt;. Regensburg, Germany: Regensburg University Press. &lt;a href=&#34;http://www.alexandermccallsmith.com/book/portuguese-irregular-verbs&#34; target=&#34;_blank&#34;&gt;http://www.alexandermccallsmith.com/book/portuguese-irregular-verbs&lt;/a&gt;
+.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-BibTeX&#34; data-lang=&#34;BibTeX&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;@book&lt;/span&gt;{I97,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Moritz-Maria von Igelfeld}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;year&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{1997}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;title&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Portugese Irregular Verbs}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;publisher&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Regensburg University Press}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;address&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Regensburg, Germany}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{http://www.alexandermccallsmith.com/book/portuguese-irregular-verbs}&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;The acknowledged aim of the book is to dwarf all other books in the field.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;As a result of such intensive research, the book&amp;rsquo;s length is almost twelve hundred pages.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
     </item>
+    
   </channel>
 </rss>

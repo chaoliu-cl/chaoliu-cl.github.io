@@ -1,19 +1,123 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Profanity on Chao Liu</title>
-    <link>//localhost:1313/tags/profanity/</link>
-    <description>Recent content in Profanity on Chao Liu</description>
-    <generator>Hugo -- 0.131.0</generator>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/profanity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/profanity/" rel="self" type="application/rss+xml"/>
+    
     <item>
       <title>Profanity in Early Irish</title>
       <link>//localhost:1313/courses/course2/</link>
-      <pubDate>Sat, 16 Jun 1990 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 16 Jun 1990 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/courses/course2/</guid>
-      <description>This undergraduate course discusses profanity in Early Irish.</description>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This course covers topics related to profanity in Early Irish. It relates such profanity to profanity in modern English:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/li&gt;
+&lt;li&gt;Sed fermentum turpis nec dolor dapibus, ac commodo enim consequat.&lt;/li&gt;
+&lt;li&gt;Suspendisse potenti. Integer ac mauris nec ligula finibus ullamcorper.&lt;/li&gt;
+&lt;li&gt;Phasellus rutrum enim in nunc aliquam mollis.&lt;/li&gt;
+&lt;li&gt;Vivamus auctor nunc ac augue dapibus, in fermentum enim hendrerit. Duis et ultrices sem, eget efficitur lacus.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;introductory-video&#34;&gt;Introductory video&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/8ihJsf-AXdA&#34; target=&#34;_blank&#34;&gt;Lecture video 0&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;introductory-readings&#34;&gt;Introductory readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/1.pdf&#34; target=&#34;_blank&#34;&gt;Paper 1&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/13.pdf&#34; target=&#34;_blank&#34;&gt;Paper 2&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;part-1-overview-of-early-irish&#34;&gt;Part 1: Overview of Early Irish&lt;/h2&gt;
+&lt;p&gt;This section reviews the Early Irish language. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur.&lt;/p&gt;
+&lt;h5 id=&#34;lecture-videos&#34;&gt;Lecture videos&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/X_mwtm3inEw&#34; target=&#34;_blank&#34;&gt;Lecture video 1&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/cFdwOwY2l-A&#34; target=&#34;_blank&#34;&gt;Lecture video 2&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;lecture-notes&#34;&gt;Lecture notes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;notes1.pdf&#34;&gt;Lecture notes 1&lt;/a&gt;
+ – Concise overview of early Irish&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;notes2.pdf&#34;&gt;Lecture notes 2&lt;/a&gt;
+ – Complete and detailed overview of early Irish&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;readings&#34;&gt;Readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/7.pdf&#34; target=&#34;_blank&#34;&gt;Paper 3&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/8.pdf&#34; target=&#34;_blank&#34;&gt;Paper 4&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;part-2-profanity-in-indo-european-languages&#34;&gt;Part 2: Profanity in Indo-European Languages&lt;/h2&gt;
+&lt;p&gt;This section introduces profanity in Indo-European languages. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Maecenas quis ex nec tortor pulvinar tristique. Morbi eget massa nec quam interdum posuere. Vestibulum lobortis auctor massa, sed hendrerit risus malesuada eu. Fusce nec metus ligula. Donec in mauris dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris vestibulum erat nec odio tincidunt, vitae laoreet mi tempor.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris vestibulum erat nec odio tincidunt, vitae laoreet mi tempor. Quisque id eros sit amet enim tempor pellentesque. Suspendisse tincidunt risus a vehicula tincidunt. Nullam sollicitudin libero et ex cursus ultrices. Phasellus sit amet justo vitae nulla hendrerit pretium. Aenean quis velit eu risus pharetra vestibulum. Sed nec risus dolor. Vivamus vel leo ac ante pharetra auctor. Curabitur eleifend sapien non nisl varius, in hendrerit ipsum vehicula. Sed non justo sit amet nisi pharetra fermentum.&lt;/p&gt;
+&lt;h5 id=&#34;lecture-videos-1&#34;&gt;Lecture videos&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/GfpKnLDTwyM&#34; target=&#34;_blank&#34;&gt;Lecture video 3&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/UHnSkIZcjBs&#34; target=&#34;_blank&#34;&gt;Lecture video 4&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;compulsory-readings&#34;&gt;Compulsory readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/10.pdf&#34; target=&#34;_blank&#34;&gt;Paper 5&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/11.pdf&#34; target=&#34;_blank&#34;&gt;Paper 6&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;optional-readings&#34;&gt;Optional readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/2.pdf&#34; target=&#34;_blank&#34;&gt;Paper 7&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/4.pdf&#34; target=&#34;_blank&#34;&gt;Paper 8&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/5.pdf&#34; target=&#34;_blank&#34;&gt;Paper 9&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;homework&#34;&gt;Homework&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;problemset.pdf&#34;&gt;Problem set on profanity in Indo-European languages&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;part-3-the-originality-of-profanity-in-early-irish&#34;&gt;Part 3: The originality of profanity in Early Irish&lt;/h2&gt;
+&lt;p&gt;This section turns to the various elements that make profanity in Early Irish so original. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;p&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit essecillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h5 id=&#34;lecture-videos-2&#34;&gt;Lecture videos&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/Q0y2EtgTpXM&#34; target=&#34;_blank&#34;&gt;Lecture video 5&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/0ZO87WsOYrY&#34; target=&#34;_blank&#34;&gt;Lecture slides 6&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This section concludes. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+</description>
     </item>
+    
   </channel>
 </rss>

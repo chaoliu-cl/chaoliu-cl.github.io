@@ -1,26 +1,251 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sentiment Analysis on Chao Liu</title>
-    <link>//localhost:1313/tags/sentiment-analysis/</link>
-    <description>Recent content in Sentiment Analysis on Chao Liu</description>
-    <generator>Hugo -- 0.131.0</generator>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/sentiment-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/sentiment-analysis/" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>Goodreader: Scrape and Analyze &#39;Goodreads&#39; Book Data</title>
+      <link>//localhost:1313/posts/goodreader_r/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/goodreader_r/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Goodreader&lt;/em&gt; is a comprehensive toolkit for scraping and analyzing book data from Goodreads.&lt;/p&gt;
+&lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and loading the package&lt;/h2&gt;
+&lt;p&gt;Install the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;Goodreader&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And load the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(Goodreader)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;searching-for-books-on-goodreads&#34;&gt;Searching for Books on Goodreads&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function allows you to search for books on Goodreads based on various criteria.&lt;/p&gt;
+&lt;p&gt;The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_df &amp;lt;- search_goodreads(search_term = &amp;quot;parenting&amp;quot;, search_in = &amp;quot;title&amp;quot;, num_books = 10, sort_by = &amp;quot;ratings&amp;quot;)
+summary(parent_df)
+#&amp;gt;   title              author            book_id         
+#&amp;gt; Length:10          Length:10          Length:10         
+#&amp;gt; Class :character   Class :character   Class :character  
+#&amp;gt; Mode  :character   Mode  :character   Mode  :character  
+
+#&amp;gt;     url               ratings     
+#&amp;gt; Length:10          Min.   : 8427  
+#&amp;gt; Class :character   1st Qu.:11744  
+#&amp;gt; Mode  :character   Median :13662  
+#&amp;gt;                    Mean   :19757  
+#&amp;gt;                    3rd Qu.:13784  
+#&amp;gt;                    Max.   :69591  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also search author’s name:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;ratings&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function includes a &lt;code&gt;sort_by&lt;/code&gt; that sorts the results either by ratings or published_year:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;published_year&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;scrape-book-metadata-and-reviews&#34;&gt;Scrape book metadata and reviews&lt;/h2&gt;
+&lt;p&gt;After the books are found, save their IDs to a text file. These IDs are used for extracting book metadata and reviews:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;get_book_ids(input_data = parent_df, file_name = &amp;quot;parent_books.txt&amp;quot;) #the book IDs are now stored in a text file named “parent_books”
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Book metadata can then be scraped:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookinfo &amp;lt;- scrape_books(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, use_parallel = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To speed up the scraping process, we can turn on the parallel process: &lt;code&gt;use_parallel = TRUE&lt;/code&gt;, and specify the number of cores for the parallel process (e.g., &lt;code&gt;num_cores = 8&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookreviews &amp;lt;- scrape_reviews(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, num_reviews = 10, use_parallel = FALSE) #users can also turn on parallel process to speed up the process
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;conduct-sentiment-analysis&#34;&gt;Conduct sentiment analysis&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;analyze_sentiment()&lt;/code&gt; function calculates the sentiment score of each review based on the lexicon chosen by the user. Available options for lexicon are afinn, bing, and nrc. Basic negation scope detection was implemented (e.g., not happy is labeled as negative emotion and is assigned with a negative score).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_results &amp;lt;- analyze_sentiment(parent_bookreviews, lexicon = &amp;quot;afinn&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;average_book_sentiment()&lt;/code&gt; function calculates the average sentiment score for each book.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ave_sentiment &amp;lt;- average_book_sentiment(sentiment_results)
+summary(ave_sentiment)
+#&amp;gt;    book_id          avg_sentiment  
+#&amp;gt;  Length:10          Min.   : 4.40  
+#&amp;gt;  Class :character   1st Qu.: 7.25  
+#&amp;gt;  Mode  :character   Median :12.86  
+#&amp;gt;                     Mean   :12.95  
+#&amp;gt;                     3rd Qu.:14.65  
+#&amp;gt;                     Max.   :27.30
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The sentiment scores can be plotted as a histogram:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_histogram(sentiment_results)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_hist.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Or a trend of average sentiment score over time:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_trend(sentiment_results, time_period = &amp;quot;year&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_trend.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;perform-topic-modeling&#34;&gt;Perform topic modeling&lt;/h2&gt;
+&lt;p&gt;Apply topic modeling to the reviews data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;reviews_topic &amp;lt;- model_topics(parent_bookreviews, num_topics = 3, num_terms = 10, english_only = TRUE)
+#&amp;gt; Topic 1:  
+#&amp;gt; parent, children, need, one, way, good, get, work, dont, give 
+#&amp;gt; 
+#&amp;gt; Topic 2:  
+#&amp;gt; parent, child, book, emot, feel, help, also, can, children, use 
+#&amp;gt; 
+#&amp;gt; Topic 3:  
+#&amp;gt; book, just, kid, think, read, like, time, say, realli, much
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plot the top terms by topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plot_topic_terms(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;topic_terms.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Create a word cloud for each topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gen_topic_clouds(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Topic 1:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 2:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic2.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 3:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic3.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;other-utility-functions&#34;&gt;Other utility functions&lt;/h2&gt;
+&lt;p&gt;The following table shows other utility functions to extract book-related information&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Function&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Output&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Description&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_ids()&lt;/td&gt;
+&lt;td&gt;Text file&lt;/td&gt;
+&lt;td&gt;Retrieve the book IDs from the input data and save to a text file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_summary()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the summary for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_author_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the author information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_genres()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Extract the genres for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_published_time()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the published time for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_num_pages()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the number of pages for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_format_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the format information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_rating_distribution()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the rating distribution for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;p&gt;📌 &lt;em&gt;This post is syndicated on &lt;a href=&#34;https://www.r-bloggers.com&#34; target=&#34;_blank&#34;&gt;R-bloggers&lt;/a&gt;
+ — a community hub for R news and tutorials.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis</title>
       <link>//localhost:1313/papers/paper2/</link>
-      <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 04 Apr 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/papers/paper2/</guid>
-      <description>This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time.</description>
+      <description>&lt;h5 id=&#34;relevant-links&#34;&gt;Relevant Links&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://journals.sagepub.com/doi/10.1177/01650254241242662&#34; target=&#34;_blank&#34;&gt;Paper&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://osf.io/mjrt6/?view_only=d2d18e16274a4ab7bdf3587eae35be02&#34; target=&#34;_blank&#34;&gt;Code and data&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;abstract&#34;&gt;Abstract&lt;/h5&gt;
+&lt;p&gt;This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;figure-1-the-smooth-effect-of-mother-positive-emotion-on-child-positive-emotion&#34;&gt;Figure 1: The Smooth Effect of Mother Positive Emotion on Child Positive Emotion&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper2_1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h5 id=&#34;figure-2-the-smooth-effect-of-mother-negative-emotion-on-child-negative-emotion&#34;&gt;Figure 2: The Smooth Effect of Mother Negative Emotion on Child Negative Emotion&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper2_2.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;citation&#34;&gt;Citation&lt;/h5&gt;
+&lt;p&gt;Liu, C., &amp;amp; Waltz, K. (2024). Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis. &lt;em&gt;International Journal of Behavioral Development&lt;/em&gt;, 0(0). &lt;a href=&#34;https://doi.org/10.1177/01650254241242662&#34; target=&#34;_blank&#34;&gt;https://doi.org/10.1177/01650254241242662&lt;/a&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-BibTeX&#34; data-lang=&#34;BibTeX&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;@article&lt;/span&gt;{doi:10.1177/01650254241242662,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Chao Liu and Kira Waltz}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;title&lt;/span&gt; =&lt;span style=&#34;color:#a50&#34;&gt;{Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;journal&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{International Journal of Behavioral Development}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;volume&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;number&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;pages&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{01650254241242662}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;year&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;doi&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{10.1177/01650254241242662}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;URL&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{https://doi.org/10.1177/01650254241242662}&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+</description>
     </item>
+    
     <item>
       <title>Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions</title>
       <link>//localhost:1313/papers/paper1/</link>
-      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Feb 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/papers/paper1/</guid>
-      <description>This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.</description>
+      <description>&lt;hr&gt;
+&lt;h5 id=&#34;relevant-links&#34;&gt;Relevant Links&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/full/10.1111/sode.12733&#34; target=&#34;_blank&#34;&gt;Paper&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://osf.io/?view_only=c96818e4b23348ceaa6db76081288d7c&#34; target=&#34;_blank&#34;&gt;Code and data&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;abstract&#34;&gt;Abstract&lt;/h5&gt;
+&lt;p&gt;This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;figure-1-the-clusters-of-mother-polarity-and-child-polarity-over-time&#34;&gt;Figure 1: The Clusters of Mother Polarity and Child Polarity over time&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;citation&#34;&gt;Citation&lt;/h5&gt;
+&lt;p&gt;Liu, C., &amp;amp; Chen, C. (2024). Text Mining and Sentiment Analysis: A New Lens to Explore the Emotion Dynamics of Mother-Child Interactions. &lt;em&gt;Social Development&lt;/em&gt;, 33, e12733. &lt;a href=&#34;https://doi.org/10.1111/sode.12733&#34; target=&#34;_blank&#34;&gt;https://doi.org/10.1111/sode.12733&lt;/a&gt;
+.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-BibTeX&#34; data-lang=&#34;BibTeX&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;@article&lt;/span&gt;{https://doi.org/10.1111/sode.12733,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Liu, Chao and Chen, Charis}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;title&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;journal&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Social Development}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;volume&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{33}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;number&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{3}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;pages&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{e12733}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;keywords&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{cluster analysis, emotion dynamics, generalized additive models, mother-child interactions, piecewise linear regression, sentiment analysis, text mining}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;doi&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{https://doi.org/10.1111/sode.12733}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{https://onlinelibrary.wiley.com/doi/abs/10.1111/sode.12733}&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+</description>
     </item>
+    
   </channel>
 </rss>

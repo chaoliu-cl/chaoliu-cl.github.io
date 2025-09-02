@@ -1,106 +1,204 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chao Liu</title>
     <link>//localhost:1313/</link>
-    <description>Recent content on Chao Liu</description>
-    <generator>Hugo -- 0.131.0</generator>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 01 Sep 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Sep 2025 22:53:47 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/" rel="self" type="application/rss+xml"/>
+    
     <item>
-      <title>My First R package: Goodreader</title>
-      <link>//localhost:1313/posts/post1/</link>
-      <pubDate>Sun, 01 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/posts/post1/</guid>
-      <description>This is a description of my first post.</description>
+      <title>Posts</title>
+      <link>//localhost:1313/posts/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/</guid>
+      <description></description>
     </item>
+    
     <item>
       <title>About me</title>
       <link>//localhost:1313/about/</link>
-      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/about/</guid>
-      <description>I grew up in a southern coastal city of China and made my way to the United States in 2010, driven by a deep desire to pursue graduate degrees in psychology and make a positive impact on the lives of children in need. In 2013, I earned my master&amp;rsquo;s degree in developmental psychology from the University of Maine.
-During my time at the university, I came to realize the profound influence that families have on child development.</description>
+      <description>&lt;p&gt;I grew up in a southern coastal city of China and made my way to the United States in 2010, driven by a deep desire to pursue graduate degrees in psychology and make a positive impact on the lives of children in need. In 2013, I earned my master&amp;rsquo;s degree in developmental psychology from the University of Maine.&lt;/p&gt;
+&lt;p&gt;During my time at the university, I came to realize the profound influence that families have on child development. This sparked a passion within me, compelling me to incorporate the study of family dynamics and their impact on child well-being into my doctoral research. It was a path I felt compelled to follow.&lt;/p&gt;
+&lt;p&gt;In August of 2018, after years of study, I successfully completed my Ph.D. in Human Development and Family Sciences at Oklahoma State University. Soon after, I joined the faculty at Cedarville University, ready to share my knowledge and expertise with those like-minded students who are about to make a meaningful difference in the world.&lt;/p&gt;
+&lt;p&gt;Beyond the realms of academia, I find solace and exhilaration in the great outdoors. As an avid outdoor enthusiast, I relish every opportunity to go hiking, camping, and backpacking, especially when accompanied by my beautiful wife. These moments spent in nature not only rejuvenate my spirit but also provide an opportunity to deepen our connection and share unforgettable experiences.&lt;/p&gt;
+&lt;p&gt;But our adventures go beyond the thrill of exploration. We find great joy in using our journeys as a platform to spread the Gospel, sharing the transformative power of faith with the people we meet along the way. It&amp;rsquo;s a unique way to combine our love for nature, our commitment to helping others, and our faith in Christ.&lt;/p&gt;
+&lt;p&gt;My life&amp;rsquo;s journey has been shaped by a deep-rooted passion for science, a belief in the importance of family, and an insatiable thirst for adventure. As I continue to explore the vast realms of knowledge, immerse myself in the wonders of nature, and touch the lives of those around me, I am constantly reminded of the profound love that Jesus demonstrated for me, and for you.&lt;/p&gt;
+</description>
     </item>
+    
     <item>
       <title>Current Projects</title>
       <link>//localhost:1313/projects/</link>
-      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/projects/</guid>
-      <description>If you are interested in any of the following projects or if you have your own ideas and would like to collaborate, please reach out!
-EmoMine: Unraveling Emotional Dynamics in Parent-Child Interactions through Text Mining Analysis
-This research project aims to leverage advanced text mining techniques to delve into the intricate emotional dynamics within parent-child interactions. Emotions play a crucial role in shaping familial relationships, and understanding their nuanced expression in textual communication is paramount.</description>
+      <description>&lt;p&gt;If you are interested in any of the following projects or if you have your own ideas and would like to collaborate, please &lt;a href=&#34;mailto:chaoliu@cedarville.edu&#34;&gt;reach out&lt;/a&gt;
+!&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;EmoMine: Unraveling Emotional Dynamics in Parent-Child Interactions through Text Mining Analysis&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This research project aims to leverage advanced text mining techniques to delve into the intricate emotional dynamics within parent-child interactions. Emotions play a crucial role in shaping familial relationships, and understanding their nuanced expression in textual communication is paramount. We will collect a diverse dataset comprising written exchanges between parents and children, spanning various contexts such as emails, chat messages, and social media interactions. Utilizing natural language processing (NLP) algorithms, sentiment analysis, and machine learning models, we will conduct a comprehensive analysis of the dataset to identify patterns, trends, and shifts in emotional content over time.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;The Impact of Praise on Children&amp;rsquo;s Social and Behavioral Development&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This research project seeks to explore the multifaceted effects of praise on the social and behavioral development of children. Praise is a common tool used by parents, educators, and caregivers to reinforce positive behavior and boost a child&amp;rsquo;s self-esteem. However, the nuanced relationship between praise and developmental outcomes requires a comprehensive investigation. The study will involve a combination of quantitative and qualitative research methods, including surveys, behavioral observations, and interviews with parents, teachers, and children.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Sleep on Psychological and Physical Well-being in College Students&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This research project aims to comprehensively explore the effects of sleep on the psychological and physical well-being of college students. Sleep is a critical component of overall health, and the unique challenges faced by students in a college environment often impact their sleep patterns. This study will employ a mixed-methods approach, combining surveys, sleep monitoring, psychological assessments, and qualitative interviews to provide a holistic understanding of the intricate relationship between sleep, psychological health, and physical well-being among college students.&lt;/p&gt;
+</description>
     </item>
+    
     <item>
       <title>Location</title>
       <link>//localhost:1313/location/</link>
-      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/location/</guid>
-      <description>Dr. Chao Liu&amp;#39;s mailing and office addresses at Cedarville University.</description>
+      <description>&lt;hr&gt;
+&lt;h4 id=&#34;mailing-address&#34;&gt;Mailing address&lt;/h4&gt;
+&lt;p&gt;Chao Liu&lt;br&gt;
+Williams Hall&lt;br&gt;
+251 N Main Street
+Cedarville, Ohio 45314&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;office-address&#34;&gt;Office address&lt;/h4&gt;
+&lt;p&gt;WI 214&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;office-location&#34;&gt;Office location&lt;/h4&gt;
+&lt;iframe src=&#34;https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6135.30036079135!2d-83.8109560747739!3d39.74750814861851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8840a68ed30091bd%3A0xa2113524b54d03cc!2sWilliams%20Hall%2C%20251%20N%20Main%20St%2C%20Cedarville%2C%20OH%2045314!5e0!3m2!1sen!2sus!4v1723045430167!5m2!1sen!2sus&#34; width=&#34;600&#34; height=&#34;450&#34; style=&#34;border:0;&#34; allowfullscreen=&#34;&#34; loading=&#34;lazy&#34; referrerpolicy=&#34;no-referrer-when-downgrade&#34;&gt;&lt;/iframe&gt;
+</description>
     </item>
+    
     <item>
       <title>Publications</title>
       <link>//localhost:1313/publications/</link>
-      <pubDate>Wed, 07 Aug 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 07 Aug 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/publications/</guid>
-      <description>Liu, C. &amp;amp; Waltz, K (2024). Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis. International Journal of Behavioral Development. [Link]Liu, C. &amp;amp; Chen, C. (2024). Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother‐child interactions. Social Development. [Link]Liu, C., Younkin, F., Hardman, M., Buchanan, B., Nugent, N., Pettus, M., &amp;amp; Lawrence B. (2021). The Longitudinal Relations between Disciplinary Practices and Emotion Regulation in Early Years.</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Liu, C. &amp;amp; Waltz, K (2024). Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis. &lt;em&gt;International Journal of Behavioral Development&lt;/em&gt;. &lt;a href=&#34;https://doi.org/10.1177/01650254241242662&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Liu, C. &amp;amp; Chen, C. (2024). Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother‐child interactions. &lt;em&gt;Social Development&lt;/em&gt;. &lt;a href=&#34;https://onlinelibrary-wiley-com.cedarville.ohionet.org/doi/full/10.1111/sode.12733&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Liu, C., Younkin, F., Hardman, M., Buchanan, B., Nugent, N., Pettus, M., &amp;amp; Lawrence B. (2021). The Longitudinal Relations between Disciplinary Practices and Emotion
+Regulation in Early Years. &lt;em&gt;Personal Relationships&lt;/em&gt;, &lt;em&gt;28&lt;/em&gt;, 860–882. &lt;a href=&#34;https://doi.org/10.1111/pere.12401&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Croff, J., Cox, R., Washburn, I., Liu, C., &amp;amp; Broadbent, C. (2020). Multilevel effects of alcohol among early adolescents in an urban school district. The &lt;em&gt;International Journal of Alcohol and Drug Research&lt;/em&gt;, &lt;em&gt;8&lt;/em&gt;, 88-94. &lt;a href=&#34;https://doi.org/10.7895/ijadr.273&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Henry, C. S., Spencer, T. A., Liu, C., &amp;amp; Plunkett, S. W. (2020). Factor structure and
+reliability of the advantages of children scale with Latino and Caucasian male emerging
+adults. &lt;em&gt;Marriage and Family Review&lt;/em&gt;, &lt;em&gt;56&lt;/em&gt;, 174-191. &lt;a href=&#34;https://doi.org/10.1080/01494929.2020.1712301&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Croff, J. M., Washburn, I. J., Cox R. B., &amp;amp; Liu, C. (2018). Modelling opportunity: An
+examination of quadratic effects of adolescent Venezuelan substance use. &lt;em&gt;Drug and
+Alcohol Review&lt;/em&gt;, &lt;em&gt;37&lt;/em&gt;, 865-873. &lt;a href=&#34;https://pubmed.ncbi.nlm.nih.gov/30109744/&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Henry, C. S., Bámaca-Colbert, M. Y., Liu, C., Kern, B. L., Plunkett, S. W., Washburn, I. J., Behnke, A. O., &amp;amp; Gorham, L. J. (2018). Parenting behaviors, neighborhood quality, and substance use in 9th and 10th grade male Latinos. &lt;em&gt;Journal of Child and Family Studies&lt;/em&gt;, &lt;em&gt;27&lt;/em&gt;, 4103–4115. &lt;a href=&#34;https://doi.org/10.1007/s10826-018-1224-z&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Criss, M., Smith, A., Morris, A., Liu, C., &amp;amp; Hubbard, R. (2017). Parents and peers as
+protective factors among adolescents exposed to neighborhood risk. &lt;em&gt;Journal of Applied
+Developmental Psychology&lt;/em&gt;, &lt;em&gt;53&lt;/em&gt;, 127-138. &lt;a href=&#34;https://doi.org/10.1016/j.appdev.2017.10.004&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Liu, C., Washburn, I., Cox, R., Croff, J., &amp;amp; Crethar, H. (2017). The effects of requiring parental consent for research on adolescents’ risk behaviors: A meta-analysis. &lt;em&gt;Journal of Adolescent Health&lt;/em&gt;, &lt;em&gt;61&lt;/em&gt;, 45-52. &lt;a href=&#34;https://pubmed.ncbi.nlm.nih.gov/28363714/&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cox, R., Croff, J., Washburn, I., &amp;amp; Liu, C. (2016). Opportunities to use drugs and the
+transition to drug use among adolescents from Caracas, Venezuela. &lt;em&gt;Journal of Ethnicity
+in Substance Abuse&lt;/em&gt;, &lt;em&gt;16&lt;/em&gt;, 246-260. &lt;a href=&#34;https://pubmed.ncbi.nlm.nih.gov/26980594/#:~:text=Findings%20show%20that%20lifetime%20prevalence,use%20was%20taken%20into%20account.&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Liu, C., &amp;amp; Mei, J. (2009). The relationship between children’s depression and children’s
+social desirability. &lt;em&gt;Chinese Journal of Child Health Care&lt;/em&gt;, &lt;em&gt;17&lt;/em&gt;, 503-505. &lt;a href=&#34;https://www.cqvip.com/qk/98529a/200905/31679646.html&#34; target=&#34;_blank&#34;&gt;[Link]&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
     </item>
+    
     <item>
-      <title>How Parents Play: Play Style as a Function of Gender of Parent, Gender of Child, and Play Context</title>
-      <link>//localhost:1313/papers/paper3/</link>
-      <pubDate>Wed, 24 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/papers/paper3/</guid>
-      <description>This study observed 81 children playing with their mothers and fathers separately to examine how parent and child gender, as well as play context, influenced parental play roles. The findings revealed complex interactions between gender and play context, with parents adopting different roles (director, facilitator, or co-player) based on the child&amp;#39;s gender and the type of game, highlighting the significant impact of these factors on parent-child play dynamics.</description>
+      <title>Papers</title>
+      <link>//localhost:1313/papers/</link>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/papers/</guid>
+      <description></description>
     </item>
+    
     <item>
       <title>Office Hours</title>
       <link>//localhost:1313/officehours/</link>
-      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 08 May 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/officehours/</guid>
-      <description>Schedule and location for Professor Dr von Igelfeld&amp;#39;s office hours.</description>
+      <description>&lt;hr&gt;
+&lt;h4 id=&#34;schedule&#34;&gt;Schedule&lt;/h4&gt;
+&lt;p&gt;Office hours take place on Wednesday at 10am.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;location&#34;&gt;Location&lt;/h4&gt;
+&lt;p&gt;By default meetings are in my office. I am also available for virtual meetings on Zoom.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;meeting-material&#34;&gt;Meeting material&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;If we are meeting to discuss research, please send me a written description of the work that you would like to discus.&lt;/li&gt;
+&lt;li&gt;Presentation slides or paper draft are perfectly fine.&lt;/li&gt;
+&lt;li&gt;If you do not have those, please send a one-page description of the research.&lt;/li&gt;
+&lt;li&gt;Please send me the material by 8pm on the evening prior of our meeting.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
+    
     <item>
-      <title>Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis</title>
-      <link>//localhost:1313/papers/paper2/</link>
-      <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/papers/paper2/</guid>
-      <description>This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time.</description>
+      <title>Data</title>
+      <link>//localhost:1313/data/</link>
+      <pubDate>Thu, 07 Mar 2013 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/data/</guid>
+      <description></description>
     </item>
+    
     <item>
-      <title>Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions</title>
-      <link>//localhost:1313/papers/paper1/</link>
-      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/papers/paper1/</guid>
-      <description>This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.</description>
+      <title>Courses</title>
+      <link>//localhost:1313/courses/</link>
+      <pubDate>Mon, 10 Mar 2003 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/courses/</guid>
+      <description></description>
     </item>
+    
     <item>
-      <title>List of Irregular Verbs Across Romance Languages</title>
-      <link>//localhost:1313/data/data1/</link>
-      <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/data/data1/</guid>
-      <description>This dataset contains all irregular verbs in known Romance languages.</description>
+      <title>Books</title>
+      <link>//localhost:1313/books/</link>
+      <pubDate>Wed, 01 Jan 1997 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/books/</guid>
+      <description></description>
     </item>
+    
     <item>
-      <title>Lectures at the Villa of Reduced Circumstances</title>
-      <link>//localhost:1313/courses/course1/</link>
-      <pubDate>Mon, 10 Mar 2003 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/courses/course1/</guid>
-      <description>This graduate course presents classical results in Romance philology.</description>
+      <title>Archive</title>
+      <link>//localhost:1313/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/archive/</guid>
+      <description></description>
     </item>
-    <item>
-      <title>Portugese Irregular Verbs</title>
-      <link>//localhost:1313/books/book1/</link>
-      <pubDate>Wed, 01 Jan 1997 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/books/book1/</guid>
-      <description>This book discusses Portugese irregular verbs in great details.</description>
-    </item>
-    <item>
-      <title>Profanity in Early Irish</title>
-      <link>//localhost:1313/courses/course2/</link>
-      <pubDate>Sat, 16 Jun 1990 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/courses/course2/</guid>
-      <description>This undergraduate course discusses profanity in Early Irish.</description>
-    </item>
+    
   </channel>
 </rss>

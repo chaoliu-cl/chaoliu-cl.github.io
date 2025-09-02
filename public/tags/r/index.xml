@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/r/" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>Conversim: Comprehensive Conversation Similarity Analysis in R</title>
+      <link>//localhost:1313/posts/conversim_r/</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/conversim_r/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Conversim&lt;/em&gt; is a powerful R package for analyzing similarities in conversations across multiple dimensions. Whether you&amp;rsquo;re studying dialogue dynamics, speech patterns, or conversational alignment, this package provides comprehensive tools for measuring topic, lexical, semantic, stylistic, sentiment, structural, and temporal similarities.&lt;/p&gt;
+&lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and Loading the Package&lt;/h2&gt;
+&lt;p&gt;Install the package:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;install.packages&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;conversim&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Load the package along with required dependencies:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(conversim)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(ggplot2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(lme4)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(topicmodels)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(tm)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(slam)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;understanding-conversation-data-structure&#34;&gt;Understanding Conversation Data Structure&lt;/h2&gt;
+&lt;p&gt;The conversim package works with conversation data that includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;dyad_id&lt;/strong&gt;: Identifier for conversation pairs&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;speaker&lt;/strong&gt;: Person speaking (A, B, etc.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;text&lt;/strong&gt;: Raw conversation text&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;processed_text&lt;/strong&gt;: Cleaned and preprocessed text&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;analyzing-single-dyad-conversations&#34;&gt;Analyzing Single Dyad Conversations&lt;/h2&gt;
+&lt;h3 id=&#34;creating-sample-data&#34;&gt;Creating Sample Data&lt;/h3&gt;
+&lt;p&gt;Let&amp;rsquo;s start with a simple conversation between two speakers:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;set.seed&lt;/span&gt;(&lt;span style=&#34;color:#099&#34;&gt;123&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;conversation &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  speaker = &lt;span style=&#34;color:#0a0&#34;&gt;rep&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;c&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#099&#34;&gt;10&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  processed_text = &lt;span style=&#34;color:#0a0&#34;&gt;c&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Hello how are you today&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I&amp;#39;m doing well thanks for asking&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;That&amp;#39;s great to hear what are your plans&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I&amp;#39;m planning to go for a walk later&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Sounds nice the weather is beautiful&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Yes it&amp;#39;s perfect for outdoor activities&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Do you often go for walks&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Yes I try to walk every day for exercise&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;That&amp;#39;s a great habit to have&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Thanks I find it helps me stay healthy&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Have you tried other forms of exercise&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I also enjoy swimming and yoga&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Those are excellent choices too&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;What about you what exercise do you prefer&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I like running and playing tennis&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Tennis is fun do you play often&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I try to play at least once a week&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;That&amp;#39;s a good frequency to maintain&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Yes it keeps me active and social&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Social aspects of exercise are important too&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;text-preprocessing&#34;&gt;Text Preprocessing&lt;/h3&gt;
+&lt;p&gt;Before analysis, preprocess your conversation data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;preprocess_dyads &amp;lt;- &lt;span style=&#34;color:#00a&#34;&gt;function&lt;/span&gt;(conversations) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  conversations$processed_text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(conversations$text, &lt;span style=&#34;color:#00a&#34;&gt;function&lt;/span&gt;(text) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;tolower&lt;/span&gt;(text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;gsub&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;[[:punct:]]&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;gsub&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;[[:digit:]]&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;gsub&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;\\s+&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;trimws&lt;/span&gt;(text))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt;(text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  })
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Remove empty processed texts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  conversations &amp;lt;- conversations&lt;span style=&#34;color:#0a0&#34;&gt;[nchar&lt;/span&gt;(conversations$processed_text) &amp;gt; &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt;(conversations)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;lexical-similarity-sequence&#34;&gt;Lexical Similarity Sequence&lt;/h3&gt;
+&lt;p&gt;Track how lexical similarity evolves throughout the conversation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lexical_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;lex_sim_seq&lt;/span&gt;(conversation, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Visualize lexical similarity over time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(Exchange = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#0a0&#34;&gt;length&lt;/span&gt;(lexical_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  Similarity = lexical_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Exchange, y = Similarity)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Lexical Similarity Sequence&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Exchange&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;lex_sim.png&#34; alt=&#34;lexical similarity&#34;  /&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;cat&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Average lexical similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(lexical_sim$average, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;#&amp;gt; Average lexical similarity: 0.557&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;topic-similarity-analysis&#34;&gt;Topic Similarity Analysis&lt;/h3&gt;
+&lt;p&gt;Analyze topic coherence using Latent Dirichlet Allocation (LDA):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_sim_seq&lt;/span&gt;(conversation, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lda&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Plot topic similarity across conversation segments&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(Segment = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;, Similarity = topic_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Segment, y = Similarity)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Topic Similarity Sequence&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Segment&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;topic_sim.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;semantic-similarity&#34;&gt;Semantic Similarity&lt;/h3&gt;
+&lt;p&gt;Measure semantic similarity using TF-IDF vectors:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;semantic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sem_sim_seq&lt;/span&gt;(conversation, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;tfidf&amp;#34;&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(Exchange = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#0a0&#34;&gt;length&lt;/span&gt;(semantic_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  Similarity = semantic_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Exchange, y = Similarity)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Semantic Similarity Sequence&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Exchange&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;semantic_sim.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;stylistic-and-sentiment-analysis&#34;&gt;Stylistic and Sentiment Analysis&lt;/h3&gt;
+&lt;p&gt;Examine writing style and emotional tone:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Stylistic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;stylistic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;style_sim_seq&lt;/span&gt;(conversation, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Sentiment similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sentiment_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sent_sim_seq&lt;/span&gt;(conversation, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Create comparison plot&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;style_data &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Exchange = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#0a0&#34;&gt;length&lt;/span&gt;(stylistic_sim$sequence),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Stylistic = stylistic_sim$sequence,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Sentiment = sentiment_sim$sequence
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;style_long &amp;lt;- reshape2::&lt;span style=&#34;color:#0a0&#34;&gt;melt&lt;/span&gt;(style_data, id.vars = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Exchange&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(style_long, &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Exchange, y = value, color = variable)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Stylistic vs Sentiment Similarity&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Exchange&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       color = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Measure&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;style_sent_sim.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;analyzing-multiple-dyads&#34;&gt;Analyzing Multiple Dyads&lt;/h2&gt;
+&lt;h3 id=&#34;loading-multi-dyad-data&#34;&gt;Loading Multi-Dyad Data&lt;/h3&gt;
+&lt;p&gt;Load the example dataset for multiple conversation pairs:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;data_path &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;system.file&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;extdata&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;dyad_example_data.Rdata&amp;#34;&lt;/span&gt;, package = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;conversim&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;load&lt;/span&gt;(data_path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Display data structure&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;head&lt;/span&gt;(dyad_example_data)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# A tibble: 6 × 3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  dyad_id speaker_id text                              
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;                             
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; A          What did you think of the new mov…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; B          I haven’t seen it yet. Which one …
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; A          The latest superhero film. I hear…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; B          Oh, that one! I’ve been meaning t…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; A          Yes, I thought it was fantastic. …
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;6&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; B          Really? What about the storyline?…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;str&lt;/span&gt;(dyad_example_data)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tibble [532 × &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;] &lt;/span&gt;(S3: tbl_df/tbl/data.frame)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ dyad_id   : num [1:&lt;span style=&#34;color:#099&#34;&gt;532&lt;/span&gt;] &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ speaker_id: chr [1:&lt;span style=&#34;color:#099&#34;&gt;532&lt;/span&gt;] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ text      : chr [1:&lt;span style=&#34;color:#099&#34;&gt;532&lt;/span&gt;] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;What did you think of the new movie that just came out?&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I haven’t seen it yet. Which one are you referring to?&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;The latest superhero film. I heard it’s getting great reviews.&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Oh, that one! I’ve been meaning to watch it. Did you enjoy it?&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;preprocessing-multiple-dyads&#34;&gt;Preprocessing Multiple Dyads&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;processed_convs &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;preprocess_dyads&lt;/span&gt;(dyad_example_data)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;comprehensive-similarity-analysis&#34;&gt;Comprehensive Similarity Analysis&lt;/h3&gt;
+&lt;p&gt;Calculate all similarity measures across multiple dyads:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Topic similarity using multilevel modeling&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_sim_dyads&lt;/span&gt;(processed_convs, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lda&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Lexical similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lexical_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;lexical_sim_dyads&lt;/span&gt;(processed_convs, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Semantic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;semantic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;semantic_sim_dyads&lt;/span&gt;(processed_convs, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;tfidf&amp;#34;&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Structural similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;structural_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;structural_sim_dyads&lt;/span&gt;(processed_convs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Stylistic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;stylistic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;stylistic_sim_dyads&lt;/span&gt;(processed_convs, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Sentiment similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sentiment_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sentiment_sim_dyads&lt;/span&gt;(processed_convs, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Participant balance&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;participant_sim_dyads&lt;/span&gt;(processed_convs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Timing patterns&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;timing_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;timing_sim_dyads&lt;/span&gt;(processed_convs)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;visualizing-multi-dyad-results&#34;&gt;Visualizing Multi-Dyad Results&lt;/h3&gt;
+&lt;p&gt;Create comprehensive comparison plots:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Prepare comparison data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;comparison_df &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  dyad = &lt;span style=&#34;color:#0a0&#34;&gt;names&lt;/span&gt;(topic_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  topic = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(topic_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  lexical = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(lexical_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  semantic = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(semantic_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  structural = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(structural_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  stylistic = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(stylistic_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sentiment = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(sentiment_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  participant = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(participant_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  timing = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(timing_sim$similarities_by_dyad)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Reshape for plotting&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;comparison_long &amp;lt;- reshape2::&lt;span style=&#34;color:#0a0&#34;&gt;melt&lt;/span&gt;(comparison_df, id.vars = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;dyad&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Create boxplot comparison&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(comparison_long, &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = variable, y = value, fill = variable)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_boxplot&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Comparison of Similarity Measures Across Dyads&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Measure&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme&lt;/span&gt;(axis.text.x = &lt;span style=&#34;color:#0a0&#34;&gt;element_text&lt;/span&gt;(angle = &lt;span style=&#34;color:#099&#34;&gt;45&lt;/span&gt;, hjust = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        legend.position = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sim_measure_comp.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;topic-similarity-trajectory&#34;&gt;Topic Similarity Trajectory&lt;/h3&gt;
+&lt;p&gt;Visualize how topic similarity changes within each dyad:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Prepare data for topic similarity trajectories&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topic_sim_df &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  dyad = &lt;span style=&#34;color:#0a0&#34;&gt;rep&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;names&lt;/span&gt;(topic_sim$similarities_by_dyad), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(topic_sim$similarities_by_dyad, length)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  similarity = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(topic_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  index = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;lapply&lt;/span&gt;(topic_sim$similarities_by_dyad, seq_along))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Create trajectory plot&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(topic_sim_df, &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = index, y = similarity, color = dyad)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;facet_wrap&lt;/span&gt;(~dyad, ncol = &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Topic Similarity Trajectories Across Dyads&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Sequence&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme&lt;/span&gt;(legend.position = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sim_scores.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;analyzing-long-speeches&#34;&gt;Analyzing Long Speeches&lt;/h2&gt;
+&lt;h3 id=&#34;loading-speech-data&#34;&gt;Loading Speech Data&lt;/h3&gt;
+&lt;p&gt;For comparing longer texts like speeches:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;data_path &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;system.file&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;extdata&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;speeches_data.Rdata&amp;#34;&lt;/span&gt;, package = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;conversim&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;load&lt;/span&gt;(data_path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Preview the speech data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;summary&lt;/span&gt;(speeches_data))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;speaker_id            text          
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Length:&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;           Length:&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;          
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Class :character   Class :character  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Mode  :character   Mode  :character
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;advanced-similarity-measures&#34;&gt;Advanced Similarity Measures&lt;/h3&gt;
+&lt;h4 id=&#34;topic-similarity-with-multiple-methods&#34;&gt;Topic Similarity with Multiple Methods&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# LDA-based topic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lda_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                   method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lda&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# LSA-based topic similarity  &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lsa_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                   method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lsa&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LDA Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(lda_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LDA Similarity: 0.169&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LSA Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(lsa_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LSA Similarity: 1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;comprehensive-semantic-analysis&#34;&gt;Comprehensive Semantic Analysis&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# TF-IDF semantic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tfidf_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;semantic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                         method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;tfidf&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Word2Vec semantic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;word2vec_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;semantic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                            method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;word2vec&amp;#34;&lt;/span&gt;, dim = &lt;span style=&#34;color:#099&#34;&gt;100&lt;/span&gt;, iter = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;TF-IDF Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(tfidf_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;TF-IDF Similarity: 0.5&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Word2Vec Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(word2vec_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Word2Vec Similarity: 0.999&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;detailed-stylistic-analysis&#34;&gt;Detailed Stylistic Analysis&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;style_analysis &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;stylistic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Stylistic Features Comparison:&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Stylistic Features Comparison:&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 1 TTR:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(style_analysis$text1_features[&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;ttr&amp;#34;&lt;/span&gt;], &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 1 TTR: 0.644&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 2 TTR:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(style_analysis$text2_features[&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;ttr&amp;#34;&lt;/span&gt;], &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 2 TTR: 0.549&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Overall Stylistic Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(style_analysis$overall_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Overall Stylistic Similarity: 0.892&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;key-similarity-measures-explained&#34;&gt;Key Similarity Measures Explained&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Measure&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Description&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Best For&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Topic&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Measures thematic coherence using LDA or LSA&lt;/td&gt;
+&lt;td&gt;Analyzing content alignment and subject matter similarity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Lexical&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Calculates shared vocabulary between speakers&lt;/td&gt;
+&lt;td&gt;Studying word choice and linguistic alignment&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Semantic&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Measures meaning similarity using vector representations&lt;/td&gt;
+&lt;td&gt;Understanding conceptual similarity beyond word overlap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Structural&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Analyzes conversation format and turn-taking patterns&lt;/td&gt;
+&lt;td&gt;Examining dialogue structure and interaction patterns&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Stylistic&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Compares writing style features (TTR, sentence length, readability)&lt;/td&gt;
+&lt;td&gt;Studying linguistic style and complexity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Sentiment&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Measures emotional tone alignment&lt;/td&gt;
+&lt;td&gt;Analyzing emotional synchrony in conversations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Participant&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Evaluates speaker balance and participation equality&lt;/td&gt;
+&lt;td&gt;Understanding conversation dynamics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Timing&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Analyzes temporal patterns in conversation flow&lt;/td&gt;
+&lt;td&gt;Studying rhythm and pacing in dialogue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;multilevel-modeling-benefits&#34;&gt;Multilevel Modeling Benefits&lt;/h2&gt;
+&lt;p&gt;The package uses multilevel modeling to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Account for dyad-level variation in similarity patterns&lt;/li&gt;
+&lt;li&gt;Provide more accurate overall averages across conversations&lt;/li&gt;
+&lt;li&gt;Handle nested data structures common in conversation analysis&lt;/li&gt;
+&lt;li&gt;Enable statistical inference about conversation patterns&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h2&gt;
+&lt;h3 id=&#34;window-size-selection&#34;&gt;Window Size Selection&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Small windows (2-3)&lt;/strong&gt;: Capture immediate conversational alignment&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Medium windows (4-6)&lt;/strong&gt;: Balance local and global patterns&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Large windows (7+)&lt;/strong&gt;: Focus on broader conversational themes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;method-selection&#34;&gt;Method Selection&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TF-IDF&lt;/strong&gt;: Fast, interpretable, good for lexical analysis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Word2Vec&lt;/strong&gt;: Captures semantic relationships, better for meaning&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LDA&lt;/strong&gt;: Excellent for topic modeling with multiple themes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LSA&lt;/strong&gt;: Good for discovering latent semantic structures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;data-preprocessing&#34;&gt;Data Preprocessing&lt;/h3&gt;
+&lt;p&gt;Always preprocess your text data by:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Converting to lowercase&lt;/li&gt;
+&lt;li&gt;Removing punctuation and numbers&lt;/li&gt;
+&lt;li&gt;Normalizing whitespace&lt;/li&gt;
+&lt;li&gt;Filtering empty entries&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The conversim package provides a comprehensive toolkit for analyzing conversation similarities across multiple dimensions. Whether studying therapeutic dialogues, educational interactions, or social conversations, these tools enable researchers to quantify and visualize the complex dynamics of human communication.&lt;/p&gt;
+&lt;p&gt;The package&amp;rsquo;s strength lies in its ability to capture different aspects of conversational similarity simultaneously, providing a holistic view of dialogue dynamics that can inform research in linguistics, psychology, communication studies, and computational social science.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;This tutorial demonstrates the core functionality of the conversim package for conversation analysis in R.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Goodreader: Scrape and Analyze &#39;Goodreads&#39; Book Data</title>
+      <link>//localhost:1313/posts/goodreader_r/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/goodreader_r/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Goodreader&lt;/em&gt; is a comprehensive toolkit for scraping and analyzing book data from Goodreads.&lt;/p&gt;
+&lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and loading the package&lt;/h2&gt;
+&lt;p&gt;Install the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;Goodreader&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And load the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(Goodreader)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;searching-for-books-on-goodreads&#34;&gt;Searching for Books on Goodreads&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function allows you to search for books on Goodreads based on various criteria.&lt;/p&gt;
+&lt;p&gt;The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_df &amp;lt;- search_goodreads(search_term = &amp;quot;parenting&amp;quot;, search_in = &amp;quot;title&amp;quot;, num_books = 10, sort_by = &amp;quot;ratings&amp;quot;)
+summary(parent_df)
+#&amp;gt;   title              author            book_id         
+#&amp;gt; Length:10          Length:10          Length:10         
+#&amp;gt; Class :character   Class :character   Class :character  
+#&amp;gt; Mode  :character   Mode  :character   Mode  :character  
+
+#&amp;gt;     url               ratings     
+#&amp;gt; Length:10          Min.   : 8427  
+#&amp;gt; Class :character   1st Qu.:11744  
+#&amp;gt; Mode  :character   Median :13662  
+#&amp;gt;                    Mean   :19757  
+#&amp;gt;                    3rd Qu.:13784  
+#&amp;gt;                    Max.   :69591  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also search author’s name:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;ratings&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function includes a &lt;code&gt;sort_by&lt;/code&gt; that sorts the results either by ratings or published_year:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;published_year&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;scrape-book-metadata-and-reviews&#34;&gt;Scrape book metadata and reviews&lt;/h2&gt;
+&lt;p&gt;After the books are found, save their IDs to a text file. These IDs are used for extracting book metadata and reviews:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;get_book_ids(input_data = parent_df, file_name = &amp;quot;parent_books.txt&amp;quot;) #the book IDs are now stored in a text file named “parent_books”
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Book metadata can then be scraped:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookinfo &amp;lt;- scrape_books(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, use_parallel = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To speed up the scraping process, we can turn on the parallel process: &lt;code&gt;use_parallel = TRUE&lt;/code&gt;, and specify the number of cores for the parallel process (e.g., &lt;code&gt;num_cores = 8&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookreviews &amp;lt;- scrape_reviews(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, num_reviews = 10, use_parallel = FALSE) #users can also turn on parallel process to speed up the process
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;conduct-sentiment-analysis&#34;&gt;Conduct sentiment analysis&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;analyze_sentiment()&lt;/code&gt; function calculates the sentiment score of each review based on the lexicon chosen by the user. Available options for lexicon are afinn, bing, and nrc. Basic negation scope detection was implemented (e.g., not happy is labeled as negative emotion and is assigned with a negative score).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_results &amp;lt;- analyze_sentiment(parent_bookreviews, lexicon = &amp;quot;afinn&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;average_book_sentiment()&lt;/code&gt; function calculates the average sentiment score for each book.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ave_sentiment &amp;lt;- average_book_sentiment(sentiment_results)
+summary(ave_sentiment)
+#&amp;gt;    book_id          avg_sentiment  
+#&amp;gt;  Length:10          Min.   : 4.40  
+#&amp;gt;  Class :character   1st Qu.: 7.25  
+#&amp;gt;  Mode  :character   Median :12.86  
+#&amp;gt;                     Mean   :12.95  
+#&amp;gt;                     3rd Qu.:14.65  
+#&amp;gt;                     Max.   :27.30
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The sentiment scores can be plotted as a histogram:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_histogram(sentiment_results)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_hist.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Or a trend of average sentiment score over time:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_trend(sentiment_results, time_period = &amp;quot;year&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_trend.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;perform-topic-modeling&#34;&gt;Perform topic modeling&lt;/h2&gt;
+&lt;p&gt;Apply topic modeling to the reviews data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;reviews_topic &amp;lt;- model_topics(parent_bookreviews, num_topics = 3, num_terms = 10, english_only = TRUE)
+#&amp;gt; Topic 1:  
+#&amp;gt; parent, children, need, one, way, good, get, work, dont, give 
+#&amp;gt; 
+#&amp;gt; Topic 2:  
+#&amp;gt; parent, child, book, emot, feel, help, also, can, children, use 
+#&amp;gt; 
+#&amp;gt; Topic 3:  
+#&amp;gt; book, just, kid, think, read, like, time, say, realli, much
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plot the top terms by topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plot_topic_terms(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;topic_terms.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Create a word cloud for each topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gen_topic_clouds(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Topic 1:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 2:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic2.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 3:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic3.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;other-utility-functions&#34;&gt;Other utility functions&lt;/h2&gt;
+&lt;p&gt;The following table shows other utility functions to extract book-related information&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Function&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Output&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Description&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_ids()&lt;/td&gt;
+&lt;td&gt;Text file&lt;/td&gt;
+&lt;td&gt;Retrieve the book IDs from the input data and save to a text file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_summary()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the summary for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_author_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the author information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_genres()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Extract the genres for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_published_time()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the published time for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_num_pages()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the number of pages for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_format_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the format information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_rating_distribution()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the rating distribution for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;p&gt;📌 &lt;em&gt;This post is syndicated on &lt;a href=&#34;https://www.r-bloggers.com&#34; target=&#34;_blank&#34;&gt;R-bloggers&lt;/a&gt;
+ — a community hub for R news and tutorials.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>textAnnotatoR: Practical Example - Qualitative Analysis with textAnnotatoR</title>
+      <link>//localhost:1313/posts/textannotator/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/textannotator/</guid>
+      <description>&lt;p&gt;&lt;em&gt;textAnnotatoR&lt;/em&gt; is an interactive text annotation tool built with Shiny that provides a graphical user interface for coding text documents, managing code hierarchies, creating memos, and analyzing coding patterns.&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This guide provides a step-by-step practical example of using the textAnnotatoR package for qualitative analysis. We&amp;rsquo;ll work through a complete example project, from importing text to analyzing coded content. You&amp;rsquo;ll learn how to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Set up a project&lt;/li&gt;
+&lt;li&gt;Import text data&lt;/li&gt;
+&lt;li&gt;Annotate text&lt;/li&gt;
+&lt;li&gt;Manage project files (saving, loading, and organizing)&lt;/li&gt;
+&lt;li&gt;Analyze patterns within coded data&lt;/li&gt;
+&lt;li&gt;Export results&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;setting-up-textannotator&#34;&gt;Setting Up textAnnotatoR&lt;/h2&gt;
+&lt;p&gt;Before diving into the sample project, let&amp;rsquo;s understand how to properly set up textAnnotatoR and navigate its interface.&lt;/p&gt;
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;If you haven&amp;rsquo;t installed textAnnotatoR yet, you can install it from CRAN or GitHub:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Install devtools if not already installed
+if (!requireNamespace(&amp;quot;devtools&amp;quot;, quietly = TRUE)) {
+  install.packages(&amp;quot;devtools&amp;quot;)
+}
+
+# Install textAnnotatoR
+install.packages(&amp;quot;textAnnotatoR&amp;quot;) # or
+devtools::install_github(&amp;quot;chaoliu-cl/textAnnotatoR&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;first-time-setup&#34;&gt;First-Time Setup&lt;/h3&gt;
+&lt;p&gt;The first time you run textAnnotatoR, it will ask you to confirm where you want to store your project data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(textAnnotatoR)
+annotate_gui()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You&amp;rsquo;ll see a dialog asking you to choose between:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Default Location: A folder managed by R in your user directory&lt;/li&gt;
+&lt;li&gt;Custom Location: A directory of your choice&lt;/li&gt;
+&lt;li&gt;Project-specific Location: A customizable directory unique to each project&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/storage_location.png&#34; alt=&#34;Storage Location Dialog&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;understanding-the-interface&#34;&gt;Understanding the Interface&lt;/h3&gt;
+&lt;p&gt;When textAnnotatoR launches, you&amp;rsquo;ll see several tabs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;File&lt;/strong&gt;: Import text and manage projects&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Code and Memo&lt;/strong&gt;: For managing codes and adding memos&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Themes&lt;/strong&gt;: Organize codes into themes and hierarchies&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Analysis&lt;/strong&gt;: Analyze coding patterns&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Records&lt;/strong&gt;: View all annotations in tabular format&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Comparison&lt;/strong&gt;: Compare coding between different coders&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sample-project-analyzing-interview-responses&#34;&gt;Sample Project: Analyzing Interview Responses&lt;/h2&gt;
+&lt;p&gt;For this example, we&amp;rsquo;ll be analyzing fictional interview responses about remote work experiences. The example demonstrates how you might use textAnnotatoR in a real qualitative research context.&lt;/p&gt;
+&lt;h3 id=&#34;step-1-creating-a-new-project&#34;&gt;Step 1: Creating a New Project&lt;/h3&gt;
+&lt;p&gt;When you first launch textAnnotatoR, it automatically creates a blank project. However, if you want to start a new project, click &amp;ldquo;New Project&amp;rdquo; in the top toolbar.&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/new_project_creation.png&#34; alt=&#34;New Project Creation&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;If you have unsaved changes in your current project, you&amp;rsquo;ll see a confirmation dialog asking if you want to save your current project first:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_before_new.png&#34; alt=&#34;Save Before New Dialog&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;step-2-importing-text-data&#34;&gt;Step 2: Importing Text Data&lt;/h3&gt;
+&lt;p&gt;For this example, we&amp;rsquo;ll use the following interview excerpt. You can copy this text into a file named &lt;code&gt;remote_work_interview.txt&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Interviewer: Can you describe your experience transitioning to remote work?
+
+Participant: It was definitely challenging at first. I think the biggest issues were setting up a proper workspace at home and establishing boundaries between work and personal life. It took me about a month to develop a routine that worked. Now, I actually prefer working remotely. I&#39;m more productive without office distractions, and I save two hours daily by not commuting.
+
+Interviewer: What tools or resources have been most helpful?
+
+Participant: Video conferencing has been essential - we use Zoom for all our meetings. We also rely heavily on Slack for quick communications and Asana for project management. My company provided a second monitor and an ergonomic chair, which made a huge difference in my physical comfort. I&#39;d say the technology was easy to adapt to, but the social aspects were harder. It&#39;s difficult to replace those impromptu conversations by the coffee machine.
+
+Interviewer: How has remote work affected your work-life balance?
+
+Participant: It&#39;s a double-edged sword. I have more flexibility and time with family, but it&#39;s also harder to disconnect. Sometimes I find myself checking emails well into the evening, which wasn&#39;t a habit before. I&#39;ve had to be intentional about setting working hours and sticking to them. Taking short walks during the day has become my substitute for the natural breaks that happened in the office.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;step-3-saving-your-project&#34;&gt;Step 3: Saving Your Project&lt;/h3&gt;
+&lt;p&gt;It&amp;rsquo;s important to save your project regularly. To do that, click on &amp;ldquo;Save Project&amp;rdquo;:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_project.png&#34; alt=&#34;Save Project&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Then, a dialog will appear:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_project_dialog.png&#34; alt=&#34;Save Project Dialog&#34;  /&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Type in your project name&lt;/li&gt;
+&lt;li&gt;Click &amp;ldquo;Choose Directory&amp;rdquo; to select where to save the project&lt;/li&gt;
+&lt;li&gt;Directories are displayed in a hierarchical format - navigate to your desired location&lt;/li&gt;
+&lt;li&gt;Click &amp;ldquo;Save&amp;rdquo; to save your project&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The project will be saved as an RDS file, which preserves all your annotations, codes, and project structure.&lt;/p&gt;
+&lt;h3 id=&#34;step-4-annotating-the-text&#34;&gt;Step 4: Annotating the Text&lt;/h3&gt;
+&lt;p&gt;Now let&amp;rsquo;s start coding our interview text:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Click the selection tool (cursor icon) in the right margin&lt;/li&gt;
+&lt;li&gt;Select text discussing the home workspace setup&lt;/li&gt;
+&lt;li&gt;In the &amp;ldquo;Code and Memo&amp;rdquo; tab, enter &amp;ldquo;Home Setup&amp;rdquo; as the code&lt;/li&gt;
+&lt;li&gt;Add a memo: &amp;ldquo;Initial challenge in transition to remote work&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Click &amp;ldquo;Save&amp;rdquo; to save the code&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/Save_code.gif&#34; alt=&#34;Save Code Animation&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Continue this process for other notable segments in the text. For example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Code Zoom, Slack, and Asana as &amp;ldquo;Technology&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Code &amp;ldquo;save two hours daily by not commuting&amp;rdquo; as &amp;ldquo;Save Time&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Code discussions of missed impromptu conversations as &amp;ldquo;Social Isolation&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Your annotated text will begin to look like this, with different colored highlights representing different codes:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/Fig3.png&#34; alt=&#34;Annotated Text Example&#34;  /&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;applying-existing-codes&#34;&gt;Applying Existing Codes&lt;/h4&gt;
+&lt;p&gt;Once you&amp;rsquo;ve created some codes, you can apply them to new text segments:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Highlight the target text&lt;/li&gt;
+&lt;li&gt;Click on &amp;ldquo;Apply Code&amp;rdquo; in the side panel&lt;/li&gt;
+&lt;li&gt;Choose the code you want to apply from the dropdown menu&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/Fig4.gif&#34; alt=&#34;Apply Code Animation&#34;  /&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;managing-codes&#34;&gt;Managing Codes&lt;/h4&gt;
+&lt;p&gt;As your coding progresses, you&amp;rsquo;ll want to manage your codes efficiently. You can click on the highlighted text to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Remove annotation&lt;/li&gt;
+&lt;li&gt;Replace code&lt;/li&gt;
+&lt;li&gt;Rename code&lt;/li&gt;
+&lt;li&gt;Delete code&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/edit_code.png&#34; alt=&#34;Edit Code Options&#34;  /&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;merging-similar-codes&#34;&gt;Merging Similar Codes&lt;/h4&gt;
+&lt;p&gt;In some instances, you might find that some of your codes are conceptually similar or overlapping. textAnnotatoR provides a &amp;ldquo;Merge Codes&amp;rdquo; feature to consolidate these:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to the &amp;ldquo;Code and Memo&amp;rdquo; tab&lt;/li&gt;
+&lt;li&gt;In the &amp;ldquo;Codes&amp;rdquo; section, select two or more codes by checking the boxes next to them&lt;/li&gt;
+&lt;li&gt;Click the &amp;ldquo;Merge Codes&amp;rdquo; button&lt;/li&gt;
+&lt;li&gt;A dialog will appear asking you to name the new merged code:
+&lt;ul&gt;
+&lt;li&gt;Enter a descriptive name that encompasses the concepts being merged&lt;/li&gt;
+&lt;li&gt;Click &amp;ldquo;Merge&amp;rdquo; to confirm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/merge_codes_dialog.png&#34; alt=&#34;Merge Codes Dialog&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;This feature is particularly useful when:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your initial coding was very granular and you now want broader categories&lt;/li&gt;
+&lt;li&gt;Multiple codes have emerged that represent the same underlying concept&lt;/li&gt;
+&lt;li&gt;You want to simplify your coding scheme for analysis or reporting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;step-5-loading-your-project&#34;&gt;Step 5: Loading Your Project&lt;/h3&gt;
+&lt;p&gt;If you need to continue your work later, you&amp;rsquo;ll need to load your saved project. Click &amp;ldquo;Load Project&amp;rdquo;:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/load_project.png&#34; alt=&#34;Load Project&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Then a dialog will appear:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/load_project_dialog.png&#34; alt=&#34;Load Project Dialog&#34;  /&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Click &amp;ldquo;Choose Project File&amp;rdquo; to navigate to your saved project file&lt;/li&gt;
+&lt;li&gt;Navigate through the directory structure to find your project&lt;/li&gt;
+&lt;li&gt;Select the RDS file and click &amp;ldquo;Select&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Click &amp;ldquo;Load&amp;rdquo; to load your project&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All your text, annotations, codes, and memos will be restored exactly as you left them.&lt;/p&gt;
+&lt;h3 id=&#34;step-6-analyzing-the-coded-data&#34;&gt;Step 6: Analyzing the Coded Data&lt;/h3&gt;
+&lt;p&gt;Once you&amp;rsquo;ve coded the entire interview, use the analysis tools to examine patterns:&lt;/p&gt;
+&lt;h4 id=&#34;code-frequency-analysis&#34;&gt;Code Frequency Analysis&lt;/h4&gt;
+&lt;p&gt;Go to the &amp;ldquo;Analysis&amp;rdquo; tab and click &amp;ldquo;Code Frequency&amp;rdquo;. This will show which codes were mentioned most often:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/code_frequency.png&#34; alt=&#34;Code Frequency Analysis&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;In our example, we might see that &amp;ldquo;Making adjustment&amp;rdquo; and &amp;ldquo;Technology&amp;rdquo; appear most frequently, indicating these are significant aspects of the remote work experience for our participant.&lt;/p&gt;
+&lt;h4 id=&#34;code-co-occurrence-analysis&#34;&gt;Code Co-occurrence Analysis&lt;/h4&gt;
+&lt;p&gt;Click &amp;ldquo;Code Co-occurrence&amp;rdquo; to see relationships between different codes:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/co_occurrence.png&#34; alt=&#34;Co-occurrence Analysis&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;This visualization might reveal that &amp;ldquo;Boundary difficulty&amp;rdquo; and &amp;ldquo;Family friendly&amp;rdquo; frequently co-occur, suggesting a relationship between these issues.&lt;/p&gt;
+&lt;h4 id=&#34;text-statistics&#34;&gt;Text Statistics&lt;/h4&gt;
+&lt;p&gt;The &amp;ldquo;Analysis&amp;rdquo; tab also provides basic text statistics:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Word count&lt;/li&gt;
+&lt;li&gt;Character count&lt;/li&gt;
+&lt;li&gt;Sentence count&lt;/li&gt;
+&lt;li&gt;Percentage of text that has been coded&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These statistics can help you track your coding progress and provide context for your analysis.&lt;/p&gt;
+&lt;h3 id=&#34;step-7-creating-themes&#34;&gt;Step 7: Creating Themes&lt;/h3&gt;
+&lt;p&gt;Sometimes multiple codes may share the same underlying theme and you may want to create a theme that encompasses several codes. Let&amp;rsquo;s create a logical hierarchy of themes and codes. Go to the &amp;ldquo;Themes&amp;rdquo; tab:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Click &amp;ldquo;Add Theme&amp;rdquo; and create the following themes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Challenges&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Benefits&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Tools&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Work-Life Balance&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For each theme, add relevant codes:&lt;/p&gt;
+&lt;p&gt;For &amp;ldquo;Challenges&amp;rdquo;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Click &amp;ldquo;Add Code to Theme&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Select &amp;ldquo;Challenges&amp;rdquo; as the parent theme&lt;/li&gt;
+&lt;li&gt;Add codes like &amp;ldquo;Technical Issues&amp;rdquo;, &amp;ldquo;Social Isolation&amp;rdquo;, &amp;ldquo;Home Setup&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;When finished, your code hierarchy should look something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/code_and_theme_hierarchy.png&#34; alt=&#34;Code and Theme Hierarchy&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;step-8-exporting-results&#34;&gt;Step 8: Exporting Results&lt;/h3&gt;
+&lt;h4 id=&#34;saving-annotations&#34;&gt;Saving Annotations&lt;/h4&gt;
+&lt;p&gt;To save your annotations for further analysis or sharing:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to the &amp;ldquo;Records&amp;rdquo; tab&lt;/li&gt;
+&lt;li&gt;Click &amp;ldquo;Save Records&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Choose CSV format&lt;/li&gt;
+&lt;li&gt;Name your file &amp;ldquo;remote_work_analysis.csv&amp;rdquo;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_records.png&#34; alt=&#34;Save Records&#34;  /&gt;
+&lt;/p&gt;
+&lt;h4 id=&#34;exporting-annotated-text&#34;&gt;Exporting Annotated Text&lt;/h4&gt;
+&lt;p&gt;To save the annotated text with all coding highlights:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In the &amp;ldquo;Code and Memo&amp;rdquo; tab, click &amp;ldquo;Save Annotated Text&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Select HTML format to preserve color coding&lt;/li&gt;
+&lt;li&gt;Name your file &amp;ldquo;annotated_interview.html&amp;rdquo;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;step-9-project-comparison-two-coders&#34;&gt;Step 9: Project Comparison (Two Coders)&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re working with a team where two researchers code the same text, you can use the comparison tools:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Have each team member code the interview independently&lt;/li&gt;
+&lt;li&gt;Save each person&amp;rsquo;s annotations as CSV files&lt;/li&gt;
+&lt;li&gt;Go to the &amp;ldquo;Comparison&amp;rdquo; tab&lt;/li&gt;
+&lt;li&gt;Upload both CSV files&lt;/li&gt;
+&lt;li&gt;Run the comparison to see inter-coder agreement and differences&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/comparison_analysis.png&#34; alt=&#34;Comparison Analysis 1&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/comparison_analysis2.png&#34; alt=&#34;Comparison Analysis 2&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;getting-the-sample-project&#34;&gt;Getting the Sample Project&lt;/h2&gt;
+&lt;p&gt;To practice with this exact example, you can download a starter project from the textAnnotatoR GitHub repository:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# If you have the remotes package installed
+remotes::install_github(&amp;quot;chaoliu-cl/textAnnotatoR&amp;quot;, build_vignettes = TRUE)
+
+# Or browse to:
+# https://github.com/chaoliu-cl/textAnnotatoR/inst/extdata/sample_projects
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The sample projects include the interview text file used for this demonstration and a word file that contains Martin Luther King Jr.&amp;rsquo;s &amp;ldquo;I have a dream&amp;rdquo; speech.&lt;/p&gt;
+&lt;h2 id=&#34;other-utility-functions&#34;&gt;Other Utility Functions&lt;/h2&gt;
+&lt;p&gt;The following table shows additional functions available in textAnnotatoR for various text analysis tasks:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Function&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Output&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Description&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;annotate_gui()&lt;/td&gt;
+&lt;td&gt;GUI&lt;/td&gt;
+&lt;td&gt;Launch the interactive text annotation interface&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;save_project()&lt;/td&gt;
+&lt;td&gt;RDS file&lt;/td&gt;
+&lt;td&gt;Save current project with all annotations and codes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;load_project()&lt;/td&gt;
+&lt;td&gt;Project&lt;/td&gt;
+&lt;td&gt;Load a previously saved project&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;export_annotations()&lt;/td&gt;
+&lt;td&gt;CSV/HTML&lt;/td&gt;
+&lt;td&gt;Export annotations in various formats&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;merge_codes()&lt;/td&gt;
+&lt;td&gt;Updated&lt;/td&gt;
+&lt;td&gt;Consolidate similar or overlapping codes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;create_theme()&lt;/td&gt;
+&lt;td&gt;Theme&lt;/td&gt;
+&lt;td&gt;Create hierarchical organization of codes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;calculate_agreement()&lt;/td&gt;
+&lt;td&gt;Metrics&lt;/td&gt;
+&lt;td&gt;Calculate inter-coder agreement statistics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;p&gt;📌 &lt;em&gt;For more advanced features and updates, visit the &lt;a href=&#34;https://github.com/chaoliu-cl/textAnnotatoR&#34; target=&#34;_blank&#34;&gt;textAnnotatoR GitHub repository&lt;/a&gt;
+.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;📌 &lt;em&gt;This post is syndicated on &lt;a href=&#34;https://www.r-bloggers.com&#34; target=&#34;_blank&#34;&gt;R-bloggers&lt;/a&gt;
+ — a community hub for R news and tutorials.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

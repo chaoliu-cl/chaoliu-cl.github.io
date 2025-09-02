@@ -1,26 +1,255 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Portuguese on Chao Liu</title>
-    <link>//localhost:1313/tags/portuguese/</link>
-    <description>Recent content in Portuguese on Chao Liu</description>
-    <generator>Hugo -- 0.131.0</generator>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/portuguese/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/portuguese/" rel="self" type="application/rss+xml"/>
+    
     <item>
       <title>List of Irregular Verbs Across Romance Languages</title>
       <link>//localhost:1313/data/data1/</link>
-      <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 07 Mar 2013 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/data/data1/</guid>
-      <description>This dataset contains all irregular verbs in known Romance languages.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;This dataset contains all irregular verbs in &lt;a href=&#34;http://www.alexandermccallsmith.com/series/von-igelfeld-series&#34; target=&#34;_blank&#34;&gt;all known Romance languages&lt;/a&gt;
+—including Portugese, Spanish, French, and Italian. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;view-dataset&#34;&gt;View dataset&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Irregular verbs in Portugese: &lt;a href=&#34;https://github.com/pmichaillat/feru&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;Irregular verbs in Italian: &lt;a href=&#34;https://github.com/pmichaillat/unemployment-gap&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;Irregular verbs in French: &lt;a href=&#34;https://github.com/pmichaillat/job-rationing&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;Irregular verbs in Spanish: &lt;a href=&#34;https://github.com/pmichaillat/countercyclical-multiplier&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;source-of-data&#34;&gt;Source of data&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;using-data-with-python&#34;&gt;Using data with Python&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h3 id=&#34;start-python&#34;&gt;Start Python:&lt;/h3&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#00a&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#0aa;text-decoration:underline&#34;&gt;numpy&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#0aa;text-decoration:underline&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#00a&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#0aa;text-decoration:underline&#34;&gt;pandas&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#0aa;text-decoration:underline&#34;&gt;pd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;open-the-file&#34;&gt;Open the file:&lt;/h3&gt;
+&lt;p&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat &lt;code&gt;data.csv&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file_path = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#39;data.csv&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#00a&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#0aa&#34;&gt;open&lt;/span&gt;(file_path, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#00a&#34;&gt;as&lt;/span&gt; file:
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;read-data&#34;&gt;Read data:&lt;/h3&gt;
+&lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    lines = file.readlines()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;parse-and-process-data&#34;&gt;Parse and process data:&lt;/h3&gt;
+&lt;p&gt;Duis aute &lt;code&gt;line_data&lt;/code&gt; irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur &lt;code&gt;data.extend&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;data = []
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#00a&#34;&gt;for&lt;/span&gt; line &lt;span style=&#34;color:#00a&#34;&gt;in&lt;/span&gt; lines:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    line_data = line.strip().split(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;)  &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Split the line into a list of values&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    line_data = [&lt;span style=&#34;color:#0aa&#34;&gt;float&lt;/span&gt;(value) &lt;span style=&#34;color:#00a&#34;&gt;for&lt;/span&gt; value &lt;span style=&#34;color:#00a&#34;&gt;in&lt;/span&gt; line_data]  &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Convert values to floats&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    data.extend(line_data)  &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Extend the main list with values from the line&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;compute-summary-statistics-using-numpy&#34;&gt;Compute summary statistics using NumPy:&lt;/h4&gt;
+&lt;p&gt;Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum: &lt;code&gt;data_array&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;data_array = np.array(data)  &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Convert the list to a NumPy array&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mean = np.mean(data_array)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;median = np.median(data_array)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;std_dev = np.std(data_array)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;min_value = np.min(data_array)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;max_value = np.max(data_array)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;display-summary-statistics&#34;&gt;Display summary statistics:&lt;/h4&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat &lt;code&gt;print&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Mean: &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;{&lt;/span&gt;mean&lt;span style=&#34;color:#a50&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Median: &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;{&lt;/span&gt;median&lt;span style=&#34;color:#a50&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Standard Deviation: &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;{&lt;/span&gt;std_dev&lt;span style=&#34;color:#a50&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Minimum Value: &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;{&lt;/span&gt;min_value&lt;span style=&#34;color:#a50&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0aa&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Maximum Value: &lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;{&lt;/span&gt;max_value&lt;span style=&#34;color:#a50&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;description-of-simulation-parameters&#34;&gt;Description of simulation parameters&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Parameter&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Value&lt;/th&gt;
+&lt;th&gt;Language&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Time period&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\alpha$&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$1/2$&lt;/td&gt;
+&lt;td&gt;French&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1930–1954&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Tempor dolor in&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\lambda$&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$e/2$&lt;/td&gt;
+&lt;td&gt;French&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1930–1954&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Fugiat sint occaecat&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\gamma$&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\ln(3)$&lt;/td&gt;
+&lt;td&gt;Spanish&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1833–1954&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Duis officia deserunt&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\omega$&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$10^{-4}$&lt;/td&gt;
+&lt;td&gt;Italian&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1930–1994&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Excepteur et dolore magna aliqua&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\sigma$&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$1.5$&lt;/td&gt;
+&lt;td&gt;Portuguese&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1990–2023&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Lorem culpa qui&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\chi^2$&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;$\pi^2$&lt;/td&gt;
+&lt;td&gt;Portuguese&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1990–2023&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Labore et dolore&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
     </item>
+    
     <item>
       <title>Lectures at the Villa of Reduced Circumstances</title>
       <link>//localhost:1313/courses/course1/</link>
-      <pubDate>Mon, 10 Mar 2003 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 10 Mar 2003 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/courses/course1/</guid>
-      <description>This graduate course presents classical results in Romance philology.</description>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This course covers research topics related to Romance philology. It focuses especially on Portugese and Spanish irregular verbs. It tries to answer several questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Why are there irregular verbs?&lt;/li&gt;
+&lt;li&gt;How are Portuguese irregular verbs different from Spanish irregular verbs?&lt;/li&gt;
+&lt;li&gt;What is the role of Latin and Greek in these irregularities?&lt;/li&gt;
+&lt;li&gt;What about irregular verbs in other Romance languages?
+&lt;ul&gt;
+&lt;li&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.&lt;/li&gt;
+&lt;li&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/li&gt;
+&lt;li&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.&lt;/li&gt;
+&lt;li&gt;Excepteur sint occaecat cupidatat non proident.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h2 id=&#34;part-1-review-of-romance-languages&#34;&gt;Part 1: Review of Romance languages&lt;/h2&gt;
+&lt;p&gt;This section reviews Romance languages. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h5 id=&#34;lecture-videos&#34;&gt;Lecture videos&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/3MZeJED2yns&#34; target=&#34;_blank&#34;&gt;Lecture video 1&lt;/a&gt;
+ – This is a first lecture video.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/8ihJsf-AXdA&#34; target=&#34;_blank&#34;&gt;Lecture video 2&lt;/a&gt;
+ – This is a another lecture video.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/79MSNfp1rw0&#34; target=&#34;_blank&#34;&gt;Lecture video 3&lt;/a&gt;
+ – This is a third lecture video. It is quite short.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;lecture-notes&#34;&gt;Lecture notes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;lecture1.pdf&#34;&gt;Lecture note 1&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;readings&#34;&gt;Readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/1.pdf&#34; target=&#34;_blank&#34;&gt;Paper 1&lt;/a&gt;
+ – This is a first paper to read.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/2.pdf&#34; target=&#34;_blank&#34;&gt;Paper 2&lt;/a&gt;
+ – This paper builds on the first one.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/4.pdf&#34; target=&#34;_blank&#34;&gt;Paper 3&lt;/a&gt;
+ – This paper is more complex.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;part-2-portugese-irregular-verbs&#34;&gt;Part 2: Portugese irregular verbs&lt;/h2&gt;
+&lt;p&gt;This section introduces Portugese irregular verbs. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+&lt;h5 id=&#34;lecture-videos-1&#34;&gt;Lecture videos&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/IZI0_WwIyb8&#34; target=&#34;_blank&#34;&gt;Lecture video 4&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/Qz7CCB1-gu8&#34; target=&#34;_blank&#34;&gt;Lecture video 5&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/79MSNfp1rw0&#34; target=&#34;_blank&#34;&gt;Lecture video 6&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;lecture-notes-1&#34;&gt;Lecture notes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;lecture2.pdf&#34;&gt;Lecture note 2&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;readings-1&#34;&gt;Readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/5.pdf&#34; target=&#34;_blank&#34;&gt;Paper 4&lt;/a&gt;
+ – This paper computes things. (Details about the simulations are presented in the paper&amp;rsquo;s &lt;a href=&#34;https://pascalmichaillat.org/5a.pdf&#34; target=&#34;_blank&#34;&gt;online appendix&lt;/a&gt;
+.)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/3.pdf&#34; target=&#34;_blank&#34;&gt;Paper 5&lt;/a&gt;
+ – This paper proves things. (The paper&amp;rsquo;s &lt;a href=&#34;https://pascalmichaillat.org/3a.pdf&#34; target=&#34;_blank&#34;&gt;online appendix&lt;/a&gt;
+ contains long proofs and extensions of the results.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;part-3-spanish-irregular-verbs&#34;&gt;Part 3: Spanish irregular verbs&lt;/h2&gt;
+&lt;p&gt;This section quickly discusses irregular verbs in Spanish. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.&lt;/p&gt;
+&lt;h5 id=&#34;lecture-videos-2&#34;&gt;Lecture videos&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/pIS8-mXG1oY&#34; target=&#34;_blank&#34;&gt;Lecture video 7&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/FUaeNM8_fxs&#34; target=&#34;_blank&#34;&gt;Lecture video 8&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/xjHVrx7jfdY&#34; target=&#34;_blank&#34;&gt;Optional lecture video&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;basic-readings&#34;&gt;Basic readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/10.pdf&#34; target=&#34;_blank&#34;&gt;Paper 6&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;advanced-readings&#34;&gt;Advanced readings&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/11.pdf&#34; target=&#34;_blank&#34;&gt;Paper 7&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pascalmichaillat.org/12.pdf&#34; target=&#34;_blank&#34;&gt;Paper 8&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This section concludes by comparing Portuguese and Spanish irregular verbs to irregular verbs in other Romance languages.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst. Quisque non felis. Nullam vulputate libero quis ligula. Fusce scelerisque suscipit sapien. Suspendisse commodo ullamcorper magna.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+</description>
     </item>
+    
   </channel>
 </rss>

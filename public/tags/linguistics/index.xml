@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 31 Aug 2025 23:13:19 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/linguistics/" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>Conversim: Comprehensive Conversation Similarity Analysis in R</title>
+      <link>//localhost:1313/posts/conversim_r/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/conversim_r/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Conversim&lt;/em&gt; is a powerful R package for analyzing conversation dynamics through multiple similarity measures. It provides tools to examine how conversations unfold over time, compare speeches, and analyze patterns across multiple conversational dyads.&lt;/p&gt;
+&lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and loading the package&lt;/h2&gt;
+&lt;p&gt;Install the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;conversim&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And load the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(conversim)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;key-features&#34;&gt;Key Features&lt;/h2&gt;
+&lt;p&gt;The package offers three main analysis approaches:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Sequential Analysis&lt;/strong&gt;: Track how conversations evolve turn by turn within a single dyad&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Speech Comparison&lt;/strong&gt;: Compare similarities between two complete texts or speeches&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-Dyad Analysis&lt;/strong&gt;: Analyze patterns across multiple conversation pairs simultaneously&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;analyzing-conversational-sequences-in-one-dyad&#34;&gt;Analyzing Conversational Sequences in One Dyad&lt;/h2&gt;
+&lt;p&gt;The sequential analysis functions help you understand how different aspects of similarity change throughout a conversation.&lt;/p&gt;
+&lt;h3 id=&#34;setting-up-sample-data&#34;&gt;Setting Up Sample Data&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;library(ggplot2)
+library(tm)
+library(conversim)
+
+# Create sample conversation data
+conversation &amp;lt;- data.frame(
+  speaker = rep(c(&amp;quot;A&amp;quot;, &amp;quot;B&amp;quot;), 10),
+  processed_text = c(
+    &amp;quot;Hello how are you today&amp;quot;,
+    &amp;quot;I&#39;m doing well thanks for asking&amp;quot;,
+    &amp;quot;That&#39;s great to hear what are your plans&amp;quot;,
+    &amp;quot;I&#39;m planning to go for a walk later&amp;quot;,
+    # ... additional conversation turns
+  )
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;topic-similarity-over-time&#34;&gt;Topic Similarity Over Time&lt;/h3&gt;
+&lt;p&gt;Track how topical coherence changes throughout the conversation:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;topic_sim &amp;lt;- topic_sim_seq(conversation, method = &amp;quot;lda&amp;quot;, num_topics = 2, window_size = 3)
+
+# Visualize the results
+ggplot(data.frame(Segment = 1:3, Similarity = topic_sim$sequence), 
+       aes(x = Segment, y = Similarity)) +
+  geom_line() +
+  geom_point() +
+  labs(title = &amp;quot;Topic Similarity Sequence&amp;quot;, 
+       x = &amp;quot;Conversation Segment&amp;quot;, 
+       y = &amp;quot;Similarity Score&amp;quot;) +
+  theme_minimal()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;lexical-similarity-sequence&#34;&gt;Lexical Similarity Sequence&lt;/h3&gt;
+&lt;p&gt;Examine how word choice similarity evolves:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;lexical_sim &amp;lt;- lex_sim_seq(conversation, window_size = 3)
+
+# Plot the evolution
+ggplot(data.frame(Exchange = 1:length(lexical_sim$sequence), 
+                  Similarity = lexical_sim$sequence), 
+       aes(x = Exchange, y = Similarity)) +
+  geom_line() +
+  geom_point() +
+  labs(title = &amp;quot;Lexical Similarity Sequence&amp;quot;) +
+  theme_minimal()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;multiple-similarity-measures&#34;&gt;Multiple Similarity Measures&lt;/h3&gt;
+&lt;p&gt;The package includes several other sequential measures:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Semantic similarity using TF-IDF
+semantic_sim &amp;lt;- sem_sim_seq(conversation, method = &amp;quot;tfidf&amp;quot;, window_size = 3)
+
+# Stylistic similarity (writing style patterns)
+stylistic_sim &amp;lt;- style_sim_seq(conversation, window_size = 3)
+
+# Sentiment similarity (emotional alignment)
+sentiment_sim &amp;lt;- sent_sim_seq(conversation, window_size = 3)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;comparing-two-complete-speeches-or-texts&#34;&gt;Comparing Two Complete Speeches or Texts&lt;/h2&gt;
+&lt;p&gt;For analyzing longer texts like speeches or documents, conversim provides comprehensive comparison functions.&lt;/p&gt;
+&lt;h3 id=&#34;loading-speech-data&#34;&gt;Loading Speech Data&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Load example speeches data
+data_path &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;speeches_data.Rdata&amp;quot;, package = &amp;quot;conversim&amp;quot;)
+load(data_path)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;text-preprocessing&#34;&gt;Text Preprocessing&lt;/h3&gt;
+&lt;p&gt;Clean and standardize your text data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;preprocessed_text &amp;lt;- preprocess_text(speeches_data$text[1])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;topic-similarity-analysis&#34;&gt;Topic Similarity Analysis&lt;/h3&gt;
+&lt;p&gt;Compare topics using different methods:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Using Latent Dirichlet Allocation
+lda_similarity &amp;lt;- topic_similarity(speeches_data$text[1], 
+                                  speeches_data$text[2], 
+                                  method = &amp;quot;lda&amp;quot;, 
+                                  num_topics = 5)
+
+# Using Latent Semantic Analysis  
+lsa_similarity &amp;lt;- topic_similarity(speeches_data$text[1], 
+                                  speeches_data$text[2], 
+                                  method = &amp;quot;lsa&amp;quot;, 
+                                  num_topics = 5)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Understanding the Results&lt;/strong&gt;: Different methods can yield different similarity scores. LDA focuses on probabilistic topic distributions, while LSA uses mathematical dimensionality reduction. Choose the method that best fits your research questions.&lt;/p&gt;
+&lt;h3 id=&#34;comprehensive-similarity-analysis&#34;&gt;Comprehensive Similarity Analysis&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Lexical overlap
+lex_similarity &amp;lt;- lexical_similarity(speeches_data$text[1], speeches_data$text[2])
+
+# Semantic meaning using multiple approaches
+tfidf_similarity &amp;lt;- semantic_similarity(speeches_data$text[1], 
+                                       speeches_data$text[2], 
+                                       method = &amp;quot;tfidf&amp;quot;)
+
+word2vec_similarity &amp;lt;- semantic_similarity(speeches_data$text[1], 
+                                          speeches_data$text[2], 
+                                          method = &amp;quot;word2vec&amp;quot;)
+
+# Structural patterns
+struct_similarity &amp;lt;- structural_similarity(strsplit(speeches_data$text[1], &amp;quot;\n&amp;quot;)[[1]], 
+                                          strsplit(speeches_data$text[2], &amp;quot;\n&amp;quot;)[[1]])
+
+# Writing style analysis
+style_similarity &amp;lt;- stylistic_similarity(speeches_data$text[1], speeches_data$text[2])
+
+# Emotional tone
+sent_similarity &amp;lt;- sentiment_similarity(speeches_data$text[1], speeches_data$text[2])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;multi-dyad-conversation-analysis&#34;&gt;Multi-Dyad Conversation Analysis&lt;/h2&gt;
+&lt;p&gt;When working with multiple conversation pairs, conversim uses multilevel modeling to account for between-dyad variation.&lt;/p&gt;
+&lt;h3 id=&#34;loading-multi-dyad-data&#34;&gt;Loading Multi-Dyad Data&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Load example multi-dyad dataset
+data_path &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;dyad_example_data.Rdata&amp;quot;, package = &amp;quot;conversim&amp;quot;)
+load(data_path)
+
+# Preprocess the conversations
+processed_convs &amp;lt;- preprocess_dyads(dyad_example_data)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;analyzing-patterns-across-dyads&#34;&gt;Analyzing Patterns Across Dyads&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Topic similarity across all dyads
+topic_sim &amp;lt;- topic_sim_dyads(processed_convs, 
+                            method = &amp;quot;lda&amp;quot;, 
+                            num_topics = 5, 
+                            window_size = 3)
+
+# Lexical similarity patterns
+lexical_sim &amp;lt;- lexical_sim_dyads(processed_convs, window_size = 3)
+
+# Semantic patterns with TF-IDF
+semantic_sim &amp;lt;- semantic_sim_dyads(processed_convs, method = &amp;quot;tfidf&amp;quot;, window_size = 3)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;advanced-multi-dyad-analysis&#34;&gt;Advanced Multi-Dyad Analysis&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# Structural conversation patterns
+structural_sim &amp;lt;- structural_sim_dyads(processed_convs)
+
+# Stylistic alignment across dyads
+stylistic_sim &amp;lt;- stylistic_sim_dyads(processed_convs, window_size = 3)
+
+# Emotional synchronization
+sentiment_sim &amp;lt;- sentiment_sim_dyads(processed_convs, window_size = 3)
+
+# Speaker participation balance
+participant_sim &amp;lt;- participant_sim_dyads(processed_convs)
+
+# Temporal conversation patterns
+timing_sim &amp;lt;- timing_sim_dyads(processed_convs)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;visualization-and-comparison&#34;&gt;Visualization and Comparison&lt;/h3&gt;
+&lt;p&gt;Create comprehensive visualizations to understand patterns:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Compare all similarity measures
+comparison_df &amp;lt;- data.frame(
+  dyad = names(topic_sim$similarities_by_dyad),
+  topic = sapply(topic_sim$similarities_by_dyad, mean),
+  lexical = sapply(lexical_sim$similarities_by_dyad, mean),
+  semantic = sapply(semantic_sim$similarities_by_dyad, mean),
+  structural = unlist(structural_sim$similarities_by_dyad),
+  stylistic = sapply(stylistic_sim$similarities_by_dyad, mean),
+  sentiment = sapply(sentiment_sim$similarities_by_dyad, mean)
+)
+
+# Reshape for plotting
+comparison_long &amp;lt;- reshape(comparison_df, 
+                          varying = list(names(comparison_df)[-1]),
+                          v.names = &amp;quot;similarity&amp;quot;,
+                          timevar = &amp;quot;measure&amp;quot;,
+                          times = names(comparison_df)[-1],
+                          direction = &amp;quot;long&amp;quot;)
+
+# Create comparison plot
+ggplot(comparison_long, aes(x = measure, y = similarity, fill = measure)) +
+  geom_boxplot() +
+  labs(title = &amp;quot;Comparison of Similarity Measures Across Dyads&amp;quot;,
+       x = &amp;quot;Similarity Measure&amp;quot;,
+       y = &amp;quot;Similarity Score&amp;quot;) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;understanding-similarity-measures&#34;&gt;Understanding Similarity Measures&lt;/h2&gt;
+&lt;h3 id=&#34;topic-similarity&#34;&gt;Topic Similarity&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;LDA&lt;/strong&gt;: Probabilistic topic modeling that identifies latent topics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LSA&lt;/strong&gt;: Mathematical dimensionality reduction for semantic analysis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use case&lt;/strong&gt;: Understanding thematic alignment between speakers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;lexical-similarity&#34;&gt;Lexical Similarity&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Method&lt;/strong&gt;: Jaccard index of unique word overlap&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Range&lt;/strong&gt;: 0 (no shared words) to 1 (identical vocabulary)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use case&lt;/strong&gt;: Measuring vocabulary alignment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;semantic-similarity&#34;&gt;Semantic Similarity&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TF-IDF&lt;/strong&gt;: Term frequency-inverse document frequency weighting&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Word2Vec&lt;/strong&gt;: Neural word embeddings for semantic meaning&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GloVe&lt;/strong&gt;: Global vector representations (requires pre-trained models)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use case&lt;/strong&gt;: Capturing meaning similarity beyond exact word matches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;stylistic-similarity&#34;&gt;Stylistic Similarity&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Features&lt;/strong&gt;: Type-token ratio, sentence length, readability scores&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Method&lt;/strong&gt;: Multi-dimensional stylistic feature comparison&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use case&lt;/strong&gt;: Identifying writing or speaking style convergence&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sentiment-similarity&#34;&gt;Sentiment Similarity&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Method&lt;/strong&gt;: Emotional valence alignment using sentiment analysis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Range&lt;/strong&gt;: 0 (opposite sentiments) to 1 (identical emotional tone)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use case&lt;/strong&gt;: Measuring emotional synchronization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;best-practices-and-tips&#34;&gt;Best Practices and Tips&lt;/h2&gt;
+&lt;h3 id=&#34;choosing-window-sizes&#34;&gt;Choosing Window Sizes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Small windows (2-3 turns)&lt;/strong&gt;: Capture immediate conversational alignment&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Large windows (5+ turns)&lt;/strong&gt;: Identify broader conversational patterns&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consider your research question&lt;/strong&gt;: Local vs. global similarity patterns&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;method-selection-guidelines&#34;&gt;Method Selection Guidelines&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Short texts&lt;/strong&gt;: Use Word2Vec or GloVe for semantic similarity&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Long texts&lt;/strong&gt;: TF-IDF works well for comprehensive documents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multiple dyads&lt;/strong&gt;: Multilevel modeling accounts for between-group variation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;data-quality-considerations&#34;&gt;Data Quality Considerations&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Preprocessing&lt;/strong&gt;: Always clean text data before analysis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Missing data&lt;/strong&gt;: Handle incomplete conversations appropriately&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Context matters&lt;/strong&gt;: Consider the conversational setting when interpreting results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;research-applications&#34;&gt;Research Applications&lt;/h2&gt;
+&lt;h3 id=&#34;linguistics-research&#34;&gt;Linguistics Research&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Study conversational accommodation and alignment&lt;/li&gt;
+&lt;li&gt;Analyze discourse patterns across different contexts&lt;/li&gt;
+&lt;li&gt;Examine speaker adaptation over time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;psychology-applications&#34;&gt;Psychology Applications&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Investigate therapeutic conversation dynamics&lt;/li&gt;
+&lt;li&gt;Study social influence in conversations&lt;/li&gt;
+&lt;li&gt;Examine relationship quality indicators&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;communication-studies&#34;&gt;Communication Studies&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Analyze political speech similarities&lt;/li&gt;
+&lt;li&gt;Study media interview patterns&lt;/li&gt;
+&lt;li&gt;Examine organizational communication dynamics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;advanced-analysis-patterns&#34;&gt;Advanced Analysis Patterns&lt;/h2&gt;
+&lt;h3 id=&#34;longitudinal-analysis&#34;&gt;Longitudinal Analysis&lt;/h3&gt;
+&lt;p&gt;Track how conversation patterns change over multiple sessions or time periods by applying similarity measures to different conversation segments.&lt;/p&gt;
+&lt;h3 id=&#34;comparative-studies&#34;&gt;Comparative Studies&lt;/h3&gt;
+&lt;p&gt;Use the multi-dyad functions to compare conversation patterns across different conditions, populations, or contexts.&lt;/p&gt;
+&lt;h3 id=&#34;predictive-modeling&#34;&gt;Predictive Modeling&lt;/h3&gt;
+&lt;p&gt;Combine similarity measures as features in machine learning models to predict conversation outcomes or relationship quality.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;The conversim package provides a comprehensive toolkit for understanding conversation dynamics through multiple analytical lenses. Whether you&amp;rsquo;re analyzing single conversations, comparing speeches, or studying patterns across multiple dyads, these tools offer both flexibility and statistical rigor for conversation research.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -26,6 +26,9 @@ menu:
         - name: Publications
           url: publications/
           weight: 2
+        - name: Tags
+          url: tags/
+          weight: 3
         #- name: Courses
         #  url: courses/
         #  weight: 3
@@ -49,7 +52,7 @@ params:
     disableSpecial1stPost: true
     disableAnchoredHeadings: true
     ShowPostNavLinks: false
-    ShowBreadCrumbs: false
+    ShowBreadCrumbs: true
     ShowCodeCopyButtons: true
     ShowAllPagesInArchive: false
     MainSections: ["books","courses","papers","data"]
@@ -57,6 +60,7 @@ params:
     disableScrollToTop: true
     TocOpen: true
     ShowWordCount: false
+    ShowPostTags: true
     UseHugoToc: true
     comments: true
     disqusShortname: "liu-chao.site"

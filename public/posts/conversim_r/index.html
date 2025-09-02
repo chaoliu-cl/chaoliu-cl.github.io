@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Conversim: Comprehensive Conversation Similarity Analysis in R | Chao Liu</title>
+<meta name="keywords" content="R, Natural Language Processing, Conversation Analysis, Text Mining, Similarity Metrics">
+<meta name="description" content="A comprehensive guide to analyzing conversation similarities using the conversim R package.">
+<meta name="author" content="Tutorial">
+<link rel="canonical" href="//localhost:1313/posts/conversim_r/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6cf4a8fa527330d9574f36d8d000fdaf90ca838ff09ab72fc27d3cb7ca1ddc5.css" integrity="sha256-1s9Kj6UnMw2VdPNtjQAP2vkMqDj/Caty/CfTy3yh3cU=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:1313/posts/conversim_r/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Conversim: Comprehensive Conversation Similarity Analysis in R" />
+<meta property="og:description" content="A comprehensive guide to analyzing conversation similarities using the conversim R package." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//localhost:1313/posts/conversim_r/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-12-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-01T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Conversim: Comprehensive Conversation Similarity Analysis in R"/>
+<meta name="twitter:description" content="A comprehensive guide to analyzing conversation similarities using the conversim R package."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "//localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Conversim: Comprehensive Conversation Similarity Analysis in R",
+      "item": "//localhost:1313/posts/conversim_r/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Conversim: Comprehensive Conversation Similarity Analysis in R",
+  "name": "Conversim: Comprehensive Conversation Similarity Analysis in R",
+  "description": "A comprehensive guide to analyzing conversation similarities using the conversim R package.",
+  "keywords": [
+    "R", "Natural Language Processing", "Conversation Analysis", "Text Mining", "Similarity Metrics"
+  ],
+  "articleBody": "Conversim is a powerful R package for analyzing similarities in conversations across multiple dimensions. Whether you’re studying dialogue dynamics, speech patterns, or conversational alignment, this package provides comprehensive tools for measuring topic, lexical, semantic, stylistic, sentiment, structural, and temporal similarities.\nInstalling and Loading the Package Install the package:\ninstall.packages(\"conversim\") Load the package along with required dependencies:\nlibrary(conversim) library(ggplot2) library(lme4) library(topicmodels) library(tm) library(slam) Understanding Conversation Data Structure The conversim package works with conversation data that includes:\ndyad_id: Identifier for conversation pairs speaker: Person speaking (A, B, etc.) text: Raw conversation text processed_text: Cleaned and preprocessed text Analyzing Single Dyad Conversations Creating Sample Data Let’s start with a simple conversation between two speakers:\nset.seed(123) conversation \u003c- data.frame( speaker = rep(c(\"A\", \"B\"), 10), processed_text = c( \"Hello how are you today\", \"I'm doing well thanks for asking\", \"That's great to hear what are your plans\", \"I'm planning to go for a walk later\", \"Sounds nice the weather is beautiful\", \"Yes it's perfect for outdoor activities\", \"Do you often go for walks\", \"Yes I try to walk every day for exercise\", \"That's a great habit to have\", \"Thanks I find it helps me stay healthy\", \"Have you tried other forms of exercise\", \"I also enjoy swimming and yoga\", \"Those are excellent choices too\", \"What about you what exercise do you prefer\", \"I like running and playing tennis\", \"Tennis is fun do you play often\", \"I try to play at least once a week\", \"That's a good frequency to maintain\", \"Yes it keeps me active and social\", \"Social aspects of exercise are important too\" ) ) Text Preprocessing Before analysis, preprocess your conversation data:\npreprocess_dyads \u003c- function(conversations) { conversations$processed_text \u003c- sapply(conversations$text, function(text) { text \u003c- tolower(text) text \u003c- gsub(\"[[:punct:]]\", \"\", text) text \u003c- gsub(\"[[:digit:]]\", \"\", text) text \u003c- gsub(\"\\\\s+\", \" \", trimws(text)) return(text) }) # Remove empty processed texts conversations \u003c- conversations[nchar(conversations$processed_text) \u003e 0, ] return(conversations) } Lexical Similarity Sequence Track how lexical similarity evolves throughout the conversation:\nlexical_sim \u003c- lex_sim_seq(conversation, window_size = 3) # Visualize lexical similarity over time ggplot(data.frame(Exchange = 1:length(lexical_sim$sequence), Similarity = lexical_sim$sequence), aes(x = Exchange, y = Similarity)) + geom_line() + geom_point() + labs(title = \"Lexical Similarity Sequence\", x = \"Conversation Exchange\", y = \"Similarity Score\") + theme_minimal() cat(\"Average lexical similarity:\", round(lexical_sim$average, 3)) #\u003e Average lexical similarity: 0.557 Topic Similarity Analysis Analyze topic coherence using Latent Dirichlet Allocation (LDA):\ntopic_sim \u003c- topic_sim_seq(conversation, method = \"lda\", num_topics = 2, window_size = 3) # Plot topic similarity across conversation segments ggplot(data.frame(Segment = 1:3, Similarity = topic_sim$sequence), aes(x = Segment, y = Similarity)) + geom_line() + geom_point() + labs(title = \"Topic Similarity Sequence\", x = \"Conversation Segment\", y = \"Similarity Score\") + theme_minimal() Semantic Similarity Measure semantic similarity using TF-IDF vectors:\nsemantic_sim \u003c- sem_sim_seq(conversation, method = \"tfidf\", window_size = 3) ggplot(data.frame(Exchange = 1:length(semantic_sim$sequence), Similarity = semantic_sim$sequence), aes(x = Exchange, y = Similarity)) + geom_line() + geom_point() + labs(title = \"Semantic Similarity Sequence\", x = \"Conversation Exchange\", y = \"Similarity Score\") + theme_minimal() Stylistic and Sentiment Analysis Examine writing style and emotional tone:\n# Stylistic similarity stylistic_sim \u003c- style_sim_seq(conversation, window_size = 3) # Sentiment similarity sentiment_sim \u003c- sent_sim_seq(conversation, window_size = 3) # Create comparison plot style_data \u003c- data.frame( Exchange = 1:length(stylistic_sim$sequence), Stylistic = stylistic_sim$sequence, Sentiment = sentiment_sim$sequence ) style_long \u003c- reshape2::melt(style_data, id.vars = \"Exchange\") ggplot(style_long, aes(x = Exchange, y = value, color = variable)) + geom_line() + geom_point() + labs(title = \"Stylistic vs Sentiment Similarity\", x = \"Conversation Exchange\", y = \"Similarity Score\", color = \"Measure\") + theme_minimal() Analyzing Multiple Dyads Loading Multi-Dyad Data Load the example dataset for multiple conversation pairs:\ndata_path \u003c- system.file(\"extdata\", \"dyad_example_data.Rdata\", package = \"conversim\") load(data_path) # Display data structure head(dyad_example_data) # A tibble: 6 × 3 dyad_id speaker_id text 1 1 A What did you think of the new mov… 2 1 B I haven’t seen it yet. Which one … 3 1 A The latest superhero film. I hear… 4 1 B Oh, that one! I’ve been meaning t… 5 1 A Yes, I thought it was fantastic. … 6 1 B Really? What about the storyline?… str(dyad_example_data) tibble [532 × 3] (S3: tbl_df/tbl/data.frame) $ dyad_id : num [1:532] 1 1 1 1 1 1 1 1 1 1 ... $ speaker_id: chr [1:532] \"A\" \"B\" \"A\" \"B\" ... $ text : chr [1:532] \"What did you think of the new movie that just came out?\" \"I haven’t seen it yet. Which one are you referring to?\" \"The latest superhero film. I heard it’s getting great reviews.\" \"Oh, that one! I’ve been meaning to watch it. Did you enjoy it?\" ... Preprocessing Multiple Dyads processed_convs \u003c- preprocess_dyads(dyad_example_data) Comprehensive Similarity Analysis Calculate all similarity measures across multiple dyads:\n# Topic similarity using multilevel modeling topic_sim \u003c- topic_sim_dyads(processed_convs, method = \"lda\", num_topics = 5, window_size = 3) # Lexical similarity lexical_sim \u003c- lexical_sim_dyads(processed_convs, window_size = 3) # Semantic similarity semantic_sim \u003c- semantic_sim_dyads(processed_convs, method = \"tfidf\", window_size = 3) # Structural similarity structural_sim \u003c- structural_sim_dyads(processed_convs) # Stylistic similarity stylistic_sim \u003c- stylistic_sim_dyads(processed_convs, window_size = 3) # Sentiment similarity sentiment_sim \u003c- sentiment_sim_dyads(processed_convs, window_size = 3) # Participant balance participant_sim \u003c- participant_sim_dyads(processed_convs) # Timing patterns timing_sim \u003c- timing_sim_dyads(processed_convs) Visualizing Multi-Dyad Results Create comprehensive comparison plots:\n# Prepare comparison data comparison_df \u003c- data.frame( dyad = names(topic_sim$similarities_by_dyad), topic = sapply(topic_sim$similarities_by_dyad, mean), lexical = sapply(lexical_sim$similarities_by_dyad, mean), semantic = sapply(semantic_sim$similarities_by_dyad, mean), structural = unlist(structural_sim$similarities_by_dyad), stylistic = sapply(stylistic_sim$similarities_by_dyad, mean), sentiment = sapply(sentiment_sim$similarities_by_dyad, mean), participant = unlist(participant_sim$similarities_by_dyad), timing = unlist(timing_sim$similarities_by_dyad) ) # Reshape for plotting comparison_long \u003c- reshape2::melt(comparison_df, id.vars = \"dyad\") # Create boxplot comparison ggplot(comparison_long, aes(x = variable, y = value, fill = variable)) + geom_boxplot() + labs(title = \"Comparison of Similarity Measures Across Dyads\", x = \"Similarity Measure\", y = \"Similarity Score\") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = \"none\") Topic Similarity Trajectory Visualize how topic similarity changes within each dyad:\n# Prepare data for topic similarity trajectories topic_sim_df \u003c- data.frame( dyad = rep(names(topic_sim$similarities_by_dyad), sapply(topic_sim$similarities_by_dyad, length)), similarity = unlist(topic_sim$similarities_by_dyad), index = unlist(lapply(topic_sim$similarities_by_dyad, seq_along)) ) # Create trajectory plot ggplot(topic_sim_df, aes(x = index, y = similarity, color = dyad)) + geom_line() + geom_point() + facet_wrap(~dyad, ncol = 2) + labs(title = \"Topic Similarity Trajectories Across Dyads\", x = \"Conversation Sequence\", y = \"Similarity Score\") + theme_minimal() + theme(legend.position = \"none\") Analyzing Long Speeches Loading Speech Data For comparing longer texts like speeches:\ndata_path \u003c- system.file(\"extdata\", \"speeches_data.Rdata\", package = \"conversim\") load(data_path) # Preview the speech data print(summary(speeches_data)) speaker_id text Length:2 Length:2 Class :character Class :character Mode :character Mode :character Advanced Similarity Measures Topic Similarity with Multiple Methods # LDA-based topic similarity lda_similarity \u003c- topic_similarity(speeches_data$text[1], speeches_data$text[2], method = \"lda\", num_topics = 5) # LSA-based topic similarity lsa_similarity \u003c- topic_similarity(speeches_data$text[1], speeches_data$text[2], method = \"lsa\", num_topics = 5) print(paste(\"LDA Similarity:\", round(lda_similarity, 3))) [1] \"LDA Similarity: 0.169\" print(paste(\"LSA Similarity:\", round(lsa_similarity, 3))) [1] \"LSA Similarity: 1\" Comprehensive Semantic Analysis # TF-IDF semantic similarity tfidf_similarity \u003c- semantic_similarity(speeches_data$text[1], speeches_data$text[2], method = \"tfidf\") # Word2Vec semantic similarity word2vec_similarity \u003c- semantic_similarity(speeches_data$text[1], speeches_data$text[2], method = \"word2vec\", dim = 100, iter = 5) print(paste(\"TF-IDF Similarity:\", round(tfidf_similarity, 3))) [1] \"TF-IDF Similarity: 0.5\" print(paste(\"Word2Vec Similarity:\", round(word2vec_similarity, 3))) [1] \"Word2Vec Similarity: 0.999\" Detailed Stylistic Analysis style_analysis \u003c- stylistic_similarity(speeches_data$text[1], speeches_data$text[2]) print(\"Stylistic Features Comparison:\") [1] \"Stylistic Features Comparison:\" print(paste(\"Text 1 TTR:\", round(style_analysis$text1_features[\"ttr\"], 3))) [1] \"Text 1 TTR: 0.644\" print(paste(\"Text 2 TTR:\", round(style_analysis$text2_features[\"ttr\"], 3))) [1] \"Text 2 TTR: 0.549\" print(paste(\"Overall Stylistic Similarity:\", round(style_analysis$overall_similarity, 3))) [1] \"Overall Stylistic Similarity: 0.892\" Key Similarity Measures Explained Measure Description Best For Topic Measures thematic coherence using LDA or LSA Analyzing content alignment and subject matter similarity Lexical Calculates shared vocabulary between speakers Studying word choice and linguistic alignment Semantic Measures meaning similarity using vector representations Understanding conceptual similarity beyond word overlap Structural Analyzes conversation format and turn-taking patterns Examining dialogue structure and interaction patterns Stylistic Compares writing style features (TTR, sentence length, readability) Studying linguistic style and complexity Sentiment Measures emotional tone alignment Analyzing emotional synchrony in conversations Participant Evaluates speaker balance and participation equality Understanding conversation dynamics Timing Analyzes temporal patterns in conversation flow Studying rhythm and pacing in dialogue Multilevel Modeling Benefits The package uses multilevel modeling to:\nAccount for dyad-level variation in similarity patterns Provide more accurate overall averages across conversations Handle nested data structures common in conversation analysis Enable statistical inference about conversation patterns Best Practices Window Size Selection Small windows (2-3): Capture immediate conversational alignment Medium windows (4-6): Balance local and global patterns Large windows (7+): Focus on broader conversational themes Method Selection TF-IDF: Fast, interpretable, good for lexical analysis Word2Vec: Captures semantic relationships, better for meaning LDA: Excellent for topic modeling with multiple themes LSA: Good for discovering latent semantic structures Data Preprocessing Always preprocess your text data by:\nConverting to lowercase Removing punctuation and numbers Normalizing whitespace Filtering empty entries Conclusion The conversim package provides a comprehensive toolkit for analyzing conversation similarities across multiple dimensions. Whether studying therapeutic dialogues, educational interactions, or social conversations, these tools enable researchers to quantify and visualize the complex dynamics of human communication.\nThe package’s strength lies in its ability to capture different aspects of conversational similarity simultaneously, providing a holistic view of dialogue dynamics that can inform research in linguistics, psychology, communication studies, and computational social science.\n📌 For more advanced features and updates, visit the textAnnotatoR GitHub repository\r.\n",
+  "wordCount" : "1520",
+  "inLanguage": "en",
+  "datePublished": "2024-12-01T00:00:00Z",
+  "dateModified": "2024-12-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Tutorial"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "//localhost:1313/posts/conversim_r/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Chao Liu",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "//localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},
+            {left: "\\begin{gather}", right: "\\end{gather}", display: true},
+            {left: "\\begin{CD}", right: "\\end{CD}", display: true},
+          ],
+          throwOnError : false
+        });
+    });
+</script>
+ 
+
+
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:1313/" accesskey="h" title="Chao Liu">
+                <img src="//localhost:1313/favicon.ico" alt="" aria-label="logo"
+                    height="18"
+                    width="18">Chao Liu</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/papers/" title="Papers">
+                    <span>Papers</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Conversim: Comprehensive Conversation Similarity Analysis in R
+    </h1>
+    <div class="post-meta"><span title='2024-12-01 00:00:00 +0000 UTC'>December 2024</span>&nbsp;&middot;&nbsp;8 min&nbsp;&middot;&nbsp;1520 words&nbsp;&middot;&nbsp;Tutorial
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#installing-and-loading-the-package">Installing and Loading the Package</a></li>
+    <li><a href="#understanding-conversation-data-structure">Understanding Conversation Data Structure</a></li>
+    <li><a href="#analyzing-single-dyad-conversations">Analyzing Single Dyad Conversations</a></li>
+    <li><a href="#analyzing-multiple-dyads">Analyzing Multiple Dyads</a></li>
+    <li><a href="#analyzing-long-speeches">Analyzing Long Speeches</a></li>
+    <li><a href="#key-similarity-measures-explained">Key Similarity Measures Explained</a></li>
+    <li><a href="#multilevel-modeling-benefits">Multilevel Modeling Benefits</a></li>
+    <li><a href="#best-practices">Best Practices</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><em>Conversim</em> is a powerful R package for analyzing similarities in conversations across multiple dimensions. Whether you&rsquo;re studying dialogue dynamics, speech patterns, or conversational alignment, this package provides comprehensive tools for measuring topic, lexical, semantic, stylistic, sentiment, structural, and temporal similarities.</p>
+<h2 id="installing-and-loading-the-package">Installing and Loading the Package</h2>
+<p>Install the package:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#0a0">install.packages</span>(<span style="color:#a50">&#34;conversim&#34;</span>)
+</span></span></code></pre></div><p>Load the package along with required dependencies:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#0a0">library</span>(conversim)
+</span></span><span style="display:flex;"><span><span style="color:#0a0">library</span>(ggplot2)
+</span></span><span style="display:flex;"><span><span style="color:#0a0">library</span>(lme4)
+</span></span><span style="display:flex;"><span><span style="color:#0a0">library</span>(topicmodels)
+</span></span><span style="display:flex;"><span><span style="color:#0a0">library</span>(tm)
+</span></span><span style="display:flex;"><span><span style="color:#0a0">library</span>(slam)
+</span></span></code></pre></div><h2 id="understanding-conversation-data-structure">Understanding Conversation Data Structure</h2>
+<p>The conversim package works with conversation data that includes:</p>
+<ul>
+<li><strong>dyad_id</strong>: Identifier for conversation pairs</li>
+<li><strong>speaker</strong>: Person speaking (A, B, etc.)</li>
+<li><strong>text</strong>: Raw conversation text</li>
+<li><strong>processed_text</strong>: Cleaned and preprocessed text</li>
+</ul>
+<h2 id="analyzing-single-dyad-conversations">Analyzing Single Dyad Conversations</h2>
+<h3 id="creating-sample-data">Creating Sample Data</h3>
+<p>Let&rsquo;s start with a simple conversation between two speakers:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#0a0">set.seed</span>(<span style="color:#099">123</span>)
+</span></span><span style="display:flex;"><span>conversation &lt;- <span style="color:#0a0">data.frame</span>(
+</span></span><span style="display:flex;"><span>  speaker = <span style="color:#0a0">rep</span>(<span style="color:#0a0">c</span>(<span style="color:#a50">&#34;A&#34;</span>, <span style="color:#a50">&#34;B&#34;</span>), <span style="color:#099">10</span>),
+</span></span><span style="display:flex;"><span>  processed_text = <span style="color:#0a0">c</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Hello how are you today&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;I&#39;m doing well thanks for asking&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;That&#39;s great to hear what are your plans&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;I&#39;m planning to go for a walk later&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Sounds nice the weather is beautiful&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Yes it&#39;s perfect for outdoor activities&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Do you often go for walks&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Yes I try to walk every day for exercise&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;That&#39;s a great habit to have&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Thanks I find it helps me stay healthy&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Have you tried other forms of exercise&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;I also enjoy swimming and yoga&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Those are excellent choices too&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;What about you what exercise do you prefer&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;I like running and playing tennis&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Tennis is fun do you play often&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;I try to play at least once a week&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;That&#39;s a good frequency to maintain&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Yes it keeps me active and social&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a50">&#34;Social aspects of exercise are important too&#34;</span>
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><h3 id="text-preprocessing">Text Preprocessing</h3>
+<p>Before analysis, preprocess your conversation data:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>preprocess_dyads &lt;- <span style="color:#00a">function</span>(conversations) {
+</span></span><span style="display:flex;"><span>  conversations$processed_text &lt;- <span style="color:#0a0">sapply</span>(conversations$text, <span style="color:#00a">function</span>(text) {
+</span></span><span style="display:flex;"><span>    text &lt;- <span style="color:#0a0">tolower</span>(text)
+</span></span><span style="display:flex;"><span>    text &lt;- <span style="color:#0a0">gsub</span>(<span style="color:#a50">&#34;[[:punct:]]&#34;</span>, <span style="color:#a50">&#34;&#34;</span>, text)
+</span></span><span style="display:flex;"><span>    text &lt;- <span style="color:#0a0">gsub</span>(<span style="color:#a50">&#34;[[:digit:]]&#34;</span>, <span style="color:#a50">&#34;&#34;</span>, text)
+</span></span><span style="display:flex;"><span>    text &lt;- <span style="color:#0a0">gsub</span>(<span style="color:#a50">&#34;\\s+&#34;</span>, <span style="color:#a50">&#34; &#34;</span>, <span style="color:#0a0">trimws</span>(text))
+</span></span><span style="display:flex;"><span>    <span style="color:#00a">return</span>(text)
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#aaa;font-style:italic"># Remove empty processed texts</span>
+</span></span><span style="display:flex;"><span>  conversations &lt;- conversations<span style="color:#0a0">[nchar</span>(conversations$processed_text) &gt; <span style="color:#099">0</span>, ]
+</span></span><span style="display:flex;"><span>  <span style="color:#00a">return</span>(conversations)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="lexical-similarity-sequence">Lexical Similarity Sequence</h3>
+<p>Track how lexical similarity evolves throughout the conversation:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>lexical_sim &lt;- <span style="color:#0a0">lex_sim_seq</span>(conversation, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Visualize lexical similarity over time</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">ggplot</span>(<span style="color:#0a0">data.frame</span>(Exchange = <span style="color:#099">1</span>:<span style="color:#0a0">length</span>(lexical_sim$sequence), 
+</span></span><span style="display:flex;"><span>                  Similarity = lexical_sim$sequence), 
+</span></span><span style="display:flex;"><span>       <span style="color:#0a0">aes</span>(x = Exchange, y = Similarity)) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_line</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_point</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">labs</span>(title = <span style="color:#a50">&#34;Lexical Similarity Sequence&#34;</span>, 
+</span></span><span style="display:flex;"><span>       x = <span style="color:#a50">&#34;Conversation Exchange&#34;</span>, 
+</span></span><span style="display:flex;"><span>       y = <span style="color:#a50">&#34;Similarity Score&#34;</span>) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme_minimal</span>()
+</span></span></code></pre></div><p><img loading="lazy" src="lex_sim.png" alt="lexical similarity"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#0a0">cat</span>(<span style="color:#a50">&#34;Average lexical similarity:&#34;</span>, <span style="color:#0a0">round</span>(lexical_sim$average, <span style="color:#099">3</span>))
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic">#&gt; Average lexical similarity: 0.557</span>
+</span></span></code></pre></div><h3 id="topic-similarity-analysis">Topic Similarity Analysis</h3>
+<p>Analyze topic coherence using Latent Dirichlet Allocation (LDA):</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>topic_sim &lt;- <span style="color:#0a0">topic_sim_seq</span>(conversation, method = <span style="color:#a50">&#34;lda&#34;</span>, num_topics = <span style="color:#099">2</span>, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Plot topic similarity across conversation segments</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">ggplot</span>(<span style="color:#0a0">data.frame</span>(Segment = <span style="color:#099">1</span>:<span style="color:#099">3</span>, Similarity = topic_sim$sequence), 
+</span></span><span style="display:flex;"><span>       <span style="color:#0a0">aes</span>(x = Segment, y = Similarity)) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_line</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_point</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">labs</span>(title = <span style="color:#a50">&#34;Topic Similarity Sequence&#34;</span>, 
+</span></span><span style="display:flex;"><span>       x = <span style="color:#a50">&#34;Conversation Segment&#34;</span>, 
+</span></span><span style="display:flex;"><span>       y = <span style="color:#a50">&#34;Similarity Score&#34;</span>) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme_minimal</span>()
+</span></span></code></pre></div><p><img loading="lazy" src="topic_sim.png" alt=""  />
+</p>
+<h3 id="semantic-similarity">Semantic Similarity</h3>
+<p>Measure semantic similarity using TF-IDF vectors:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>semantic_sim &lt;- <span style="color:#0a0">sem_sim_seq</span>(conversation, method = <span style="color:#a50">&#34;tfidf&#34;</span>, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">ggplot</span>(<span style="color:#0a0">data.frame</span>(Exchange = <span style="color:#099">1</span>:<span style="color:#0a0">length</span>(semantic_sim$sequence), 
+</span></span><span style="display:flex;"><span>                  Similarity = semantic_sim$sequence), 
+</span></span><span style="display:flex;"><span>       <span style="color:#0a0">aes</span>(x = Exchange, y = Similarity)) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_line</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_point</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">labs</span>(title = <span style="color:#a50">&#34;Semantic Similarity Sequence&#34;</span>, 
+</span></span><span style="display:flex;"><span>       x = <span style="color:#a50">&#34;Conversation Exchange&#34;</span>, 
+</span></span><span style="display:flex;"><span>       y = <span style="color:#a50">&#34;Similarity Score&#34;</span>) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme_minimal</span>()
+</span></span></code></pre></div><p><img loading="lazy" src="semantic_sim.png" alt=""  />
+</p>
+<h3 id="stylistic-and-sentiment-analysis">Stylistic and Sentiment Analysis</h3>
+<p>Examine writing style and emotional tone:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Stylistic similarity</span>
+</span></span><span style="display:flex;"><span>stylistic_sim &lt;- <span style="color:#0a0">style_sim_seq</span>(conversation, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Sentiment similarity</span>
+</span></span><span style="display:flex;"><span>sentiment_sim &lt;- <span style="color:#0a0">sent_sim_seq</span>(conversation, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Create comparison plot</span>
+</span></span><span style="display:flex;"><span>style_data &lt;- <span style="color:#0a0">data.frame</span>(
+</span></span><span style="display:flex;"><span>  Exchange = <span style="color:#099">1</span>:<span style="color:#0a0">length</span>(stylistic_sim$sequence),
+</span></span><span style="display:flex;"><span>  Stylistic = stylistic_sim$sequence,
+</span></span><span style="display:flex;"><span>  Sentiment = sentiment_sim$sequence
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>style_long &lt;- reshape2::<span style="color:#0a0">melt</span>(style_data, id.vars = <span style="color:#a50">&#34;Exchange&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">ggplot</span>(style_long, <span style="color:#0a0">aes</span>(x = Exchange, y = value, color = variable)) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_line</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_point</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">labs</span>(title = <span style="color:#a50">&#34;Stylistic vs Sentiment Similarity&#34;</span>, 
+</span></span><span style="display:flex;"><span>       x = <span style="color:#a50">&#34;Conversation Exchange&#34;</span>, 
+</span></span><span style="display:flex;"><span>       y = <span style="color:#a50">&#34;Similarity Score&#34;</span>,
+</span></span><span style="display:flex;"><span>       color = <span style="color:#a50">&#34;Measure&#34;</span>) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme_minimal</span>()
+</span></span></code></pre></div><p><img loading="lazy" src="style_sent_sim.png" alt=""  />
+</p>
+<h2 id="analyzing-multiple-dyads">Analyzing Multiple Dyads</h2>
+<h3 id="loading-multi-dyad-data">Loading Multi-Dyad Data</h3>
+<p>Load the example dataset for multiple conversation pairs:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>data_path &lt;- <span style="color:#0a0">system.file</span>(<span style="color:#a50">&#34;extdata&#34;</span>, <span style="color:#a50">&#34;dyad_example_data.Rdata&#34;</span>, package = <span style="color:#a50">&#34;conversim&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#0a0">load</span>(data_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Display data structure</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">head</span>(dyad_example_data)
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># A tibble: 6 × 3</span>
+</span></span><span style="display:flex;"><span>  dyad_id speaker_id text                              
+</span></span><span style="display:flex;"><span>    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                             
+</span></span><span style="display:flex;"><span><span style="color:#099">1</span>       <span style="color:#099">1</span> A          What did you think of the new mov…
+</span></span><span style="display:flex;"><span><span style="color:#099">2</span>       <span style="color:#099">1</span> B          I haven’t seen it yet. Which one …
+</span></span><span style="display:flex;"><span><span style="color:#099">3</span>       <span style="color:#099">1</span> A          The latest superhero film. I hear…
+</span></span><span style="display:flex;"><span><span style="color:#099">4</span>       <span style="color:#099">1</span> B          Oh, that one! I’ve been meaning t…
+</span></span><span style="display:flex;"><span><span style="color:#099">5</span>       <span style="color:#099">1</span> A          Yes, I thought it was fantastic. …
+</span></span><span style="display:flex;"><span><span style="color:#099">6</span>       <span style="color:#099">1</span> B          Really? What about the storyline?…
+</span></span><span style="display:flex;"><span><span style="color:#0a0">str</span>(dyad_example_data)
+</span></span><span style="display:flex;"><span>tibble [532 × <span style="color:#099">3</span><span style="color:#0a0">] </span>(S3: tbl_df/tbl/data.frame)
+</span></span><span style="display:flex;"><span> $ dyad_id   : num [1:<span style="color:#099">532</span>] <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#099">1</span> <span style="color:#00a">...</span>
+</span></span><span style="display:flex;"><span> $ speaker_id: chr [1:<span style="color:#099">532</span>] <span style="color:#a50">&#34;A&#34;</span> <span style="color:#a50">&#34;B&#34;</span> <span style="color:#a50">&#34;A&#34;</span> <span style="color:#a50">&#34;B&#34;</span> <span style="color:#00a">...</span>
+</span></span><span style="display:flex;"><span> $ text      : chr [1:<span style="color:#099">532</span>] <span style="color:#a50">&#34;What did you think of the new movie that just came out?&#34;</span> <span style="color:#a50">&#34;I haven’t seen it yet. Which one are you referring to?&#34;</span> <span style="color:#a50">&#34;The latest superhero film. I heard it’s getting great reviews.&#34;</span> <span style="color:#a50">&#34;Oh, that one! I’ve been meaning to watch it. Did you enjoy it?&#34;</span> <span style="color:#00a">...</span>
+</span></span></code></pre></div><h3 id="preprocessing-multiple-dyads">Preprocessing Multiple Dyads</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>processed_convs &lt;- <span style="color:#0a0">preprocess_dyads</span>(dyad_example_data)
+</span></span></code></pre></div><h3 id="comprehensive-similarity-analysis">Comprehensive Similarity Analysis</h3>
+<p>Calculate all similarity measures across multiple dyads:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Topic similarity using multilevel modeling</span>
+</span></span><span style="display:flex;"><span>topic_sim &lt;- <span style="color:#0a0">topic_sim_dyads</span>(processed_convs, method = <span style="color:#a50">&#34;lda&#34;</span>, num_topics = <span style="color:#099">5</span>, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Lexical similarity</span>
+</span></span><span style="display:flex;"><span>lexical_sim &lt;- <span style="color:#0a0">lexical_sim_dyads</span>(processed_convs, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Semantic similarity</span>
+</span></span><span style="display:flex;"><span>semantic_sim &lt;- <span style="color:#0a0">semantic_sim_dyads</span>(processed_convs, method = <span style="color:#a50">&#34;tfidf&#34;</span>, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Structural similarity</span>
+</span></span><span style="display:flex;"><span>structural_sim &lt;- <span style="color:#0a0">structural_sim_dyads</span>(processed_convs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Stylistic similarity</span>
+</span></span><span style="display:flex;"><span>stylistic_sim &lt;- <span style="color:#0a0">stylistic_sim_dyads</span>(processed_convs, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Sentiment similarity</span>
+</span></span><span style="display:flex;"><span>sentiment_sim &lt;- <span style="color:#0a0">sentiment_sim_dyads</span>(processed_convs, window_size = <span style="color:#099">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Participant balance</span>
+</span></span><span style="display:flex;"><span>participant_sim &lt;- <span style="color:#0a0">participant_sim_dyads</span>(processed_convs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Timing patterns</span>
+</span></span><span style="display:flex;"><span>timing_sim &lt;- <span style="color:#0a0">timing_sim_dyads</span>(processed_convs)
+</span></span></code></pre></div><h3 id="visualizing-multi-dyad-results">Visualizing Multi-Dyad Results</h3>
+<p>Create comprehensive comparison plots:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Prepare comparison data</span>
+</span></span><span style="display:flex;"><span>comparison_df &lt;- <span style="color:#0a0">data.frame</span>(
+</span></span><span style="display:flex;"><span>  dyad = <span style="color:#0a0">names</span>(topic_sim$similarities_by_dyad),
+</span></span><span style="display:flex;"><span>  topic = <span style="color:#0a0">sapply</span>(topic_sim$similarities_by_dyad, mean),
+</span></span><span style="display:flex;"><span>  lexical = <span style="color:#0a0">sapply</span>(lexical_sim$similarities_by_dyad, mean),
+</span></span><span style="display:flex;"><span>  semantic = <span style="color:#0a0">sapply</span>(semantic_sim$similarities_by_dyad, mean),
+</span></span><span style="display:flex;"><span>  structural = <span style="color:#0a0">unlist</span>(structural_sim$similarities_by_dyad),
+</span></span><span style="display:flex;"><span>  stylistic = <span style="color:#0a0">sapply</span>(stylistic_sim$similarities_by_dyad, mean),
+</span></span><span style="display:flex;"><span>  sentiment = <span style="color:#0a0">sapply</span>(sentiment_sim$similarities_by_dyad, mean),
+</span></span><span style="display:flex;"><span>  participant = <span style="color:#0a0">unlist</span>(participant_sim$similarities_by_dyad),
+</span></span><span style="display:flex;"><span>  timing = <span style="color:#0a0">unlist</span>(timing_sim$similarities_by_dyad)
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Reshape for plotting</span>
+</span></span><span style="display:flex;"><span>comparison_long &lt;- reshape2::<span style="color:#0a0">melt</span>(comparison_df, id.vars = <span style="color:#a50">&#34;dyad&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Create boxplot comparison</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">ggplot</span>(comparison_long, <span style="color:#0a0">aes</span>(x = variable, y = value, fill = variable)) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_boxplot</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">labs</span>(title = <span style="color:#a50">&#34;Comparison of Similarity Measures Across Dyads&#34;</span>,
+</span></span><span style="display:flex;"><span>       x = <span style="color:#a50">&#34;Similarity Measure&#34;</span>,
+</span></span><span style="display:flex;"><span>       y = <span style="color:#a50">&#34;Similarity Score&#34;</span>) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme_minimal</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme</span>(axis.text.x = <span style="color:#0a0">element_text</span>(angle = <span style="color:#099">45</span>, hjust = <span style="color:#099">1</span>),
+</span></span><span style="display:flex;"><span>        legend.position = <span style="color:#a50">&#34;none&#34;</span>)
+</span></span></code></pre></div><p><img loading="lazy" src="sim_measure_comp.png" alt=""  />
+</p>
+<h3 id="topic-similarity-trajectory">Topic Similarity Trajectory</h3>
+<p>Visualize how topic similarity changes within each dyad:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Prepare data for topic similarity trajectories</span>
+</span></span><span style="display:flex;"><span>topic_sim_df &lt;- <span style="color:#0a0">data.frame</span>(
+</span></span><span style="display:flex;"><span>  dyad = <span style="color:#0a0">rep</span>(<span style="color:#0a0">names</span>(topic_sim$similarities_by_dyad), 
+</span></span><span style="display:flex;"><span>             <span style="color:#0a0">sapply</span>(topic_sim$similarities_by_dyad, length)),
+</span></span><span style="display:flex;"><span>  similarity = <span style="color:#0a0">unlist</span>(topic_sim$similarities_by_dyad),
+</span></span><span style="display:flex;"><span>  index = <span style="color:#0a0">unlist</span>(<span style="color:#0a0">lapply</span>(topic_sim$similarities_by_dyad, seq_along))
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Create trajectory plot</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">ggplot</span>(topic_sim_df, <span style="color:#0a0">aes</span>(x = index, y = similarity, color = dyad)) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_line</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">geom_point</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">facet_wrap</span>(~dyad, ncol = <span style="color:#099">2</span>) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">labs</span>(title = <span style="color:#a50">&#34;Topic Similarity Trajectories Across Dyads&#34;</span>,
+</span></span><span style="display:flex;"><span>       x = <span style="color:#a50">&#34;Conversation Sequence&#34;</span>,
+</span></span><span style="display:flex;"><span>       y = <span style="color:#a50">&#34;Similarity Score&#34;</span>) +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme_minimal</span>() +
+</span></span><span style="display:flex;"><span>  <span style="color:#0a0">theme</span>(legend.position = <span style="color:#a50">&#34;none&#34;</span>)
+</span></span></code></pre></div><p><img loading="lazy" src="sim_scores.png" alt=""  />
+</p>
+<h2 id="analyzing-long-speeches">Analyzing Long Speeches</h2>
+<h3 id="loading-speech-data">Loading Speech Data</h3>
+<p>For comparing longer texts like speeches:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>data_path &lt;- <span style="color:#0a0">system.file</span>(<span style="color:#a50">&#34;extdata&#34;</span>, <span style="color:#a50">&#34;speeches_data.Rdata&#34;</span>, package = <span style="color:#a50">&#34;conversim&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#0a0">load</span>(data_path)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Preview the speech data</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">summary</span>(speeches_data))
+</span></span><span style="display:flex;"><span>speaker_id            text          
+</span></span><span style="display:flex;"><span> Length:<span style="color:#099">2</span>           Length:<span style="color:#099">2</span>          
+</span></span><span style="display:flex;"><span> Class :character   Class :character  
+</span></span><span style="display:flex;"><span> Mode  :character   Mode  :character
+</span></span></code></pre></div><h3 id="advanced-similarity-measures">Advanced Similarity Measures</h3>
+<h4 id="topic-similarity-with-multiple-methods">Topic Similarity with Multiple Methods</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># LDA-based topic similarity</span>
+</span></span><span style="display:flex;"><span>lda_similarity &lt;- <span style="color:#0a0">topic_similarity</span>(speeches_data$text[1], speeches_data$text[2], 
+</span></span><span style="display:flex;"><span>                                   method = <span style="color:#a50">&#34;lda&#34;</span>, num_topics = <span style="color:#099">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># LSA-based topic similarity  </span>
+</span></span><span style="display:flex;"><span>lsa_similarity &lt;- <span style="color:#0a0">topic_similarity</span>(speeches_data$text[1], speeches_data$text[2], 
+</span></span><span style="display:flex;"><span>                                   method = <span style="color:#a50">&#34;lsa&#34;</span>, num_topics = <span style="color:#099">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">paste</span>(<span style="color:#a50">&#34;LDA Similarity:&#34;</span>, <span style="color:#0a0">round</span>(lda_similarity, <span style="color:#099">3</span>)))
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;LDA Similarity: 0.169&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">paste</span>(<span style="color:#a50">&#34;LSA Similarity:&#34;</span>, <span style="color:#0a0">round</span>(lsa_similarity, <span style="color:#099">3</span>)))
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;LSA Similarity: 1&#34;</span>
+</span></span></code></pre></div><h4 id="comprehensive-semantic-analysis">Comprehensive Semantic Analysis</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># TF-IDF semantic similarity</span>
+</span></span><span style="display:flex;"><span>tfidf_similarity &lt;- <span style="color:#0a0">semantic_similarity</span>(speeches_data$text[1], speeches_data$text[2], 
+</span></span><span style="display:flex;"><span>                                         method = <span style="color:#a50">&#34;tfidf&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#aaa;font-style:italic"># Word2Vec semantic similarity</span>
+</span></span><span style="display:flex;"><span>word2vec_similarity &lt;- <span style="color:#0a0">semantic_similarity</span>(speeches_data$text[1], speeches_data$text[2], 
+</span></span><span style="display:flex;"><span>                                            method = <span style="color:#a50">&#34;word2vec&#34;</span>, dim = <span style="color:#099">100</span>, iter = <span style="color:#099">5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">paste</span>(<span style="color:#a50">&#34;TF-IDF Similarity:&#34;</span>, <span style="color:#0a0">round</span>(tfidf_similarity, <span style="color:#099">3</span>)))
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;TF-IDF Similarity: 0.5&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">paste</span>(<span style="color:#a50">&#34;Word2Vec Similarity:&#34;</span>, <span style="color:#0a0">round</span>(word2vec_similarity, <span style="color:#099">3</span>)))
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;Word2Vec Similarity: 0.999&#34;</span>
+</span></span></code></pre></div><h4 id="detailed-stylistic-analysis">Detailed Stylistic Analysis</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>style_analysis &lt;- <span style="color:#0a0">stylistic_similarity</span>(speeches_data$text[1], speeches_data$text[2])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#a50">&#34;Stylistic Features Comparison:&#34;</span>)
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;Stylistic Features Comparison:&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">paste</span>(<span style="color:#a50">&#34;Text 1 TTR:&#34;</span>, <span style="color:#0a0">round</span>(style_analysis$text1_features[<span style="color:#a50">&#34;ttr&#34;</span>], <span style="color:#099">3</span>)))
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;Text 1 TTR: 0.644&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">paste</span>(<span style="color:#a50">&#34;Text 2 TTR:&#34;</span>, <span style="color:#0a0">round</span>(style_analysis$text2_features[<span style="color:#a50">&#34;ttr&#34;</span>], <span style="color:#099">3</span>)))
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;Text 2 TTR: 0.549&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#0a0">print</span>(<span style="color:#0a0">paste</span>(<span style="color:#a50">&#34;Overall Stylistic Similarity:&#34;</span>, <span style="color:#0a0">round</span>(style_analysis$overall_similarity, <span style="color:#099">3</span>)))
+</span></span><span style="display:flex;"><span>[1] <span style="color:#a50">&#34;Overall Stylistic Similarity: 0.892&#34;</span>
+</span></span></code></pre></div><h2 id="key-similarity-measures-explained">Key Similarity Measures Explained</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Measure</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Best For</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Topic</strong></td>
+<td>Measures thematic coherence using LDA or LSA</td>
+<td>Analyzing content alignment and subject matter similarity</td>
+</tr>
+<tr>
+<td><strong>Lexical</strong></td>
+<td>Calculates shared vocabulary between speakers</td>
+<td>Studying word choice and linguistic alignment</td>
+</tr>
+<tr>
+<td><strong>Semantic</strong></td>
+<td>Measures meaning similarity using vector representations</td>
+<td>Understanding conceptual similarity beyond word overlap</td>
+</tr>
+<tr>
+<td><strong>Structural</strong></td>
+<td>Analyzes conversation format and turn-taking patterns</td>
+<td>Examining dialogue structure and interaction patterns</td>
+</tr>
+<tr>
+<td><strong>Stylistic</strong></td>
+<td>Compares writing style features (TTR, sentence length, readability)</td>
+<td>Studying linguistic style and complexity</td>
+</tr>
+<tr>
+<td><strong>Sentiment</strong></td>
+<td>Measures emotional tone alignment</td>
+<td>Analyzing emotional synchrony in conversations</td>
+</tr>
+<tr>
+<td><strong>Participant</strong></td>
+<td>Evaluates speaker balance and participation equality</td>
+<td>Understanding conversation dynamics</td>
+</tr>
+<tr>
+<td><strong>Timing</strong></td>
+<td>Analyzes temporal patterns in conversation flow</td>
+<td>Studying rhythm and pacing in dialogue</td>
+</tr>
+</tbody>
+</table>
+<h2 id="multilevel-modeling-benefits">Multilevel Modeling Benefits</h2>
+<p>The package uses multilevel modeling to:</p>
+<ul>
+<li>Account for dyad-level variation in similarity patterns</li>
+<li>Provide more accurate overall averages across conversations</li>
+<li>Handle nested data structures common in conversation analysis</li>
+<li>Enable statistical inference about conversation patterns</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="window-size-selection">Window Size Selection</h3>
+<ul>
+<li><strong>Small windows (2-3)</strong>: Capture immediate conversational alignment</li>
+<li><strong>Medium windows (4-6)</strong>: Balance local and global patterns</li>
+<li><strong>Large windows (7+)</strong>: Focus on broader conversational themes</li>
+</ul>
+<h3 id="method-selection">Method Selection</h3>
+<ul>
+<li><strong>TF-IDF</strong>: Fast, interpretable, good for lexical analysis</li>
+<li><strong>Word2Vec</strong>: Captures semantic relationships, better for meaning</li>
+<li><strong>LDA</strong>: Excellent for topic modeling with multiple themes</li>
+<li><strong>LSA</strong>: Good for discovering latent semantic structures</li>
+</ul>
+<h3 id="data-preprocessing">Data Preprocessing</h3>
+<p>Always preprocess your text data by:</p>
+<ul>
+<li>Converting to lowercase</li>
+<li>Removing punctuation and numbers</li>
+<li>Normalizing whitespace</li>
+<li>Filtering empty entries</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>The conversim package provides a comprehensive toolkit for analyzing conversation similarities across multiple dimensions. Whether studying therapeutic dialogues, educational interactions, or social conversations, these tools enable researchers to quantify and visualize the complex dynamics of human communication.</p>
+<p>The package&rsquo;s strength lies in its ability to capture different aspects of conversational similarity simultaneously, providing a holistic view of dialogue dynamics that can inform research in linguistics, psychology, communication studies, and computational social science.</p>
+<hr>
+<p>📌 <em>For more advanced features and updates, visit the <a href="https://github.com/chaoliu-cl/conversim" target="_blank">textAnnotatoR GitHub repository</a>
+.</em></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="//localhost:1313/tags/r/">R</a></li>
+      <li><a href="//localhost:1313/tags/natural-language-processing/">Natural Language Processing</a></li>
+      <li><a href="//localhost:1313/tags/conversation-analysis/">Conversation Analysis</a></li>
+      <li><a href="//localhost:1313/tags/text-mining/">Text Mining</a></li>
+      <li><a href="//localhost:1313/tags/similarity-metrics/">Similarity Metrics</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+</html>

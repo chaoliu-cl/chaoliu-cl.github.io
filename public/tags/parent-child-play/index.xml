@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Parent-Child Play on Chao Liu</title>
-    <link>//localhost:1313/tags/parent-child-play/</link>
-    <description>Recent content in Parent-Child Play on Chao Liu</description>
-    <generator>Hugo -- 0.131.0</generator>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/parent-child-play/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/parent-child-play/" rel="self" type="application/rss+xml"/>
+    
     <item>
       <title>How Parents Play: Play Style as a Function of Gender of Parent, Gender of Child, and Play Context</title>
       <link>//localhost:1313/papers/paper3/</link>
-      <pubDate>Wed, 24 Jul 2024 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 24 Jul 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/papers/paper3/</guid>
-      <description>This study observed 81 children playing with their mothers and fathers separately to examine how parent and child gender, as well as play context, influenced parental play roles. The findings revealed complex interactions between gender and play context, with parents adopting different roles (director, facilitator, or co-player) based on the child&amp;#39;s gender and the type of game, highlighting the significant impact of these factors on parent-child play dynamics.</description>
+      <description>&lt;hr&gt;
+&lt;h5 id=&#34;relevant-links&#34;&gt;Relevant Links&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://journals.sagepub.com/doi/full/10.1177/0192513X241263782&#34; target=&#34;_blank&#34;&gt;Paper&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;abstract&#34;&gt;Abstract&lt;/h5&gt;
+&lt;p&gt;This study observed 81 children playing with their mothers and fathers separately to examine how parent and child gender, as well as play context, influenced parental play roles. The findings revealed complex interactions between gender and play context, with parents adopting different roles (director, facilitator, or co-player) based on the child&amp;rsquo;s gender and the type of game, highlighting the significant impact of these factors on parent-child play dynamics.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;figure-1-adjusted-residuals-for-counts-of-parental-roles-dir--director-fac--facilitator-co-p--co-player-comparing-boys-with-girls-within-three-play-contexts&#34;&gt;Figure 1: Adjusted residuals for counts of parental roles (Dir = Director, Fac = Facilitator, Co-P = Co-player) comparing boys with girls within three play contexts.&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper3.jpeg&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h5 id=&#34;figure-2-adjusted-residuals-for-counts-of-different-parental-roles-dir--director-fac--facilitator-co-p--co-player-comparing-fathers-with-mothers-within-three-play-contexts&#34;&gt;Figure 2: Adjusted residuals for counts of different parental roles (Dir = Director, Fac = Facilitator, Co-P = Co-player) comparing fathers with mothers within three play contexts.&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper3_2.jpeg&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;citation&#34;&gt;Citation&lt;/h5&gt;
+&lt;p&gt;Liu, C., Harrist, A. W., Cookston, J. T., &amp;amp; Carrillo, S. (2024). How Parents Play: Play Style as a Function of Gender of Parent, Gender of Child, and Play Context. &lt;em&gt;Journal of Family Issues&lt;/em&gt;, 0(0). &lt;a href=&#34;https://doi.org/10.1177/0192513X241263782&#34; target=&#34;_blank&#34;&gt;https://doi.org/10.1177/0192513X241263782&lt;/a&gt;
+.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-BibTeX&#34; data-lang=&#34;BibTeX&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;@article&lt;/span&gt;{doi:10.1177/0192513X241263782,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Chao Liu and Amanda W. Harrist and Jeffrey T. Cookston and Sonia Carrillo}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;title&lt;/span&gt; =&lt;span style=&#34;color:#a50&#34;&gt;{How Parents Play: Play Style as a Function of Gender of Parent, Gender of Child, and Play Context}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;journal&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Journal of Family Issues}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;volume&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;number&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;pages&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0192513X241263782}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;year&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;doi&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{10.1177/0192513X241263782}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;URL&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{https://doi.org/10.1177/0192513X241263782}&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+</description>
     </item>
+    
   </channel>
 </rss>

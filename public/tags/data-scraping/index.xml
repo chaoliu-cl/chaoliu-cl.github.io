@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/data-scraping/" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>Goodreader: Scrape and Analyze &#39;Goodreads&#39; Book Data</title>
+      <link>//localhost:1313/posts/goodreader_r/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/goodreader_r/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Goodreader&lt;/em&gt; is a comprehensive toolkit for scraping and analyzing book data from Goodreads.&lt;/p&gt;
+&lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and loading the package&lt;/h2&gt;
+&lt;p&gt;Install the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;Goodreader&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And load the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(Goodreader)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;searching-for-books-on-goodreads&#34;&gt;Searching for Books on Goodreads&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function allows you to search for books on Goodreads based on various criteria.&lt;/p&gt;
+&lt;p&gt;The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_df &amp;lt;- search_goodreads(search_term = &amp;quot;parenting&amp;quot;, search_in = &amp;quot;title&amp;quot;, num_books = 10, sort_by = &amp;quot;ratings&amp;quot;)
+summary(parent_df)
+#&amp;gt;   title              author            book_id         
+#&amp;gt; Length:10          Length:10          Length:10         
+#&amp;gt; Class :character   Class :character   Class :character  
+#&amp;gt; Mode  :character   Mode  :character   Mode  :character  
+
+#&amp;gt;     url               ratings     
+#&amp;gt; Length:10          Min.   : 8427  
+#&amp;gt; Class :character   1st Qu.:11744  
+#&amp;gt; Mode  :character   Median :13662  
+#&amp;gt;                    Mean   :19757  
+#&amp;gt;                    3rd Qu.:13784  
+#&amp;gt;                    Max.   :69591  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also search author’s name:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;ratings&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function includes a &lt;code&gt;sort_by&lt;/code&gt; that sorts the results either by ratings or published_year:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;published_year&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;scrape-book-metadata-and-reviews&#34;&gt;Scrape book metadata and reviews&lt;/h2&gt;
+&lt;p&gt;After the books are found, save their IDs to a text file. These IDs are used for extracting book metadata and reviews:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;get_book_ids(input_data = parent_df, file_name = &amp;quot;parent_books.txt&amp;quot;) #the book IDs are now stored in a text file named “parent_books”
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Book metadata can then be scraped:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookinfo &amp;lt;- scrape_books(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, use_parallel = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To speed up the scraping process, we can turn on the parallel process: &lt;code&gt;use_parallel = TRUE&lt;/code&gt;, and specify the number of cores for the parallel process (e.g., &lt;code&gt;num_cores = 8&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookreviews &amp;lt;- scrape_reviews(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, num_reviews = 10, use_parallel = FALSE) #users can also turn on parallel process to speed up the process
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;conduct-sentiment-analysis&#34;&gt;Conduct sentiment analysis&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;analyze_sentiment()&lt;/code&gt; function calculates the sentiment score of each review based on the lexicon chosen by the user. Available options for lexicon are afinn, bing, and nrc. Basic negation scope detection was implemented (e.g., not happy is labeled as negative emotion and is assigned with a negative score).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_results &amp;lt;- analyze_sentiment(parent_bookreviews, lexicon = &amp;quot;afinn&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;average_book_sentiment()&lt;/code&gt; function calculates the average sentiment score for each book.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ave_sentiment &amp;lt;- average_book_sentiment(sentiment_results)
+summary(ave_sentiment)
+#&amp;gt;    book_id          avg_sentiment  
+#&amp;gt;  Length:10          Min.   : 4.40  
+#&amp;gt;  Class :character   1st Qu.: 7.25  
+#&amp;gt;  Mode  :character   Median :12.86  
+#&amp;gt;                     Mean   :12.95  
+#&amp;gt;                     3rd Qu.:14.65  
+#&amp;gt;                     Max.   :27.30
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The sentiment scores can be plotted as a histogram:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_histogram(sentiment_results)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_hist.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Or a trend of average sentiment score over time:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_trend(sentiment_results, time_period = &amp;quot;year&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_trend.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;perform-topic-modeling&#34;&gt;Perform topic modeling&lt;/h2&gt;
+&lt;p&gt;Apply topic modeling to the reviews data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;reviews_topic &amp;lt;- model_topics(parent_bookreviews, num_topics = 3, num_terms = 10, english_only = TRUE)
+#&amp;gt; Topic 1:  
+#&amp;gt; parent, children, need, one, way, good, get, work, dont, give 
+#&amp;gt; 
+#&amp;gt; Topic 2:  
+#&amp;gt; parent, child, book, emot, feel, help, also, can, children, use 
+#&amp;gt; 
+#&amp;gt; Topic 3:  
+#&amp;gt; book, just, kid, think, read, like, time, say, realli, much
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plot the top terms by topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plot_topic_terms(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;topic_terms.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Create a word cloud for each topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gen_topic_clouds(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Topic 1:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 2:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic2.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 3:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic3.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;other-utility-functions&#34;&gt;Other utility functions&lt;/h2&gt;
+&lt;p&gt;The following table shows other utility functions to extract book-related information&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Function&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Output&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Description&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_ids()&lt;/td&gt;
+&lt;td&gt;Text file&lt;/td&gt;
+&lt;td&gt;Retrieve the book IDs from the input data and save to a text file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_summary()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the summary for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_author_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the author information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_genres()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Extract the genres for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_published_time()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the published time for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_num_pages()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the number of pages for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_format_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the format information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_rating_distribution()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the rating distribution for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;p&gt;📌 &lt;em&gt;This post is syndicated on &lt;a href=&#34;https://www.r-bloggers.com&#34; target=&#34;_blank&#34;&gt;R-bloggers&lt;/a&gt;
+ — a community hub for R news and tutorials.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

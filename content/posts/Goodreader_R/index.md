@@ -1,17 +1,19 @@
 ---
-title: "My First R package: Goodreader"
+title: "Goodreader: Scrape and Analyze 'Goodreads' Book Data"
 date: 2024-09-01
 draft: false
 comments: true
 author: "Chao Liu"
+tags: ["R", "Goodreads", "Text Mining", "Data Scraping", "Sentiment Analysis"]
 weight: 1
-# aliases: ["/first"]
 showToc: true
 TocOpen: true
 hidemeta: false
 description: "This is a description of my first post."
 disableShare: false
-hideSummary: true
+hideSummary: true        
+summary: ""              
+rssFullText: true       
 searchHidden: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
@@ -145,3 +147,7 @@ The following table shows other utility functions to extract book-related inform
 | get_num_pages()           | List       | Retrieve the number of pages for each book                        |
 | get_format_info()         | List       | Retrieve the format information for each book                     |
 | get_rating_distribution() | List       | Retrieve the rating distribution for each book                    |
+
+---
+
+📌 *For more advanced features and updates, visit the [textAnnotatoR GitHub repository](https://github.com/chaoliu-cl/Goodreader).*

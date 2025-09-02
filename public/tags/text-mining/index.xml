@@ -1,26 +1,634 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Text Mining on Chao Liu</title>
-    <link>//localhost:1313/tags/text-mining/</link>
-    <description>Recent content in Text Mining on Chao Liu</description>
-    <generator>Hugo -- 0.131.0</generator>
+    <title>Chao Liu</title>
+    <link>//localhost:1313/</link>
+    <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/text-mining/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <atom:link href="//localhost:1313/tags/text-mining/" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>Conversim: Comprehensive Conversation Similarity Analysis in R</title>
+      <link>//localhost:1313/posts/conversim_r/</link>
+      <pubDate>Sun, 01 Dec 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/conversim_r/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Conversim&lt;/em&gt; is a powerful R package for analyzing similarities in conversations across multiple dimensions. Whether you&amp;rsquo;re studying dialogue dynamics, speech patterns, or conversational alignment, this package provides comprehensive tools for measuring topic, lexical, semantic, stylistic, sentiment, structural, and temporal similarities.&lt;/p&gt;
+&lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and Loading the Package&lt;/h2&gt;
+&lt;p&gt;Install the package:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;install.packages&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;conversim&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Load the package along with required dependencies:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(conversim)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(ggplot2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(lme4)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(topicmodels)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(tm)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;library&lt;/span&gt;(slam)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;understanding-conversation-data-structure&#34;&gt;Understanding Conversation Data Structure&lt;/h2&gt;
+&lt;p&gt;The conversim package works with conversation data that includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;dyad_id&lt;/strong&gt;: Identifier for conversation pairs&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;speaker&lt;/strong&gt;: Person speaking (A, B, etc.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;text&lt;/strong&gt;: Raw conversation text&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;processed_text&lt;/strong&gt;: Cleaned and preprocessed text&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;analyzing-single-dyad-conversations&#34;&gt;Analyzing Single Dyad Conversations&lt;/h2&gt;
+&lt;h3 id=&#34;creating-sample-data&#34;&gt;Creating Sample Data&lt;/h3&gt;
+&lt;p&gt;Let&amp;rsquo;s start with a simple conversation between two speakers:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;set.seed&lt;/span&gt;(&lt;span style=&#34;color:#099&#34;&gt;123&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;conversation &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  speaker = &lt;span style=&#34;color:#0a0&#34;&gt;rep&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;c&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;), &lt;span style=&#34;color:#099&#34;&gt;10&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  processed_text = &lt;span style=&#34;color:#0a0&#34;&gt;c&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Hello how are you today&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I&amp;#39;m doing well thanks for asking&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;That&amp;#39;s great to hear what are your plans&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I&amp;#39;m planning to go for a walk later&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Sounds nice the weather is beautiful&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Yes it&amp;#39;s perfect for outdoor activities&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Do you often go for walks&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Yes I try to walk every day for exercise&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;That&amp;#39;s a great habit to have&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Thanks I find it helps me stay healthy&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Have you tried other forms of exercise&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I also enjoy swimming and yoga&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Those are excellent choices too&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;What about you what exercise do you prefer&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I like running and playing tennis&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Tennis is fun do you play often&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I try to play at least once a week&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;That&amp;#39;s a good frequency to maintain&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Yes it keeps me active and social&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Social aspects of exercise are important too&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;text-preprocessing&#34;&gt;Text Preprocessing&lt;/h3&gt;
+&lt;p&gt;Before analysis, preprocess your conversation data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;preprocess_dyads &amp;lt;- &lt;span style=&#34;color:#00a&#34;&gt;function&lt;/span&gt;(conversations) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  conversations$processed_text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(conversations$text, &lt;span style=&#34;color:#00a&#34;&gt;function&lt;/span&gt;(text) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;tolower&lt;/span&gt;(text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;gsub&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;[[:punct:]]&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;gsub&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;[[:digit:]]&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;, text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    text &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;gsub&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;\\s+&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;trimws&lt;/span&gt;(text))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt;(text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  })
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Remove empty processed texts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  conversations &amp;lt;- conversations&lt;span style=&#34;color:#0a0&#34;&gt;[nchar&lt;/span&gt;(conversations$processed_text) &amp;gt; &lt;span style=&#34;color:#099&#34;&gt;0&lt;/span&gt;, ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#00a&#34;&gt;return&lt;/span&gt;(conversations)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;lexical-similarity-sequence&#34;&gt;Lexical Similarity Sequence&lt;/h3&gt;
+&lt;p&gt;Track how lexical similarity evolves throughout the conversation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lexical_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;lex_sim_seq&lt;/span&gt;(conversation, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Visualize lexical similarity over time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(Exchange = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#0a0&#34;&gt;length&lt;/span&gt;(lexical_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  Similarity = lexical_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Exchange, y = Similarity)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Lexical Similarity Sequence&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Exchange&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;lex_sim.png&#34; alt=&#34;lexical similarity&#34;  /&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;cat&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Average lexical similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(lexical_sim$average, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;#&amp;gt; Average lexical similarity: 0.557&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;topic-similarity-analysis&#34;&gt;Topic Similarity Analysis&lt;/h3&gt;
+&lt;p&gt;Analyze topic coherence using Latent Dirichlet Allocation (LDA):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_sim_seq&lt;/span&gt;(conversation, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lda&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Plot topic similarity across conversation segments&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(Segment = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;, Similarity = topic_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Segment, y = Similarity)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Topic Similarity Sequence&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Segment&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;topic_sim.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;semantic-similarity&#34;&gt;Semantic Similarity&lt;/h3&gt;
+&lt;p&gt;Measure semantic similarity using TF-IDF vectors:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;semantic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sem_sim_seq&lt;/span&gt;(conversation, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;tfidf&amp;#34;&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(Exchange = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#0a0&#34;&gt;length&lt;/span&gt;(semantic_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  Similarity = semantic_sim$sequence), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Exchange, y = Similarity)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Semantic Similarity Sequence&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Exchange&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;semantic_sim.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;stylistic-and-sentiment-analysis&#34;&gt;Stylistic and Sentiment Analysis&lt;/h3&gt;
+&lt;p&gt;Examine writing style and emotional tone:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Stylistic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;stylistic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;style_sim_seq&lt;/span&gt;(conversation, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Sentiment similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sentiment_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sent_sim_seq&lt;/span&gt;(conversation, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Create comparison plot&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;style_data &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Exchange = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;:&lt;span style=&#34;color:#0a0&#34;&gt;length&lt;/span&gt;(stylistic_sim$sequence),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Stylistic = stylistic_sim$sequence,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Sentiment = sentiment_sim$sequence
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;style_long &amp;lt;- reshape2::&lt;span style=&#34;color:#0a0&#34;&gt;melt&lt;/span&gt;(style_data, id.vars = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Exchange&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(style_long, &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = Exchange, y = value, color = variable)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Stylistic vs Sentiment Similarity&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Exchange&amp;#34;&lt;/span&gt;, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       color = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Measure&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;style_sent_sim.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;analyzing-multiple-dyads&#34;&gt;Analyzing Multiple Dyads&lt;/h2&gt;
+&lt;h3 id=&#34;loading-multi-dyad-data&#34;&gt;Loading Multi-Dyad Data&lt;/h3&gt;
+&lt;p&gt;Load the example dataset for multiple conversation pairs:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;data_path &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;system.file&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;extdata&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;dyad_example_data.Rdata&amp;#34;&lt;/span&gt;, package = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;conversim&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;load&lt;/span&gt;(data_path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Display data structure&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;head&lt;/span&gt;(dyad_example_data)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# A tibble: 6 × 3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  dyad_id speaker_id text                              
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;                             
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; A          What did you think of the new mov…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; B          I haven’t seen it yet. Which one …
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; A          The latest superhero film. I hear…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;4&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; B          Oh, that one! I’ve been meaning t…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; A          Yes, I thought it was fantastic. …
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#099&#34;&gt;6&lt;/span&gt;       &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; B          Really? What about the storyline?…
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;str&lt;/span&gt;(dyad_example_data)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tibble [532 × &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;] &lt;/span&gt;(S3: tbl_df/tbl/data.frame)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ dyad_id   : num [1:&lt;span style=&#34;color:#099&#34;&gt;532&lt;/span&gt;] &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ speaker_id: chr [1:&lt;span style=&#34;color:#099&#34;&gt;532&lt;/span&gt;] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; $ text      : chr [1:&lt;span style=&#34;color:#099&#34;&gt;532&lt;/span&gt;] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;What did you think of the new movie that just came out?&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;I haven’t seen it yet. Which one are you referring to?&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;The latest superhero film. I heard it’s getting great reviews.&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Oh, that one! I’ve been meaning to watch it. Did you enjoy it?&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#00a&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;preprocessing-multiple-dyads&#34;&gt;Preprocessing Multiple Dyads&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;processed_convs &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;preprocess_dyads&lt;/span&gt;(dyad_example_data)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;comprehensive-similarity-analysis&#34;&gt;Comprehensive Similarity Analysis&lt;/h3&gt;
+&lt;p&gt;Calculate all similarity measures across multiple dyads:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Topic similarity using multilevel modeling&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_sim_dyads&lt;/span&gt;(processed_convs, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lda&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Lexical similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lexical_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;lexical_sim_dyads&lt;/span&gt;(processed_convs, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Semantic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;semantic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;semantic_sim_dyads&lt;/span&gt;(processed_convs, method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;tfidf&amp;#34;&lt;/span&gt;, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Structural similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;structural_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;structural_sim_dyads&lt;/span&gt;(processed_convs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Stylistic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;stylistic_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;stylistic_sim_dyads&lt;/span&gt;(processed_convs, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Sentiment similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sentiment_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;sentiment_sim_dyads&lt;/span&gt;(processed_convs, window_size = &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Participant balance&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;participant_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;participant_sim_dyads&lt;/span&gt;(processed_convs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Timing patterns&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;timing_sim &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;timing_sim_dyads&lt;/span&gt;(processed_convs)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;visualizing-multi-dyad-results&#34;&gt;Visualizing Multi-Dyad Results&lt;/h3&gt;
+&lt;p&gt;Create comprehensive comparison plots:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Prepare comparison data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;comparison_df &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  dyad = &lt;span style=&#34;color:#0a0&#34;&gt;names&lt;/span&gt;(topic_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  topic = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(topic_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  lexical = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(lexical_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  semantic = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(semantic_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  structural = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(structural_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  stylistic = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(stylistic_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sentiment = &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(sentiment_sim$similarities_by_dyad, mean),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  participant = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(participant_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  timing = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(timing_sim$similarities_by_dyad)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Reshape for plotting&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;comparison_long &amp;lt;- reshape2::&lt;span style=&#34;color:#0a0&#34;&gt;melt&lt;/span&gt;(comparison_df, id.vars = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;dyad&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Create boxplot comparison&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(comparison_long, &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = variable, y = value, fill = variable)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_boxplot&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Comparison of Similarity Measures Across Dyads&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Measure&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme&lt;/span&gt;(axis.text.x = &lt;span style=&#34;color:#0a0&#34;&gt;element_text&lt;/span&gt;(angle = &lt;span style=&#34;color:#099&#34;&gt;45&lt;/span&gt;, hjust = &lt;span style=&#34;color:#099&#34;&gt;1&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        legend.position = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sim_measure_comp.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h3 id=&#34;topic-similarity-trajectory&#34;&gt;Topic Similarity Trajectory&lt;/h3&gt;
+&lt;p&gt;Visualize how topic similarity changes within each dyad:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Prepare data for topic similarity trajectories&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;topic_sim_df &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;data.frame&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  dyad = &lt;span style=&#34;color:#0a0&#34;&gt;rep&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;names&lt;/span&gt;(topic_sim$similarities_by_dyad), 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             &lt;span style=&#34;color:#0a0&#34;&gt;sapply&lt;/span&gt;(topic_sim$similarities_by_dyad, length)),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  similarity = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(topic_sim$similarities_by_dyad),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  index = &lt;span style=&#34;color:#0a0&#34;&gt;unlist&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;lapply&lt;/span&gt;(topic_sim$similarities_by_dyad, seq_along))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Create trajectory plot&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;ggplot&lt;/span&gt;(topic_sim_df, &lt;span style=&#34;color:#0a0&#34;&gt;aes&lt;/span&gt;(x = index, y = similarity, color = dyad)) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_line&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;geom_point&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;facet_wrap&lt;/span&gt;(~dyad, ncol = &lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;labs&lt;/span&gt;(title = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Topic Similarity Trajectories Across Dyads&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Conversation Sequence&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       y = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Similarity Score&amp;#34;&lt;/span&gt;) +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme_minimal&lt;/span&gt;() +
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0a0&#34;&gt;theme&lt;/span&gt;(legend.position = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sim_scores.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;analyzing-long-speeches&#34;&gt;Analyzing Long Speeches&lt;/h2&gt;
+&lt;h3 id=&#34;loading-speech-data&#34;&gt;Loading Speech Data&lt;/h3&gt;
+&lt;p&gt;For comparing longer texts like speeches:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;data_path &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;system.file&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;extdata&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;speeches_data.Rdata&amp;#34;&lt;/span&gt;, package = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;conversim&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;load&lt;/span&gt;(data_path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Preview the speech data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;summary&lt;/span&gt;(speeches_data))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;speaker_id            text          
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Length:&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;           Length:&lt;span style=&#34;color:#099&#34;&gt;2&lt;/span&gt;          
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Class :character   Class :character  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Mode  :character   Mode  :character
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;advanced-similarity-measures&#34;&gt;Advanced Similarity Measures&lt;/h3&gt;
+&lt;h4 id=&#34;topic-similarity-with-multiple-methods&#34;&gt;Topic Similarity with Multiple Methods&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# LDA-based topic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lda_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                   method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lda&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# LSA-based topic similarity  &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lsa_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;topic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                   method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;lsa&amp;#34;&lt;/span&gt;, num_topics = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LDA Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(lda_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LDA Similarity: 0.169&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LSA Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(lsa_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;LSA Similarity: 1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;comprehensive-semantic-analysis&#34;&gt;Comprehensive Semantic Analysis&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# TF-IDF semantic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tfidf_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;semantic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                         method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;tfidf&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#aaa;font-style:italic&#34;&gt;# Word2Vec semantic similarity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;word2vec_similarity &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;semantic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2], 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                            method = &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;word2vec&amp;#34;&lt;/span&gt;, dim = &lt;span style=&#34;color:#099&#34;&gt;100&lt;/span&gt;, iter = &lt;span style=&#34;color:#099&#34;&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;TF-IDF Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(tfidf_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;TF-IDF Similarity: 0.5&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Word2Vec Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(word2vec_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Word2Vec Similarity: 0.999&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;detailed-stylistic-analysis&#34;&gt;Detailed Stylistic Analysis&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-r&#34; data-lang=&#34;r&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;style_analysis &amp;lt;- &lt;span style=&#34;color:#0a0&#34;&gt;stylistic_similarity&lt;/span&gt;(speeches_data$text[1], speeches_data$text[2])
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Stylistic Features Comparison:&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Stylistic Features Comparison:&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 1 TTR:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(style_analysis$text1_features[&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;ttr&amp;#34;&lt;/span&gt;], &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 1 TTR: 0.644&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 2 TTR:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(style_analysis$text2_features[&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;ttr&amp;#34;&lt;/span&gt;], &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Text 2 TTR: 0.549&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0a0&#34;&gt;paste&lt;/span&gt;(&lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Overall Stylistic Similarity:&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0a0&#34;&gt;round&lt;/span&gt;(style_analysis$overall_similarity, &lt;span style=&#34;color:#099&#34;&gt;3&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[1] &lt;span style=&#34;color:#a50&#34;&gt;&amp;#34;Overall Stylistic Similarity: 0.892&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;key-similarity-measures-explained&#34;&gt;Key Similarity Measures Explained&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Measure&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Description&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Best For&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Topic&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Measures thematic coherence using LDA or LSA&lt;/td&gt;
+&lt;td&gt;Analyzing content alignment and subject matter similarity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Lexical&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Calculates shared vocabulary between speakers&lt;/td&gt;
+&lt;td&gt;Studying word choice and linguistic alignment&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Semantic&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Measures meaning similarity using vector representations&lt;/td&gt;
+&lt;td&gt;Understanding conceptual similarity beyond word overlap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Structural&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Analyzes conversation format and turn-taking patterns&lt;/td&gt;
+&lt;td&gt;Examining dialogue structure and interaction patterns&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Stylistic&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Compares writing style features (TTR, sentence length, readability)&lt;/td&gt;
+&lt;td&gt;Studying linguistic style and complexity&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Sentiment&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Measures emotional tone alignment&lt;/td&gt;
+&lt;td&gt;Analyzing emotional synchrony in conversations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Participant&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Evaluates speaker balance and participation equality&lt;/td&gt;
+&lt;td&gt;Understanding conversation dynamics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Timing&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Analyzes temporal patterns in conversation flow&lt;/td&gt;
+&lt;td&gt;Studying rhythm and pacing in dialogue&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;multilevel-modeling-benefits&#34;&gt;Multilevel Modeling Benefits&lt;/h2&gt;
+&lt;p&gt;The package uses multilevel modeling to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Account for dyad-level variation in similarity patterns&lt;/li&gt;
+&lt;li&gt;Provide more accurate overall averages across conversations&lt;/li&gt;
+&lt;li&gt;Handle nested data structures common in conversation analysis&lt;/li&gt;
+&lt;li&gt;Enable statistical inference about conversation patterns&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h2&gt;
+&lt;h3 id=&#34;window-size-selection&#34;&gt;Window Size Selection&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Small windows (2-3)&lt;/strong&gt;: Capture immediate conversational alignment&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Medium windows (4-6)&lt;/strong&gt;: Balance local and global patterns&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Large windows (7+)&lt;/strong&gt;: Focus on broader conversational themes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;method-selection&#34;&gt;Method Selection&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TF-IDF&lt;/strong&gt;: Fast, interpretable, good for lexical analysis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Word2Vec&lt;/strong&gt;: Captures semantic relationships, better for meaning&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LDA&lt;/strong&gt;: Excellent for topic modeling with multiple themes&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LSA&lt;/strong&gt;: Good for discovering latent semantic structures&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;data-preprocessing&#34;&gt;Data Preprocessing&lt;/h3&gt;
+&lt;p&gt;Always preprocess your text data by:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Converting to lowercase&lt;/li&gt;
+&lt;li&gt;Removing punctuation and numbers&lt;/li&gt;
+&lt;li&gt;Normalizing whitespace&lt;/li&gt;
+&lt;li&gt;Filtering empty entries&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The conversim package provides a comprehensive toolkit for analyzing conversation similarities across multiple dimensions. Whether studying therapeutic dialogues, educational interactions, or social conversations, these tools enable researchers to quantify and visualize the complex dynamics of human communication.&lt;/p&gt;
+&lt;p&gt;The package&amp;rsquo;s strength lies in its ability to capture different aspects of conversational similarity simultaneously, providing a holistic view of dialogue dynamics that can inform research in linguistics, psychology, communication studies, and computational social science.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;This tutorial demonstrates the core functionality of the conversim package for conversation analysis in R.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Goodreader: Scrape and Analyze &#39;Goodreads&#39; Book Data</title>
+      <link>//localhost:1313/posts/goodreader_r/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 &#43;0000</pubDate>
+      <guid>//localhost:1313/posts/goodreader_r/</guid>
+      <description>&lt;p&gt;&lt;em&gt;Goodreader&lt;/em&gt; is a comprehensive toolkit for scraping and analyzing book data from Goodreads.&lt;/p&gt;
+&lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and loading the package&lt;/h2&gt;
+&lt;p&gt;Install the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;Goodreader&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And load the package:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;library(Goodreader)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;searching-for-books-on-goodreads&#34;&gt;Searching for Books on Goodreads&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function allows you to search for books on Goodreads based on various criteria.&lt;/p&gt;
+&lt;p&gt;The code below searches for books that include the term “parenting” in the title and returned 10 books sorted by readers’ ratings&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_df &amp;lt;- search_goodreads(search_term = &amp;quot;parenting&amp;quot;, search_in = &amp;quot;title&amp;quot;, num_books = 10, sort_by = &amp;quot;ratings&amp;quot;)
+summary(parent_df)
+#&amp;gt;   title              author            book_id         
+#&amp;gt; Length:10          Length:10          Length:10         
+#&amp;gt; Class :character   Class :character   Class :character  
+#&amp;gt; Mode  :character   Mode  :character   Mode  :character  
+
+#&amp;gt;     url               ratings     
+#&amp;gt; Length:10          Min.   : 8427  
+#&amp;gt; Class :character   1st Qu.:11744  
+#&amp;gt; Mode  :character   Median :13662  
+#&amp;gt;                    Mean   :19757  
+#&amp;gt;                    3rd Qu.:13784  
+#&amp;gt;                    Max.   :69591  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also search author’s name:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;ratings&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;search_goodreads()&lt;/code&gt; function includes a &lt;code&gt;sort_by&lt;/code&gt; that sorts the results either by ratings or published_year:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;search_goodreads(search_term = &amp;quot;J.K. Rowling&amp;quot;, search_in = &amp;quot;author&amp;quot;, num_books = 5, sort_by = &amp;quot;published_year&amp;quot;) 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;scrape-book-metadata-and-reviews&#34;&gt;Scrape book metadata and reviews&lt;/h2&gt;
+&lt;p&gt;After the books are found, save their IDs to a text file. These IDs are used for extracting book metadata and reviews:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;get_book_ids(input_data = parent_df, file_name = &amp;quot;parent_books.txt&amp;quot;) #the book IDs are now stored in a text file named “parent_books”
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Book metadata can then be scraped:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookinfo &amp;lt;- scrape_books(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, use_parallel = FALSE)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To speed up the scraping process, we can turn on the parallel process: &lt;code&gt;use_parallel = TRUE&lt;/code&gt;, and specify the number of cores for the parallel process (e.g., &lt;code&gt;num_cores = 8&lt;/code&gt;)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;parent_bookreviews &amp;lt;- scrape_reviews(book_ids_path = &amp;quot;parent_books.txt&amp;quot;, num_reviews = 10, use_parallel = FALSE) #users can also turn on parallel process to speed up the process
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;conduct-sentiment-analysis&#34;&gt;Conduct sentiment analysis&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;analyze_sentiment()&lt;/code&gt; function calculates the sentiment score of each review based on the lexicon chosen by the user. Available options for lexicon are afinn, bing, and nrc. Basic negation scope detection was implemented (e.g., not happy is labeled as negative emotion and is assigned with a negative score).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_results &amp;lt;- analyze_sentiment(parent_bookreviews, lexicon = &amp;quot;afinn&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;average_book_sentiment()&lt;/code&gt; function calculates the average sentiment score for each book.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ave_sentiment &amp;lt;- average_book_sentiment(sentiment_results)
+summary(ave_sentiment)
+#&amp;gt;    book_id          avg_sentiment  
+#&amp;gt;  Length:10          Min.   : 4.40  
+#&amp;gt;  Class :character   1st Qu.: 7.25  
+#&amp;gt;  Mode  :character   Median :12.86  
+#&amp;gt;                     Mean   :12.95  
+#&amp;gt;                     3rd Qu.:14.65  
+#&amp;gt;                     Max.   :27.30
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The sentiment scores can be plotted as a histogram:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_histogram(sentiment_results)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_hist.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Or a trend of average sentiment score over time:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sentiment_trend(sentiment_results, time_period = &amp;quot;year&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;sentiment_trend.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;perform-topic-modeling&#34;&gt;Perform topic modeling&lt;/h2&gt;
+&lt;p&gt;Apply topic modeling to the reviews data:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;reviews_topic &amp;lt;- model_topics(parent_bookreviews, num_topics = 3, num_terms = 10, english_only = TRUE)
+#&amp;gt; Topic 1:  
+#&amp;gt; parent, children, need, one, way, good, get, work, dont, give 
+#&amp;gt; 
+#&amp;gt; Topic 2:  
+#&amp;gt; parent, child, book, emot, feel, help, also, can, children, use 
+#&amp;gt; 
+#&amp;gt; Topic 3:  
+#&amp;gt; book, just, kid, think, read, like, time, say, realli, much
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plot the top terms by topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;plot_topic_terms(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;topic_terms.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Create a word cloud for each topic:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gen_topic_clouds(reviews_topic)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Topic 1:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 2:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic2.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;p&gt;Topic 3:&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Topic3.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;other-utility-functions&#34;&gt;Other utility functions&lt;/h2&gt;
+&lt;p&gt;The following table shows other utility functions to extract book-related information&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;Function&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Output&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;Description&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_ids()&lt;/td&gt;
+&lt;td&gt;Text file&lt;/td&gt;
+&lt;td&gt;Retrieve the book IDs from the input data and save to a text file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_book_summary()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the summary for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_author_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the author information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_genres()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Extract the genres for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_published_time()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the published time for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_num_pages()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the number of pages for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_format_info()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the format information for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;get_rating_distribution()&lt;/td&gt;
+&lt;td&gt;List&lt;/td&gt;
+&lt;td&gt;Retrieve the rating distribution for each book&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;p&gt;📌 &lt;em&gt;This post is syndicated on &lt;a href=&#34;https://www.r-bloggers.com&#34; target=&#34;_blank&#34;&gt;R-bloggers&lt;/a&gt;
+ — a community hub for R news and tutorials.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis</title>
       <link>//localhost:1313/papers/paper2/</link>
-      <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 04 Apr 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/papers/paper2/</guid>
-      <description>This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time.</description>
+      <description>&lt;h5 id=&#34;relevant-links&#34;&gt;Relevant Links&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://journals.sagepub.com/doi/10.1177/01650254241242662&#34; target=&#34;_blank&#34;&gt;Paper&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://osf.io/mjrt6/?view_only=d2d18e16274a4ab7bdf3587eae35be02&#34; target=&#34;_blank&#34;&gt;Code and data&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;abstract&#34;&gt;Abstract&lt;/h5&gt;
+&lt;p&gt;This study utilized text mining and sentiment analysis on mother-child conversations to examine the developmental trends in their interactions from early to middle childhood. The findings revealed a shift towards more balanced interactions as children age, with increased turn-taking dynamics and linguistic congruence, as well as a complex interdependence of expressed emotions between mothers and children over time.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;figure-1-the-smooth-effect-of-mother-positive-emotion-on-child-positive-emotion&#34;&gt;Figure 1: The Smooth Effect of Mother Positive Emotion on Child Positive Emotion&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper2_1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;h5 id=&#34;figure-2-the-smooth-effect-of-mother-negative-emotion-on-child-negative-emotion&#34;&gt;Figure 2: The Smooth Effect of Mother Negative Emotion on Child Negative Emotion&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper2_2.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;citation&#34;&gt;Citation&lt;/h5&gt;
+&lt;p&gt;Liu, C., &amp;amp; Waltz, K. (2024). Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis. &lt;em&gt;International Journal of Behavioral Development&lt;/em&gt;, 0(0). &lt;a href=&#34;https://doi.org/10.1177/01650254241242662&#34; target=&#34;_blank&#34;&gt;https://doi.org/10.1177/01650254241242662&lt;/a&gt;
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-BibTeX&#34; data-lang=&#34;BibTeX&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;@article&lt;/span&gt;{doi:10.1177/01650254241242662,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Chao Liu and Kira Waltz}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;title&lt;/span&gt; =&lt;span style=&#34;color:#a50&#34;&gt;{Unveiling the tapestry of mother–child interactions through text mining and sentiment analysis}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;journal&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{International Journal of Behavioral Development}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;volume&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;number&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;pages&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{01650254241242662}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;year&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{0}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;doi&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{10.1177/01650254241242662}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;URL&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{https://doi.org/10.1177/01650254241242662}&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+</description>
     </item>
+    
     <item>
       <title>Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions</title>
       <link>//localhost:1313/papers/paper1/</link>
-      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 02 Feb 2024 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/papers/paper1/</guid>
-      <description>This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.</description>
+      <description>&lt;hr&gt;
+&lt;h5 id=&#34;relevant-links&#34;&gt;Relevant Links&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/full/10.1111/sode.12733&#34; target=&#34;_blank&#34;&gt;Paper&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://osf.io/?view_only=c96818e4b23348ceaa6db76081288d7c&#34; target=&#34;_blank&#34;&gt;Code and data&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;abstract&#34;&gt;Abstract&lt;/h5&gt;
+&lt;p&gt;This study employed text mining and sentiment analysis on over 8,800 mother-child conversation transcripts to examine dynamic patterns of emotion expression, revealing distinct temporal trends in emotional sentiment for both mothers and children. The research identified clusters of mothers and children with varying emotion expression patterns, and demonstrated how mother-child polarity score differences fluctuated throughout conversations, showcasing the potential of these analytical methods for understanding parent-child interactions and informing relationship-focused interventions.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;figure-1-the-clusters-of-mother-polarity-and-child-polarity-over-time&#34;&gt;Figure 1: The Clusters of Mother Polarity and Child Polarity over time&lt;/h5&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;paper1.png&#34; alt=&#34;&#34;  /&gt;
+&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&#34;citation&#34;&gt;Citation&lt;/h5&gt;
+&lt;p&gt;Liu, C., &amp;amp; Chen, C. (2024). Text Mining and Sentiment Analysis: A New Lens to Explore the Emotion Dynamics of Mother-Child Interactions. &lt;em&gt;Social Development&lt;/em&gt;, 33, e12733. &lt;a href=&#34;https://doi.org/10.1111/sode.12733&#34; target=&#34;_blank&#34;&gt;https://doi.org/10.1111/sode.12733&lt;/a&gt;
+.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-BibTeX&#34; data-lang=&#34;BibTeX&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a0;text-decoration:underline&#34;&gt;@article&lt;/span&gt;{https://doi.org/10.1111/sode.12733,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Liu, Chao and Chen, Charis}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;title&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Text mining and sentiment analysis: A new lens to explore the emotion dynamics of mother-child interactions}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;journal&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{Social Development}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;volume&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{33}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;number&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{3}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;pages&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{e12733}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;keywords&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{cluster analysis, emotion dynamics, generalized additive models, mother-child interactions, piecewise linear regression, sentiment analysis, text mining}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;doi&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{https://doi.org/10.1111/sode.12733}&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1e90ff&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#a50&#34;&gt;{https://onlinelibrary.wiley.com/doi/abs/10.1111/sode.12733}&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+</description>
     </item>
+    
   </channel>
 </rss>
