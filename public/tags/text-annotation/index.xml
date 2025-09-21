@@ -6,13 +6,13 @@
     <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 20 Sep 2025 23:54:17 -0400</lastBuildDate>
     <atom:link href="//localhost:1313/tags/text-annotation/" rel="self" type="application/rss+xml"/>
     
     <item>
-      <title>textAnnotatoR: Practical Example - Qualitative Analysis with textAnnotatoR</title>
+      <title>textAnnotatoR: Qualitative Analysis with textAnnotatoR</title>
       <link>//localhost:1313/posts/textannotator/</link>
-      <pubDate>Sun, 01 Sep 2024 00:00:00 &#43;0000</pubDate>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</pubDate>
       <guid>//localhost:1313/posts/textannotator/</guid>
       <description>&lt;p&gt;&lt;em&gt;textAnnotatoR&lt;/em&gt; is an interactive text annotation tool built with Shiny that provides a graphical user interface for coding text documents, managing code hierarchies, creating memos, and analyzing coding patterns.&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -49,7 +49,7 @@ annotate_gui()
 &lt;li&gt;Custom Location: A directory of your choice&lt;/li&gt;
 &lt;li&gt;Project-specific Location: A customizable directory unique to each project&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/storage_location.png&#34; alt=&#34;Storage Location Dialog&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;storage_location.png&#34; alt=&#34;Storage Location Dialog&#34;  /&gt;
 &lt;/p&gt;
 &lt;h3 id=&#34;understanding-the-interface&#34;&gt;Understanding the Interface&lt;/h3&gt;
 &lt;p&gt;When textAnnotatoR launches, you&amp;rsquo;ll see several tabs:&lt;/p&gt;
@@ -65,10 +65,10 @@ annotate_gui()
 &lt;p&gt;For this example, we&amp;rsquo;ll be analyzing fictional interview responses about remote work experiences. The example demonstrates how you might use textAnnotatoR in a real qualitative research context.&lt;/p&gt;
 &lt;h3 id=&#34;step-1-creating-a-new-project&#34;&gt;Step 1: Creating a New Project&lt;/h3&gt;
 &lt;p&gt;When you first launch textAnnotatoR, it automatically creates a blank project. However, if you want to start a new project, click &amp;ldquo;New Project&amp;rdquo; in the top toolbar.&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/new_project_creation.png&#34; alt=&#34;New Project Creation&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;new_project_creation.png&#34; alt=&#34;New Project Creation&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;If you have unsaved changes in your current project, you&amp;rsquo;ll see a confirmation dialog asking if you want to save your current project first:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_before_new.png&#34; alt=&#34;Save Before New Dialog&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;save_before_new.png&#34; alt=&#34;Save Before New Dialog&#34;  /&gt;
 &lt;/p&gt;
 &lt;h3 id=&#34;step-2-importing-text-data&#34;&gt;Step 2: Importing Text Data&lt;/h3&gt;
 &lt;p&gt;For this example, we&amp;rsquo;ll use the following interview excerpt. You can copy this text into a file named &lt;code&gt;remote_work_interview.txt&lt;/code&gt;:&lt;/p&gt;
@@ -86,10 +86,10 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;step-3-saving-your-project&#34;&gt;Step 3: Saving Your Project&lt;/h3&gt;
 &lt;p&gt;It&amp;rsquo;s important to save your project regularly. To do that, click on &amp;ldquo;Save Project&amp;rdquo;:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_project.png&#34; alt=&#34;Save Project&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;save_project.png&#34; alt=&#34;Save Project&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;Then, a dialog will appear:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_project_dialog.png&#34; alt=&#34;Save Project Dialog&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;save_project_dialog.png&#34; alt=&#34;Save Project Dialog&#34;  /&gt;
 &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Type in your project name&lt;/li&gt;
@@ -107,7 +107,7 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;li&gt;Add a memo: &amp;ldquo;Initial challenge in transition to remote work&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;Click &amp;ldquo;Save&amp;rdquo; to save the code&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/Save_code.gif&#34; alt=&#34;Save Code Animation&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Save_code.gif&#34; alt=&#34;Save Code Animation&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;Continue this process for other notable segments in the text. For example:&lt;/p&gt;
 &lt;ul&gt;
@@ -116,7 +116,7 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;li&gt;Code discussions of missed impromptu conversations as &amp;ldquo;Social Isolation&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Your annotated text will begin to look like this, with different colored highlights representing different codes:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/Fig3.png&#34; alt=&#34;Annotated Text Example&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Fig3.png&#34; alt=&#34;Annotated Text Example&#34;  /&gt;
 &lt;/p&gt;
 &lt;h4 id=&#34;applying-existing-codes&#34;&gt;Applying Existing Codes&lt;/h4&gt;
 &lt;p&gt;Once you&amp;rsquo;ve created some codes, you can apply them to new text segments:&lt;/p&gt;
@@ -125,7 +125,7 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;li&gt;Click on &amp;ldquo;Apply Code&amp;rdquo; in the side panel&lt;/li&gt;
 &lt;li&gt;Choose the code you want to apply from the dropdown menu&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/Fig4.gif&#34; alt=&#34;Apply Code Animation&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;Fig4.gif&#34; alt=&#34;Apply Code Animation&#34;  /&gt;
 &lt;/p&gt;
 &lt;h4 id=&#34;managing-codes&#34;&gt;Managing Codes&lt;/h4&gt;
 &lt;p&gt;As your coding progresses, you&amp;rsquo;ll want to manage your codes efficiently. You can click on the highlighted text to:&lt;/p&gt;
@@ -135,7 +135,7 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;li&gt;Rename code&lt;/li&gt;
 &lt;li&gt;Delete code&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/edit_code.png&#34; alt=&#34;Edit Code Options&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;edit_code.png&#34; alt=&#34;Edit Code Options&#34;  /&gt;
 &lt;/p&gt;
 &lt;h4 id=&#34;merging-similar-codes&#34;&gt;Merging Similar Codes&lt;/h4&gt;
 &lt;p&gt;In some instances, you might find that some of your codes are conceptually similar or overlapping. textAnnotatoR provides a &amp;ldquo;Merge Codes&amp;rdquo; feature to consolidate these:&lt;/p&gt;
@@ -150,7 +150,7 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/merge_codes_dialog.png&#34; alt=&#34;Merge Codes Dialog&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;merge_codes_dialog.png&#34; alt=&#34;Merge Codes Dialog&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;This feature is particularly useful when:&lt;/p&gt;
 &lt;ul&gt;
@@ -160,10 +160,10 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;/ul&gt;
 &lt;h3 id=&#34;step-5-loading-your-project&#34;&gt;Step 5: Loading Your Project&lt;/h3&gt;
 &lt;p&gt;If you need to continue your work later, you&amp;rsquo;ll need to load your saved project. Click &amp;ldquo;Load Project&amp;rdquo;:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/load_project.png&#34; alt=&#34;Load Project&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;load_project.png&#34; alt=&#34;Load Project&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;Then a dialog will appear:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/load_project_dialog.png&#34; alt=&#34;Load Project Dialog&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;load_project_dialog.png&#34; alt=&#34;Load Project Dialog&#34;  /&gt;
 &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Click &amp;ldquo;Choose Project File&amp;rdquo; to navigate to your saved project file&lt;/li&gt;
@@ -176,12 +176,12 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;p&gt;Once you&amp;rsquo;ve coded the entire interview, use the analysis tools to examine patterns:&lt;/p&gt;
 &lt;h4 id=&#34;code-frequency-analysis&#34;&gt;Code Frequency Analysis&lt;/h4&gt;
 &lt;p&gt;Go to the &amp;ldquo;Analysis&amp;rdquo; tab and click &amp;ldquo;Code Frequency&amp;rdquo;. This will show which codes were mentioned most often:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/code_frequency.png&#34; alt=&#34;Code Frequency Analysis&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;code_frequency.png&#34; alt=&#34;Code Frequency Analysis&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;In our example, we might see that &amp;ldquo;Making adjustment&amp;rdquo; and &amp;ldquo;Technology&amp;rdquo; appear most frequently, indicating these are significant aspects of the remote work experience for our participant.&lt;/p&gt;
 &lt;h4 id=&#34;code-co-occurrence-analysis&#34;&gt;Code Co-occurrence Analysis&lt;/h4&gt;
 &lt;p&gt;Click &amp;ldquo;Code Co-occurrence&amp;rdquo; to see relationships between different codes:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/co_occurrence.png&#34; alt=&#34;Co-occurrence Analysis&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;co_occurrence.png&#34; alt=&#34;Co-occurrence Analysis&#34;  /&gt;
 &lt;/p&gt;
 &lt;p&gt;This visualization might reveal that &amp;ldquo;Boundary difficulty&amp;rdquo; and &amp;ldquo;Family friendly&amp;rdquo; frequently co-occur, suggesting a relationship between these issues.&lt;/p&gt;
 &lt;h4 id=&#34;text-statistics&#34;&gt;Text Statistics&lt;/h4&gt;
@@ -216,7 +216,7 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;When finished, your code hierarchy should look something like this:&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/code_and_theme_hierarchy.png&#34; alt=&#34;Code and Theme Hierarchy&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;code_and_theme_hierarchy.png&#34; alt=&#34;Code and Theme Hierarchy&#34;  /&gt;
 &lt;/p&gt;
 &lt;h3 id=&#34;step-8-exporting-results&#34;&gt;Step 8: Exporting Results&lt;/h3&gt;
 &lt;h4 id=&#34;saving-annotations&#34;&gt;Saving Annotations&lt;/h4&gt;
@@ -227,7 +227,7 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;li&gt;Choose CSV format&lt;/li&gt;
 &lt;li&gt;Name your file &amp;ldquo;remote_work_analysis.csv&amp;rdquo;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/save_records.png&#34; alt=&#34;Save Records&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;save_records.png&#34; alt=&#34;Save Records&#34;  /&gt;
 &lt;/p&gt;
 &lt;h4 id=&#34;exporting-annotated-text&#34;&gt;Exporting Annotated Text&lt;/h4&gt;
 &lt;p&gt;To save the annotated text with all coding highlights:&lt;/p&gt;
@@ -245,9 +245,9 @@ Participant: It&#39;s a double-edged sword. I have more flexibility and time wit
 &lt;li&gt;Upload both CSV files&lt;/li&gt;
 &lt;li&gt;Run the comparison to see inter-coder agreement and differences&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/comparison_analysis.png&#34; alt=&#34;Comparison Analysis 1&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;comparison_analysis.png&#34; alt=&#34;Comparison Analysis 1&#34;  /&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;../man/figures/comparison_analysis2.png&#34; alt=&#34;Comparison Analysis 2&#34;  /&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;comparison_analysis2.png&#34; alt=&#34;Comparison Analysis 2&#34;  /&gt;
 &lt;/p&gt;
 &lt;h2 id=&#34;getting-the-sample-project&#34;&gt;Getting the Sample Project&lt;/h2&gt;
 &lt;p&gt;To practice with this exact example, you can download a starter project from the textAnnotatoR GitHub repository:&lt;/p&gt;

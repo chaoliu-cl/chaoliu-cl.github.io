@@ -25,6 +25,10 @@ UseHugoToc: true
 
 *textAnnotatoR* is an interactive text annotation tool built with Shiny that provides a graphical user interface for coding text documents, managing code hierarchies, creating memos, and analyzing coding patterns.
 
+Please cite the following paper if you use *textAnnotatoR*:
+Liu, C., (2025). textAnnotatoR: An Interactive Text Annotation Tool with 'shiny' GUI. Journal of Open Source Software, 10(113), 7971, https://doi.org/10.21105/joss.07971
+
+
 ## Introduction
 
 This guide provides a step-by-step practical example of using the textAnnotatoR package for qualitative analysis. We'll work through a complete example project, from importing text to analyzing coded content. You'll learn how to:

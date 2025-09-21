@@ -2,17 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>//localhost:1313/posts/textannotator/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>//localhost:1313/posts/conversim_r/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/posts/goodreader_r/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/textannotator/</loc>
-    <lastmod>2024-09-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>//localhost:1313/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/coding/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/posts/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/qualitative-analysis/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/r/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/shiny/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/text-annotation/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>//localhost:1313/tags/textannotator/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/conversation-analysis/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
@@ -20,23 +44,11 @@
     <loc>//localhost:1313/tags/natural-language-processing/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/r/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>//localhost:1313/tags/similarity-metrics/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/text-mining/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/coding/</loc>
-    <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/tags/data-scraping/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
@@ -44,19 +56,7 @@
     <loc>//localhost:1313/tags/goodreads/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/qualitative-analysis/</loc>
-    <lastmod>2024-09-01T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>//localhost:1313/tags/sentiment-analysis/</loc>
-    <lastmod>2024-09-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/shiny/</loc>
-    <lastmod>2024-09-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/text-annotation/</loc>
-    <lastmod>2024-09-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/textannotator/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>//localhost:1313/about/</loc>

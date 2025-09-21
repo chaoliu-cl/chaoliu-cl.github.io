@@ -6,7 +6,7 @@
     <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 01 Sep 2025 22:45:51 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 20 Sep 2025 23:54:17 -0400</lastBuildDate>
     <atom:link href="//localhost:1313/tags/natural-language-processing/" rel="self" type="application/rss+xml"/>
     
     <item>
@@ -388,7 +388,10 @@
 &lt;p&gt;The conversim package provides a comprehensive toolkit for analyzing conversation similarities across multiple dimensions. Whether studying therapeutic dialogues, educational interactions, or social conversations, these tools enable researchers to quantify and visualize the complex dynamics of human communication.&lt;/p&gt;
 &lt;p&gt;The package&amp;rsquo;s strength lies in its ability to capture different aspects of conversational similarity simultaneously, providing a holistic view of dialogue dynamics that can inform research in linguistics, psychology, communication studies, and computational social science.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;This tutorial demonstrates the core functionality of the conversim package for conversation analysis in R.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;📌 &lt;em&gt;For more advanced features and updates, visit the &lt;a href=&#34;https://github.com/chaoliu-cl/conversim&#34; target=&#34;_blank&#34;&gt;textAnnotatoR GitHub repository&lt;/a&gt;
+.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;📌 &lt;em&gt;This post is syndicated on &lt;a href=&#34;https://www.r-bloggers.com&#34; target=&#34;_blank&#34;&gt;R-bloggers&lt;/a&gt;
+ — a community hub for R news and tutorials.&lt;/em&gt;&lt;/p&gt;
 </description>
     </item>
     
