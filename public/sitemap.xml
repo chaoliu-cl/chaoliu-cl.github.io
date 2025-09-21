@@ -2,168 +2,168 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/posts/textannotator/</loc>
+    <loc>http://localhost:1313/posts/textannotator/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/conversim_r/</loc>
+    <loc>http://localhost:1313/posts/conversim_r/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/goodreader_r/</loc>
+    <loc>http://localhost:1313/posts/goodreader_r/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/coding/</loc>
+    <loc>http://localhost:1313/tags/coding/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/qualitative-analysis/</loc>
+    <loc>http://localhost:1313/tags/qualitative-analysis/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/r/</loc>
+    <loc>http://localhost:1313/tags/r/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/shiny/</loc>
+    <loc>http://localhost:1313/tags/shiny/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/text-annotation/</loc>
+    <loc>http://localhost:1313/tags/text-annotation/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/textannotator/</loc>
+    <loc>http://localhost:1313/tags/textannotator/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/conversation-analysis/</loc>
+    <loc>http://localhost:1313/tags/conversation-analysis/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/natural-language-processing/</loc>
+    <loc>http://localhost:1313/tags/natural-language-processing/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/similarity-metrics/</loc>
+    <loc>http://localhost:1313/tags/similarity-metrics/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/text-mining/</loc>
+    <loc>http://localhost:1313/tags/text-mining/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/data-scraping/</loc>
+    <loc>http://localhost:1313/tags/data-scraping/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/goodreads/</loc>
+    <loc>http://localhost:1313/tags/goodreads/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/sentiment-analysis/</loc>
+    <loc>http://localhost:1313/tags/sentiment-analysis/</loc>
     <lastmod>2024-09-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2024-08-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/projects/</loc>
+    <loc>http://localhost:1313/projects/</loc>
     <lastmod>2024-08-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/location/</loc>
+    <loc>http://localhost:1313/location/</loc>
     <lastmod>2024-08-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/publications/</loc>
+    <loc>http://localhost:1313/publications/</loc>
     <lastmod>2024-08-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/child-development/</loc>
+    <loc>http://localhost:1313/tags/child-development/</loc>
     <lastmod>2024-07-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/papers/paper3/</loc>
+    <loc>http://localhost:1313/papers/paper3/</loc>
     <lastmod>2024-07-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/log-linear-analysis/</loc>
+    <loc>http://localhost:1313/tags/log-linear-analysis/</loc>
     <lastmod>2024-07-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/papers/</loc>
+    <loc>http://localhost:1313/papers/</loc>
     <lastmod>2024-07-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/parent-child-play/</loc>
+    <loc>http://localhost:1313/tags/parent-child-play/</loc>
     <lastmod>2024-07-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/officehours/</loc>
+    <loc>http://localhost:1313/officehours/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/mother-child-interaction/</loc>
+    <loc>http://localhost:1313/tags/mother-child-interaction/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/papers/paper2/</loc>
+    <loc>http://localhost:1313/papers/paper2/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/papers/paper1/</loc>
+    <loc>http://localhost:1313/papers/paper1/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/data/</loc>
+    <loc>http://localhost:1313/data/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/dataset/</loc>
+    <loc>http://localhost:1313/tags/dataset/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/french/</loc>
+    <loc>http://localhost:1313/tags/french/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/irregular-verbs/</loc>
+    <loc>http://localhost:1313/tags/irregular-verbs/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/italian/</loc>
+    <loc>http://localhost:1313/tags/italian/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/data/data1/</loc>
+    <loc>http://localhost:1313/data/data1/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/philology/</loc>
+    <loc>http://localhost:1313/tags/philology/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/portuguese/</loc>
+    <loc>http://localhost:1313/tags/portuguese/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/python/</loc>
+    <loc>http://localhost:1313/tags/python/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/romance-languages/</loc>
+    <loc>http://localhost:1313/tags/romance-languages/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/simulations/</loc>
+    <loc>http://localhost:1313/tags/simulations/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/spanish/</loc>
+    <loc>http://localhost:1313/tags/spanish/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/courses/</loc>
+    <loc>http://localhost:1313/courses/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/courses/course1/</loc>
+    <loc>http://localhost:1313/courses/course1/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/books/</loc>
+    <loc>http://localhost:1313/books/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/portugese/</loc>
+    <loc>http://localhost:1313/tags/portugese/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/books/book1/</loc>
+    <loc>http://localhost:1313/books/book1/</loc>
     <lastmod>2024-05-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/celtic-languages/</loc>
+    <loc>http://localhost:1313/tags/celtic-languages/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/irish/</loc>
+    <loc>http://localhost:1313/tags/irish/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/language-modernization/</loc>
+    <loc>http://localhost:1313/tags/language-modernization/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/profanity/</loc>
+    <loc>http://localhost:1313/tags/profanity/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/courses/course2/</loc>
+    <loc>http://localhost:1313/courses/course2/</loc>
     <lastmod>2024-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/archive/</loc>
+    <loc>http://localhost:1313/archive/</loc>
   </url>
 </urlset>

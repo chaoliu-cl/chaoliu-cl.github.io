@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chao Liu</title>
-    <link>//localhost:1313/</link>
+    <link>http://localhost:1313/</link>
     <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 20 Sep 2025 23:54:17 -0400</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/similarity-metrics/" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Sun, 21 Sep 2025 13:57:30 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/similarity-metrics/" rel="self" type="application/rss+xml"/>
     
     <item>
       <title>Conversim: Comprehensive Conversation Similarity Analysis in R</title>
-      <link>//localhost:1313/posts/conversim_r/</link>
+      <link>http://localhost:1313/posts/conversim_r/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 &#43;0000</pubDate>
-      <guid>//localhost:1313/posts/conversim_r/</guid>
+      <guid>http://localhost:1313/posts/conversim_r/</guid>
       <description>&lt;p&gt;&lt;em&gt;Conversim&lt;/em&gt; is a powerful R package for analyzing similarities in conversations across multiple dimensions. Whether you&amp;rsquo;re studying dialogue dynamics, speech patterns, or conversational alignment, this package provides comprehensive tools for measuring topic, lexical, semantic, stylistic, sentiment, structural, and temporal similarities.&lt;/p&gt;
 &lt;h2 id=&#34;installing-and-loading-the-package&#34;&gt;Installing and Loading the Package&lt;/h2&gt;
 &lt;p&gt;Install the package:&lt;/p&gt;

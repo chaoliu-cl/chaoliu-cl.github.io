@@ -1,10 +1,23 @@
-baseURL: "liu-chao.site" 
+baseURL: "https://liu-chao.site"  # Added https://
 title: Chao Liu
 paginate: 20
 theme: PaperMod
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
+
+# RSS Configuration - Only for Posts section
+outputs:
+  home:
+    - HTML
+  page:
+    - HTML
+  section:
+    - HTML
+    - RSS  # This enables RSS for sections like /posts/
+
+# RSS Feed Settings
+rssLimit: 20  # Number of items in RSS feed
 
 taxonomies:
     tag: tags
@@ -29,15 +42,6 @@ menu:
         - name: Tags
           url: tags/
           weight: 3
-        #- name: Courses
-        #  url: courses/
-        #  weight: 3
-        #- name: Data
-        #  url: data/
-        #  weight: 4 
-        #- name: Blog
-        #  url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
-        #  weight: 6
 
 params:
     description: "I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two."
@@ -55,7 +59,7 @@ params:
     ShowBreadCrumbs: true
     ShowCodeCopyButtons: true
     ShowAllPagesInArchive: false
-    MainSections: ["books","courses","papers","data"]
+    MainSections: ["posts"]  # Only posts will be included in main content feeds
     ShowToc: false
     disableScrollToTop: true
     TocOpen: true
@@ -65,6 +69,7 @@ params:
     comments: true
     disqusShortname: "liu-chao.site"
     math: true
+    
     profileMode:
           enabled: true
           title: Chao Liu
@@ -96,40 +101,24 @@ params:
             - name: Publications
               url: publications/
               weight: 2
-            #- name: Courses
-            #  url: courses/
-            #  weight: 3
-            #- name: Data
-            #  url: data/
-            #  weight: 4 
-            #- name: Blog
-            #  url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
-            #  weight: 6
 
     socialIcons:
         - name: CV
           url: cv_5-5.pdf
         - name: Email
           url: mailto:chaoliu@cedarville.edu
-        #- name: Zoom
-        #  url: https://www.zoom.us/my/igelfeld
         - name: Location
           url: location/
-        #- name: Office Hours
-        #  url: officehours/
         - name: Google Scholar
           url: https://scholar.google.com/citations?user=7Mo7trwAAAAJ&hl=en
         - name: GitHub
           url: https://github.com/chaoliu-cl
-        #- name: Substack
-        #  url: https://pmichaillat.substack.com
-        #- name: YouTube
-        #  url: https://www.youtube.com/@alexandermccallsmithoffici9000
         - name: X
           url: https://x.com/ChaoLiu77600168
         - name: linkedin
           url: https://www.linkedin.com/in/chao-liu-1056663b/
-
+        - name: RSS
+          url: posts/index.xml
 
     assets:
         disableScrollBarStyle: true

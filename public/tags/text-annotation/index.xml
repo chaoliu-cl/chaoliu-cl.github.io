@@ -2,19 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chao Liu</title>
-    <link>//localhost:1313/</link>
+    <link>http://localhost:1313/</link>
     <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 20 Sep 2025 23:54:17 -0400</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/text-annotation/" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Sun, 21 Sep 2025 13:57:30 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/text-annotation/" rel="self" type="application/rss+xml"/>
     
     <item>
       <title>textAnnotatoR: Qualitative Analysis with textAnnotatoR</title>
-      <link>//localhost:1313/posts/textannotator/</link>
+      <link>http://localhost:1313/posts/textannotator/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 &#43;0000</pubDate>
-      <guid>//localhost:1313/posts/textannotator/</guid>
+      <guid>http://localhost:1313/posts/textannotator/</guid>
       <description>&lt;p&gt;&lt;em&gt;textAnnotatoR&lt;/em&gt; is an interactive text annotation tool built with Shiny that provides a graphical user interface for coding text documents, managing code hierarchies, creating memos, and analyzing coding patterns.&lt;/p&gt;
+&lt;p&gt;Please cite the following paper if you use &lt;em&gt;textAnnotatoR&lt;/em&gt;:
+Liu, C., (2025). textAnnotatoR: An Interactive Text Annotation Tool with &amp;lsquo;shiny&amp;rsquo; GUI. Journal of Open Source Software, 10(113), 7971, &lt;a href=&#34;https://doi.org/10.21105/joss.07971&#34; target=&#34;_blank&#34;&gt;https://doi.org/10.21105/joss.07971&lt;/a&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;This guide provides a step-by-step practical example of using the textAnnotatoR package for qualitative analysis. We&amp;rsquo;ll work through a complete example project, from importing text to analyzing coded content. You&amp;rsquo;ll learn how to:&lt;/p&gt;
 &lt;ol&gt;

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chao Liu</title>
-    <link>//localhost:1313/</link>
+    <link>http://localhost:1313/</link>
     <description>I am an Associate Professor of Psychology at Cedarville University. My teaching and research interests revolve around quantitative methodologies. I am a Christ follower, a husband, and a father of two.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 20 Sep 2025 23:54:17 -0400</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/parent-child-play/" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Sun, 21 Sep 2025 13:57:30 -0400</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/parent-child-play/" rel="self" type="application/rss+xml"/>
     
     <item>
       <title>How Parents Play: Play Style as a Function of Gender of Parent, Gender of Child, and Play Context</title>
-      <link>//localhost:1313/papers/paper3/</link>
+      <link>http://localhost:1313/papers/paper3/</link>
       <pubDate>Wed, 24 Jul 2024 00:00:00 &#43;0000</pubDate>
-      <guid>//localhost:1313/papers/paper3/</guid>
+      <guid>http://localhost:1313/papers/paper3/</guid>
       <description>&lt;hr&gt;
 &lt;h5 id=&#34;relevant-links&#34;&gt;Relevant Links&lt;/h5&gt;
 &lt;ul&gt;

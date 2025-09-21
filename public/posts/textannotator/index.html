@@ -9,15 +9,15 @@
 <meta name="keywords" content="R, textAnnotatoR, Text Annotation, Qualitative Analysis, Coding, Shiny">
 <meta name="description" content="A comprehensive guide to using textAnnotatoR for qualitative text analysis and coding.">
 <meta name="author" content="Chao Liu">
-<link rel="canonical" href="//localhost:1313/posts/textannotator/">
+<link rel="canonical" href="http://localhost:1313/posts/textannotator/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6cf4a8fa527330d9574f36d8d000fdaf90ca838ff09ab72fc27d3cb7ca1ddc5.css" integrity="sha256-1s9Kj6UnMw2VdPNtjQAP2vkMqDj/Caty/CfTy3yh3cU=" rel="preload stylesheet" as="style">
-<link rel="icon" href="//localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="//localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="//localhost:1313/posts/textannotator/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/textannotator/">
 <noscript>
     <style>
         #theme-toggle,
@@ -29,7 +29,7 @@
 </noscript><meta property="og:title" content="textAnnotatoR: Qualitative Analysis with textAnnotatoR" />
 <meta property="og:description" content="A comprehensive guide to using textAnnotatoR for qualitative text analysis and coding." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="//localhost:1313/posts/textannotator/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://localhost:1313/posts/textannotator/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2025-09-01T00:00:00+00:00" />
 <meta property="article:modified_time" content="2025-09-01T00:00:00+00:00" />
 
@@ -47,13 +47,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "//localhost:1313/posts/"
+      "item": "http://localhost:1313/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "textAnnotatoR: Qualitative Analysis with textAnnotatoR",
-      "item": "//localhost:1313/posts/textannotator/"
+      "item": "http://localhost:1313/posts/textannotator/"
     }
   ]
 }
@@ -68,8 +68,8 @@
   "keywords": [
     "R", "textAnnotatoR", "Text Annotation", "Qualitative Analysis", "Coding", "Shiny"
   ],
-  "articleBody": "textAnnotatoR is an interactive text annotation tool built with Shiny that provides a graphical user interface for coding text documents, managing code hierarchies, creating memos, and analyzing coding patterns.\nIntroduction This guide provides a step-by-step practical example of using the textAnnotatoR package for qualitative analysis. We’ll work through a complete example project, from importing text to analyzing coded content. You’ll learn how to:\nSet up a project Import text data Annotate text Manage project files (saving, loading, and organizing) Analyze patterns within coded data Export results Setting Up textAnnotatoR Before diving into the sample project, let’s understand how to properly set up textAnnotatoR and navigate its interface.\nInstallation If you haven’t installed textAnnotatoR yet, you can install it from CRAN or GitHub:\n# Install devtools if not already installed\rif (!requireNamespace(\"devtools\", quietly = TRUE)) {\rinstall.packages(\"devtools\")\r}\r# Install textAnnotatoR\rinstall.packages(\"textAnnotatoR\") # or\rdevtools::install_github(\"chaoliu-cl/textAnnotatoR\")\rFirst-Time Setup The first time you run textAnnotatoR, it will ask you to confirm where you want to store your project data:\nlibrary(textAnnotatoR)\rannotate_gui()\rYou’ll see a dialog asking you to choose between:\nDefault Location: A folder managed by R in your user directory Custom Location: A directory of your choice Project-specific Location: A customizable directory unique to each project Understanding the Interface When textAnnotatoR launches, you’ll see several tabs:\nFile: Import text and manage projects Code and Memo: For managing codes and adding memos Themes: Organize codes into themes and hierarchies Analysis: Analyze coding patterns Records: View all annotations in tabular format Comparison: Compare coding between different coders Sample Project: Analyzing Interview Responses For this example, we’ll be analyzing fictional interview responses about remote work experiences. The example demonstrates how you might use textAnnotatoR in a real qualitative research context.\nStep 1: Creating a New Project When you first launch textAnnotatoR, it automatically creates a blank project. However, if you want to start a new project, click “New Project” in the top toolbar.\nIf you have unsaved changes in your current project, you’ll see a confirmation dialog asking if you want to save your current project first:\nStep 2: Importing Text Data For this example, we’ll use the following interview excerpt. You can copy this text into a file named remote_work_interview.txt:\nInterviewer: Can you describe your experience transitioning to remote work?\rParticipant: It was definitely challenging at first. I think the biggest issues were setting up a proper workspace at home and establishing boundaries between work and personal life. It took me about a month to develop a routine that worked. Now, I actually prefer working remotely. I'm more productive without office distractions, and I save two hours daily by not commuting.\rInterviewer: What tools or resources have been most helpful?\rParticipant: Video conferencing has been essential - we use Zoom for all our meetings. We also rely heavily on Slack for quick communications and Asana for project management. My company provided a second monitor and an ergonomic chair, which made a huge difference in my physical comfort. I'd say the technology was easy to adapt to, but the social aspects were harder. It's difficult to replace those impromptu conversations by the coffee machine.\rInterviewer: How has remote work affected your work-life balance?\rParticipant: It's a double-edged sword. I have more flexibility and time with family, but it's also harder to disconnect. Sometimes I find myself checking emails well into the evening, which wasn't a habit before. I've had to be intentional about setting working hours and sticking to them. Taking short walks during the day has become my substitute for the natural breaks that happened in the office.\rStep 3: Saving Your Project It’s important to save your project regularly. To do that, click on “Save Project”:\nThen, a dialog will appear:\nType in your project name Click “Choose Directory” to select where to save the project Directories are displayed in a hierarchical format - navigate to your desired location Click “Save” to save your project The project will be saved as an RDS file, which preserves all your annotations, codes, and project structure.\nStep 4: Annotating the Text Now let’s start coding our interview text:\nClick the selection tool (cursor icon) in the right margin Select text discussing the home workspace setup In the “Code and Memo” tab, enter “Home Setup” as the code Add a memo: “Initial challenge in transition to remote work” Click “Save” to save the code Continue this process for other notable segments in the text. For example:\nCode Zoom, Slack, and Asana as “Technology” Code “save two hours daily by not commuting” as “Save Time” Code discussions of missed impromptu conversations as “Social Isolation” Your annotated text will begin to look like this, with different colored highlights representing different codes:\nApplying Existing Codes Once you’ve created some codes, you can apply them to new text segments:\nHighlight the target text Click on “Apply Code” in the side panel Choose the code you want to apply from the dropdown menu Managing Codes As your coding progresses, you’ll want to manage your codes efficiently. You can click on the highlighted text to:\nRemove annotation Replace code Rename code Delete code Merging Similar Codes In some instances, you might find that some of your codes are conceptually similar or overlapping. textAnnotatoR provides a “Merge Codes” feature to consolidate these:\nGo to the “Code and Memo” tab In the “Codes” section, select two or more codes by checking the boxes next to them Click the “Merge Codes” button A dialog will appear asking you to name the new merged code: Enter a descriptive name that encompasses the concepts being merged Click “Merge” to confirm This feature is particularly useful when:\nYour initial coding was very granular and you now want broader categories Multiple codes have emerged that represent the same underlying concept You want to simplify your coding scheme for analysis or reporting Step 5: Loading Your Project If you need to continue your work later, you’ll need to load your saved project. Click “Load Project”:\nThen a dialog will appear:\nClick “Choose Project File” to navigate to your saved project file Navigate through the directory structure to find your project Select the RDS file and click “Select” Click “Load” to load your project All your text, annotations, codes, and memos will be restored exactly as you left them.\nStep 6: Analyzing the Coded Data Once you’ve coded the entire interview, use the analysis tools to examine patterns:\nCode Frequency Analysis Go to the “Analysis” tab and click “Code Frequency”. This will show which codes were mentioned most often:\nIn our example, we might see that “Making adjustment” and “Technology” appear most frequently, indicating these are significant aspects of the remote work experience for our participant.\nCode Co-occurrence Analysis Click “Code Co-occurrence” to see relationships between different codes:\nThis visualization might reveal that “Boundary difficulty” and “Family friendly” frequently co-occur, suggesting a relationship between these issues.\nText Statistics The “Analysis” tab also provides basic text statistics:\nWord count Character count Sentence count Percentage of text that has been coded These statistics can help you track your coding progress and provide context for your analysis.\nStep 7: Creating Themes Sometimes multiple codes may share the same underlying theme and you may want to create a theme that encompasses several codes. Let’s create a logical hierarchy of themes and codes. Go to the “Themes” tab:\nClick “Add Theme” and create the following themes:\n“Challenges” “Benefits” “Tools” “Work-Life Balance” For each theme, add relevant codes:\nFor “Challenges”:\nClick “Add Code to Theme” Select “Challenges” as the parent theme Add codes like “Technical Issues”, “Social Isolation”, “Home Setup” When finished, your code hierarchy should look something like this:\nStep 8: Exporting Results Saving Annotations To save your annotations for further analysis or sharing:\nGo to the “Records” tab Click “Save Records” Choose CSV format Name your file “remote_work_analysis.csv” Exporting Annotated Text To save the annotated text with all coding highlights:\nIn the “Code and Memo” tab, click “Save Annotated Text” Select HTML format to preserve color coding Name your file “annotated_interview.html” Step 9: Project Comparison (Two Coders) If you’re working with a team where two researchers code the same text, you can use the comparison tools:\nHave each team member code the interview independently Save each person’s annotations as CSV files Go to the “Comparison” tab Upload both CSV files Run the comparison to see inter-coder agreement and differences Getting the Sample Project To practice with this exact example, you can download a starter project from the textAnnotatoR GitHub repository:\n# If you have the remotes package installed\rremotes::install_github(\"chaoliu-cl/textAnnotatoR\", build_vignettes = TRUE)\r# Or browse to:\r# https://github.com/chaoliu-cl/textAnnotatoR/inst/extdata/sample_projects\rThe sample projects include the interview text file used for this demonstration and a word file that contains Martin Luther King Jr.’s “I have a dream” speech.\nOther Utility Functions The following table shows additional functions available in textAnnotatoR for various text analysis tasks:\nFunction Output Description annotate_gui() GUI Launch the interactive text annotation interface save_project() RDS file Save current project with all annotations and codes load_project() Project Load a previously saved project export_annotations() CSV/HTML Export annotations in various formats merge_codes() Updated Consolidate similar or overlapping codes create_theme() Theme Create hierarchical organization of codes calculate_agreement() Metrics Calculate inter-coder agreement statistics 📌 For more advanced features and updates, visit the textAnnotatoR GitHub repository\r.\n📌 This post is syndicated on R-bloggers\r— a community hub for R news and tutorials.\n",
-  "wordCount" : "1561",
+  "articleBody": "textAnnotatoR is an interactive text annotation tool built with Shiny that provides a graphical user interface for coding text documents, managing code hierarchies, creating memos, and analyzing coding patterns.\nPlease cite the following paper if you use textAnnotatoR: Liu, C., (2025). textAnnotatoR: An Interactive Text Annotation Tool with ‘shiny’ GUI. Journal of Open Source Software, 10(113), 7971, https://doi.org/10.21105/joss.07971\rIntroduction This guide provides a step-by-step practical example of using the textAnnotatoR package for qualitative analysis. We’ll work through a complete example project, from importing text to analyzing coded content. You’ll learn how to:\nSet up a project Import text data Annotate text Manage project files (saving, loading, and organizing) Analyze patterns within coded data Export results Setting Up textAnnotatoR Before diving into the sample project, let’s understand how to properly set up textAnnotatoR and navigate its interface.\nInstallation If you haven’t installed textAnnotatoR yet, you can install it from CRAN or GitHub:\n# Install devtools if not already installed\rif (!requireNamespace(\"devtools\", quietly = TRUE)) {\rinstall.packages(\"devtools\")\r}\r# Install textAnnotatoR\rinstall.packages(\"textAnnotatoR\") # or\rdevtools::install_github(\"chaoliu-cl/textAnnotatoR\")\rFirst-Time Setup The first time you run textAnnotatoR, it will ask you to confirm where you want to store your project data:\nlibrary(textAnnotatoR)\rannotate_gui()\rYou’ll see a dialog asking you to choose between:\nDefault Location: A folder managed by R in your user directory Custom Location: A directory of your choice Project-specific Location: A customizable directory unique to each project Understanding the Interface When textAnnotatoR launches, you’ll see several tabs:\nFile: Import text and manage projects Code and Memo: For managing codes and adding memos Themes: Organize codes into themes and hierarchies Analysis: Analyze coding patterns Records: View all annotations in tabular format Comparison: Compare coding between different coders Sample Project: Analyzing Interview Responses For this example, we’ll be analyzing fictional interview responses about remote work experiences. The example demonstrates how you might use textAnnotatoR in a real qualitative research context.\nStep 1: Creating a New Project When you first launch textAnnotatoR, it automatically creates a blank project. However, if you want to start a new project, click “New Project” in the top toolbar.\nIf you have unsaved changes in your current project, you’ll see a confirmation dialog asking if you want to save your current project first:\nStep 2: Importing Text Data For this example, we’ll use the following interview excerpt. You can copy this text into a file named remote_work_interview.txt:\nInterviewer: Can you describe your experience transitioning to remote work?\rParticipant: It was definitely challenging at first. I think the biggest issues were setting up a proper workspace at home and establishing boundaries between work and personal life. It took me about a month to develop a routine that worked. Now, I actually prefer working remotely. I'm more productive without office distractions, and I save two hours daily by not commuting.\rInterviewer: What tools or resources have been most helpful?\rParticipant: Video conferencing has been essential - we use Zoom for all our meetings. We also rely heavily on Slack for quick communications and Asana for project management. My company provided a second monitor and an ergonomic chair, which made a huge difference in my physical comfort. I'd say the technology was easy to adapt to, but the social aspects were harder. It's difficult to replace those impromptu conversations by the coffee machine.\rInterviewer: How has remote work affected your work-life balance?\rParticipant: It's a double-edged sword. I have more flexibility and time with family, but it's also harder to disconnect. Sometimes I find myself checking emails well into the evening, which wasn't a habit before. I've had to be intentional about setting working hours and sticking to them. Taking short walks during the day has become my substitute for the natural breaks that happened in the office.\rStep 3: Saving Your Project It’s important to save your project regularly. To do that, click on “Save Project”:\nThen, a dialog will appear:\nType in your project name Click “Choose Directory” to select where to save the project Directories are displayed in a hierarchical format - navigate to your desired location Click “Save” to save your project The project will be saved as an RDS file, which preserves all your annotations, codes, and project structure.\nStep 4: Annotating the Text Now let’s start coding our interview text:\nClick the selection tool (cursor icon) in the right margin Select text discussing the home workspace setup In the “Code and Memo” tab, enter “Home Setup” as the code Add a memo: “Initial challenge in transition to remote work” Click “Save” to save the code Continue this process for other notable segments in the text. For example:\nCode Zoom, Slack, and Asana as “Technology” Code “save two hours daily by not commuting” as “Save Time” Code discussions of missed impromptu conversations as “Social Isolation” Your annotated text will begin to look like this, with different colored highlights representing different codes:\nApplying Existing Codes Once you’ve created some codes, you can apply them to new text segments:\nHighlight the target text Click on “Apply Code” in the side panel Choose the code you want to apply from the dropdown menu Managing Codes As your coding progresses, you’ll want to manage your codes efficiently. You can click on the highlighted text to:\nRemove annotation Replace code Rename code Delete code Merging Similar Codes In some instances, you might find that some of your codes are conceptually similar or overlapping. textAnnotatoR provides a “Merge Codes” feature to consolidate these:\nGo to the “Code and Memo” tab In the “Codes” section, select two or more codes by checking the boxes next to them Click the “Merge Codes” button A dialog will appear asking you to name the new merged code: Enter a descriptive name that encompasses the concepts being merged Click “Merge” to confirm This feature is particularly useful when:\nYour initial coding was very granular and you now want broader categories Multiple codes have emerged that represent the same underlying concept You want to simplify your coding scheme for analysis or reporting Step 5: Loading Your Project If you need to continue your work later, you’ll need to load your saved project. Click “Load Project”:\nThen a dialog will appear:\nClick “Choose Project File” to navigate to your saved project file Navigate through the directory structure to find your project Select the RDS file and click “Select” Click “Load” to load your project All your text, annotations, codes, and memos will be restored exactly as you left them.\nStep 6: Analyzing the Coded Data Once you’ve coded the entire interview, use the analysis tools to examine patterns:\nCode Frequency Analysis Go to the “Analysis” tab and click “Code Frequency”. This will show which codes were mentioned most often:\nIn our example, we might see that “Making adjustment” and “Technology” appear most frequently, indicating these are significant aspects of the remote work experience for our participant.\nCode Co-occurrence Analysis Click “Code Co-occurrence” to see relationships between different codes:\nThis visualization might reveal that “Boundary difficulty” and “Family friendly” frequently co-occur, suggesting a relationship between these issues.\nText Statistics The “Analysis” tab also provides basic text statistics:\nWord count Character count Sentence count Percentage of text that has been coded These statistics can help you track your coding progress and provide context for your analysis.\nStep 7: Creating Themes Sometimes multiple codes may share the same underlying theme and you may want to create a theme that encompasses several codes. Let’s create a logical hierarchy of themes and codes. Go to the “Themes” tab:\nClick “Add Theme” and create the following themes:\n“Challenges” “Benefits” “Tools” “Work-Life Balance” For each theme, add relevant codes:\nFor “Challenges”:\nClick “Add Code to Theme” Select “Challenges” as the parent theme Add codes like “Technical Issues”, “Social Isolation”, “Home Setup” When finished, your code hierarchy should look something like this:\nStep 8: Exporting Results Saving Annotations To save your annotations for further analysis or sharing:\nGo to the “Records” tab Click “Save Records” Choose CSV format Name your file “remote_work_analysis.csv” Exporting Annotated Text To save the annotated text with all coding highlights:\nIn the “Code and Memo” tab, click “Save Annotated Text” Select HTML format to preserve color coding Name your file “annotated_interview.html” Step 9: Project Comparison (Two Coders) If you’re working with a team where two researchers code the same text, you can use the comparison tools:\nHave each team member code the interview independently Save each person’s annotations as CSV files Go to the “Comparison” tab Upload both CSV files Run the comparison to see inter-coder agreement and differences Getting the Sample Project To practice with this exact example, you can download a starter project from the textAnnotatoR GitHub repository:\n# If you have the remotes package installed\rremotes::install_github(\"chaoliu-cl/textAnnotatoR\", build_vignettes = TRUE)\r# Or browse to:\r# https://github.com/chaoliu-cl/textAnnotatoR/inst/extdata/sample_projects\rThe sample projects include the interview text file used for this demonstration and a word file that contains Martin Luther King Jr.’s “I have a dream” speech.\nOther Utility Functions The following table shows additional functions available in textAnnotatoR for various text analysis tasks:\nFunction Output Description annotate_gui() GUI Launch the interactive text annotation interface save_project() RDS file Save current project with all annotations and codes load_project() Project Load a previously saved project export_annotations() CSV/HTML Export annotations in various formats merge_codes() Updated Consolidate similar or overlapping codes create_theme() Theme Create hierarchical organization of codes calculate_agreement() Metrics Calculate inter-coder agreement statistics 📌 For more advanced features and updates, visit the textAnnotatoR GitHub repository\r.\n📌 This post is syndicated on R-bloggers\r— a community hub for R news and tutorials.\n",
+  "wordCount" : "1590",
   "inLanguage": "en",
   "datePublished": "2025-09-01T00:00:00Z",
   "dateModified": "2025-09-01T00:00:00Z",
@@ -79,14 +79,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "//localhost:1313/posts/textannotator/"
+    "@id": "http://localhost:1313/posts/textannotator/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Chao Liu",
     "logo": {
       "@type": "ImageObject",
-      "url": "//localhost:1313/favicon.ico"
+      "url": "http://localhost:1313/favicon.ico"
     }
   }
 }
@@ -133,8 +133,8 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="//localhost:1313/" accesskey="h" title="Chao Liu">
-                <img src="//localhost:1313/favicon.ico" alt="" aria-label="logo"
+            <a href="http://localhost:1313/" accesskey="h" title="Chao Liu">
+                <img src="http://localhost:1313/favicon.ico" alt="" aria-label="logo"
                     height="18"
                     width="18">Chao Liu</a>
             <div class="logo-switches">
@@ -162,32 +162,32 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="//localhost:1313/about/" title="About">
+                <a href="http://localhost:1313/about/" title="About">
                     <span>About</span>
                 </a>
             </li>
             <li>
-                <a href="//localhost:1313/papers/" title="Papers">
+                <a href="http://localhost:1313/papers/" title="Papers">
                     <span>Papers</span>
                 </a>
             </li>
             <li>
-                <a href="//localhost:1313/posts/" title="Posts">
+                <a href="http://localhost:1313/posts/" title="Posts">
                     <span>Posts</span>
                 </a>
             </li>
             <li>
-                <a href="//localhost:1313/projects/" title="Projects">
+                <a href="http://localhost:1313/projects/" title="Projects">
                     <span>Projects</span>
                 </a>
             </li>
             <li>
-                <a href="//localhost:1313/publications/" title="Publications">
+                <a href="http://localhost:1313/publications/" title="Publications">
                     <span>Publications</span>
                 </a>
             </li>
             <li>
-                <a href="//localhost:1313/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -199,11 +199,11 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="//localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="//localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       textAnnotatoR: Qualitative Analysis with textAnnotatoR
     </h1>
-    <div class="post-meta"><span title='2025-09-01 00:00:00 +0000 UTC'>September 2025</span>&nbsp;&middot;&nbsp;8 min&nbsp;&middot;&nbsp;1561 words&nbsp;&middot;&nbsp;Chao Liu
+    <div class="post-meta"><span title='2025-09-01 00:00:00 +0000 UTC'>September 2025</span>&nbsp;&middot;&nbsp;8 min&nbsp;&middot;&nbsp;1590 words&nbsp;&middot;&nbsp;Chao Liu
 
 </div>
   </header> <div class="toc">
@@ -226,6 +226,9 @@
 </div>
 
   <div class="post-content"><p><em>textAnnotatoR</em> is an interactive text annotation tool built with Shiny that provides a graphical user interface for coding text documents, managing code hierarchies, creating memos, and analyzing coding patterns.</p>
+<p>Please cite the following paper if you use <em>textAnnotatoR</em>:
+Liu, C., (2025). textAnnotatoR: An Interactive Text Annotation Tool with &lsquo;shiny&rsquo; GUI. Journal of Open Source Software, 10(113), 7971, <a href="https://doi.org/10.21105/joss.07971" target="_blank">https://doi.org/10.21105/joss.07971</a>
+</p>
 <h2 id="introduction">Introduction</h2>
 <p>This guide provides a step-by-step practical example of using the textAnnotatoR package for qualitative analysis. We&rsquo;ll work through a complete example project, from importing text to analyzing coded content. You&rsquo;ll learn how to:</p>
 <ol>
@@ -527,13 +530,18 @@ remotes::install_github(&quot;chaoliu-cl/textAnnotatoR&quot;, build_vignettes = 
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="//localhost:1313/tags/r/">R</a></li>
-      <li><a href="//localhost:1313/tags/textannotator/">TextAnnotatoR</a></li>
-      <li><a href="//localhost:1313/tags/text-annotation/">Text Annotation</a></li>
-      <li><a href="//localhost:1313/tags/qualitative-analysis/">Qualitative Analysis</a></li>
-      <li><a href="//localhost:1313/tags/coding/">Coding</a></li>
-      <li><a href="//localhost:1313/tags/shiny/">Shiny</a></li>
+      <li><a href="http://localhost:1313/tags/r/">R</a></li>
+      <li><a href="http://localhost:1313/tags/textannotator/">TextAnnotatoR</a></li>
+      <li><a href="http://localhost:1313/tags/text-annotation/">Text Annotation</a></li>
+      <li><a href="http://localhost:1313/tags/qualitative-analysis/">Qualitative Analysis</a></li>
+      <li><a href="http://localhost:1313/tags/coding/">Coding</a></li>
+      <li><a href="http://localhost:1313/tags/shiny/">Shiny</a></li>
     </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/conversim_r/">
+    <span>Conversim: Comprehensive Conversation Similarity Analysis in R&nbsp;&rarr;</span>
+  </a>
+</nav>
 
   </footer>
 </article>
