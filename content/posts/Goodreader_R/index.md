@@ -151,3 +151,5 @@ The following table shows other utility functions to extract book-related inform
 ---
 
 📌 *For more advanced features and updates, visit the [textAnnotatoR GitHub repository](https://github.com/chaoliu-cl/Goodreader).*
+
+📌 *This post is syndicated on [R-bloggers](https://www.r-bloggers.com) — a community hub for R news and tutorials.*

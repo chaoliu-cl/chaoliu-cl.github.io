@@ -446,3 +446,5 @@ The package's strength lies in its ability to capture different aspects of conve
 ---
 
 📌 *For more advanced features and updates, visit the [textAnnotatoR GitHub repository](https://github.com/chaoliu-cl/conversim).*
+
+📌 *This post is syndicated on [R-bloggers](https://www.r-bloggers.com) — a community hub for R news and tutorials.*
