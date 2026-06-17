@@ -1,0 +1,113 @@
+{
+  "application": "VoxScribe",
+  "sample_purpose": "App Review sample data for testing transcript, coding, analysis, and export workflows.",
+  "project": {
+    "title": "Campus Interview Study",
+    "recording": "interview-01-sample.wav",
+    "language": "en",
+    "duration_seconds": 45.0,
+    "created_for_review": true
+  },
+  "segments": [
+    {
+      "id": "seg-001",
+      "start_time": "00:00:00.000",
+      "end_time": "00:00:06.400",
+      "speaker": "Interviewer",
+      "text": "Thanks for joining today. Could you describe how you currently capture and analyze interview recordings?",
+      "codes": ["workflow"],
+      "memo": "Opening question frames the current research process."
+    },
+    {
+      "id": "seg-002",
+      "start_time": "00:00:06.400",
+      "end_time": "00:00:15.700",
+      "speaker": "Participant",
+      "text": "I usually record the session, send the audio for transcription, then copy important passages into a spreadsheet for coding.",
+      "codes": ["workflow", "manual coding"],
+      "memo": "Participant describes a multi-tool workflow."
+    },
+    {
+      "id": "seg-003",
+      "start_time": "00:00:15.700",
+      "end_time": "00:00:21.200",
+      "speaker": "Interviewer",
+      "text": "What slows you down the most when you move from transcript review to analysis?",
+      "codes": ["pain point"],
+      "memo": "Probe for bottlenecks."
+    },
+    {
+      "id": "seg-004",
+      "start_time": "00:00:21.200",
+      "end_time": "00:00:31.000",
+      "speaker": "Participant",
+      "text": "The hardest part is keeping codes, notes, and evidence connected while I compare themes across multiple interviews.",
+      "codes": ["pain point", "theme development"],
+      "memo": "Highlights need for connected codes and evidence."
+    },
+    {
+      "id": "seg-005",
+      "start_time": "00:00:31.000",
+      "end_time": "00:00:36.500",
+      "speaker": "Interviewer",
+      "text": "If you could export one report for your team, what should it include?",
+      "codes": ["export need"],
+      "memo": "Transition to reporting requirements."
+    },
+    {
+      "id": "seg-006",
+      "start_time": "00:00:36.500",
+      "end_time": "00:00:45.000",
+      "speaker": "Participant",
+      "text": "I would want coded excerpts, timestamps, short memos, and a summary of how often each theme appeared.",
+      "codes": ["export need", "evidence"],
+      "memo": "Useful for testing coded-record export and analysis views."
+    }
+  ],
+  "codebook": [
+    {
+      "name": "workflow",
+      "color": "#176b87",
+      "description": "How the participant currently completes transcription and analysis tasks."
+    },
+    {
+      "name": "manual coding",
+      "color": "#a66a18",
+      "description": "References to spreadsheet or copy-paste coding practices."
+    },
+    {
+      "name": "pain point",
+      "color": "#b24a3d",
+      "description": "Friction or delays in the analysis process."
+    },
+    {
+      "name": "theme development",
+      "color": "#327a58",
+      "description": "Grouping evidence into higher-level themes."
+    },
+    {
+      "name": "export need",
+      "color": "#5b5fae",
+      "description": "Desired output formats or report contents."
+    },
+    {
+      "name": "evidence",
+      "color": "#4c6f91",
+      "description": "Passages that support findings or final reports."
+    }
+  ],
+  "themes": [
+    {
+      "name": "Research Workflow",
+      "codes": ["workflow", "manual coding"]
+    },
+    {
+      "name": "Analysis Challenges",
+      "codes": ["pain point", "theme development"]
+    },
+    {
+      "name": "Reporting Needs",
+      "codes": ["export need", "evidence"]
+    }
+  ]
+}

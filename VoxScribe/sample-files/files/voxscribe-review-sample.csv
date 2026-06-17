@@ -1,0 +1,7 @@
+start_time,end_time,speaker,text,codes,memo
+00:00:00.000,00:00:06.400,Interviewer,"Thanks for joining today. Could you describe how you currently capture and analyze interview recordings?",workflow,"Opening question frames the current research process."
+00:00:06.400,00:00:15.700,Participant,"I usually record the session, send the audio for transcription, then copy important passages into a spreadsheet for coding.","workflow; manual coding","Participant describes a multi-tool workflow."
+00:00:15.700,00:00:21.200,Interviewer,"What slows you down the most when you move from transcript review to analysis?","pain point","Probe for bottlenecks."
+00:00:21.200,00:00:31.000,Participant,"The hardest part is keeping codes, notes, and evidence connected while I compare themes across multiple interviews.","pain point; theme development","Highlights need for connected codes and evidence."
+00:00:31.000,00:00:36.500,Interviewer,"If you could export one report for your team, what should it include?","export need","Transition to reporting requirements."
+00:00:36.500,00:00:45.000,Participant,"I would want coded excerpts, timestamps, short memos, and a summary of how often each theme appeared.","export need; evidence","Useful for testing coded-record export and analysis views."

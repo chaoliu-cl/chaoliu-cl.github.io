@@ -1,0 +1,42 @@
+VoxScribe Review Sample Transcript
+Project: Campus Interview Study
+Recording: interview-01-sample.wav
+Purpose: Sample file for App Review testing of transcript viewing, coding, analysis, and export workflows.
+
+[00:00:00.000 - 00:00:06.400] Interviewer:
+Thanks for joining today. Could you describe how you currently capture and analyze interview recordings?
+Codes: workflow
+Memo: Opening question frames the current research process.
+
+[00:00:06.400 - 00:00:15.700] Participant:
+I usually record the session, send the audio for transcription, then copy important passages into a spreadsheet for coding.
+Codes: workflow; manual coding
+Memo: Participant describes a multi-tool workflow.
+
+[00:00:15.700 - 00:00:21.200] Interviewer:
+What slows you down the most when you move from transcript review to analysis?
+Codes: pain point
+Memo: Probe for bottlenecks.
+
+[00:00:21.200 - 00:00:31.000] Participant:
+The hardest part is keeping codes, notes, and evidence connected while I compare themes across multiple interviews.
+Codes: pain point; theme development
+Memo: Highlights need for connected codes and evidence.
+
+[00:00:31.000 - 00:00:36.500] Interviewer:
+If you could export one report for your team, what should it include?
+Codes: export need
+Memo: Transition to reporting requirements.
+
+[00:00:36.500 - 00:00:45.000] Participant:
+I would want coded excerpts, timestamps, short memos, and a summary of how often each theme appeared.
+Codes: export need; evidence
+Memo: Useful for testing coded-record export and analysis views.
+
+Codebook:
+- workflow: How the participant currently completes transcription and analysis tasks.
+- manual coding: References to spreadsheet or copy-paste coding practices.
+- pain point: Friction or delays in the analysis process.
+- theme development: Grouping evidence into higher-level themes.
+- export need: Desired output formats or report contents.
+- evidence: Passages that support findings or final reports.

@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:06,400
+Interviewer: Thanks for joining today. Could you describe how you currently capture and analyze interview recordings?
+
+2
+00:00:06,400 --> 00:00:15,700
+Participant: I usually record the session, send the audio for transcription, then copy important passages into a spreadsheet for coding.
+
+3
+00:00:15,700 --> 00:00:21,200
+Interviewer: What slows you down the most when you move from transcript review to analysis?
+
+4
+00:00:21,200 --> 00:00:31,000
+Participant: The hardest part is keeping codes, notes, and evidence connected while I compare themes across multiple interviews.
+
+5
+00:00:31,000 --> 00:00:36,500
+Interviewer: If you could export one report for your team, what should it include?
+
+6
+00:00:36,500 --> 00:00:45,000
+Participant: I would want coded excerpts, timestamps, short memos, and a summary of how often each theme appeared.
