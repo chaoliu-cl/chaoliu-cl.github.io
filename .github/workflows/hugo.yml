@@ -56,6 +56,10 @@ jobs:
           hugo \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Preserve static app pages
+        run: |
+          rm -rf public/gratune
+          cp -R static/gratune public/gratune
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
